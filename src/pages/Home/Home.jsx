@@ -2,9 +2,26 @@ import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [location, setLocation] = useState("");
+  const [type, setType] = useState("");
+  const [budget, setBudget] = useState("");
+
+  const navigate = useNavigate();
+
+  // SEARCH FUNCTION
+  const handleSearch = () => {
+    navigate(
+      `/properties?location=${location}&type=${type}&budget=${budget}`
+    );
+  };
+
+  // CATEGORY CLICK FUNCTION
+  const goCategory = (value) => {
+    navigate(`/properties?type=${value}`);
+  };
 
   return (
     <>
@@ -27,7 +44,7 @@ function Home() {
           {/* SEARCH BOX */}
           <div className="search-box">
 
-            {/* LOCATION DROPDOWN (FIXED) */}
+            {/* LOCATION */}
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -51,22 +68,30 @@ function Home() {
               <option>Northern Territory</option>
             </select>
 
-            <select>
-              <option>Property Type</option>
-              <option>Apartment</option>
-              <option>Villa</option>
-              <option>Townhouse</option>
-              <option>Commercial</option>
+            {/* TYPE */}
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="">Property Type</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Villa">Villa</option>
+              <option value="Townhouse">Townhouse</option>
+              <option value="Commercial">Commercial</option>
             </select>
 
-            <select>
-              <option>Budget</option>
-              <option>$200k - $500k</option>
-              <option>$500k - $1M</option>
-              <option>$1M+</option>
+            {/* BUDGET */}
+            <select
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+            >
+              <option value="">Budget</option>
+              <option value="200k">$200k - $500k</option>
+              <option value="500k">$500k - $1M</option>
+              <option value="1m">$1M+</option>
             </select>
 
-            <button className="search-btn">
+            <button className="search-btn" onClick={handleSearch}>
               Search Properties
             </button>
 
@@ -82,53 +107,36 @@ function Home() {
         </div>
       </section>
 
-      {/* FEATURED */}
-      <section className="featured">
-        <h2>Featured Properties</h2>
-
-        <div className="property-grid">
-
-          <div className="property-card">
-            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994" />
-            <div className="property-info">
-              <h3>Luxury Villa</h3>
-              <p>Sydney, Australia</p>
-              <span>$950,000</span>
-            </div>
-          </div>
-
-          <div className="property-card">
-            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" />
-            <div className="property-info">
-              <h3>Modern Apartment</h3>
-              <p>Melbourne, Australia</p>
-              <span>$680,000</span>
-            </div>
-          </div>
-
-          <div className="property-card">
-            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750" />
-            <div className="property-info">
-              <h3>Family Home</h3>
-              <p>Brisbane, Australia</p>
-              <span>$820,000</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       {/* CATEGORIES */}
       <section className="categories">
         <h2>Browse By Category</h2>
 
         <div className="category-grid">
-          <div className="category-card">Apartment</div>
-          <div className="category-card">Villa</div>
-          <div className="category-card">Townhouse</div>
-          <div className="category-card">Commercial</div>
-          <div className="category-card">Luxury Homes</div>
-          <div className="category-card">Land</div>
+
+          <div className="category-card" onClick={() => goCategory("Apartment")}>
+            Apartment
+          </div>
+
+          <div className="category-card" onClick={() => goCategory("Villa")}>
+            Villa
+          </div>
+
+          <div className="category-card" onClick={() => goCategory("Townhouse")}>
+            Townhouse
+          </div>
+
+          <div className="category-card" onClick={() => goCategory("Commercial")}>
+            Commercial
+          </div>
+
+          <div className="category-card" onClick={() => goCategory("Luxury")}>
+            Luxury Homes
+          </div>
+
+          <div className="category-card" onClick={() => goCategory("Land")}>
+            Land
+          </div>
+
         </div>
       </section>
 

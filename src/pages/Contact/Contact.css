@@ -1,0 +1,74 @@
+.contact-container {
+  display: flex;
+  gap: 40px;
+  padding: 50px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-info h1 {
+  font-size: 34px;
+}
+
+.contact-info p {
+  color: #555;
+  margin-top: 10px;
+}
+
+.info-box {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.contact-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.contact-form textarea {
+  height: 120px;
+}
+
+.contact-form button {
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.contact-form,
+.info-box {
+  transition: all 0.3s ease;
+}
+
+
+/* POP EFFECT for INFO BOX */
+.info-box:hover {
+  transform: translateY(-5px);
+  background: #eeeeee;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* INPUT FOCUS IMPROVEMENT (optional but professional) */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+  outline: none;
+}

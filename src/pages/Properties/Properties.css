@@ -1,0 +1,30 @@
+.properties-container {
+  padding: 40px;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+.properties-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.properties-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.properties-header p {
+  color: #666;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.no-results {
+  text-align: center;
+  grid-column: 1 / -1;
+}
