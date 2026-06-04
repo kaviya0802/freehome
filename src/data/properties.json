@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Luxury Villa",
+    "type": "Villa",
+    "location": "Sydney",
+    "price": 950000
+  },
+  {
+    "id": 2,
+    "title": "Modern Apartment",
+    "type": "Apartment",
+    "location": "Melbourne",
+    "price": 680000
+  },
+  {
+    "id": 3,
+    "title": "Family House",
+    "type": "House",
+    "location": "Brisbane",
+    "price": 820000
+  }
+]
