@@ -6,7 +6,8 @@ import {
   FaChevronDown,
   FaHome,
   FaUserPlus,
-  FaTools
+  FaTools,
+  FaQuestionCircle
 } from "react-icons/fa";
 
 function Navbar() {
@@ -15,8 +16,14 @@ function Navbar() {
 
       {/* LOGO */}
       <div className="logo">
-        <FaHome />
-        <span>FreeHome</span>
+        <div className="logo-icon">
+          <FaHome />
+        </div>
+
+        <div className="logo-text">
+          <span className="brand-name">FreeHome</span>
+          <small className="brand-tag">Find Your Dream Home</small>
+        </div>
       </div>
 
       {/* NAV LINKS */}
@@ -29,9 +36,10 @@ function Navbar() {
           <li className="dropdown">
             <span>Properties <FaChevronDown /></span>
             <div className="dropdown-menu">
+              <Link to="/properties">All Properties</Link>
               <Link to="/properties?mode=buy">Buy Homes</Link>
               <Link to="/properties?mode=rent">Rent Homes</Link>
-              <Link to="/properties?mode=pg">PG / Hostel</Link>
+              <Link to="/properties?type=PG Hostel">PG Hostel</Link>
             </div>
           </li>
 
@@ -46,22 +54,26 @@ function Navbar() {
             </div>
           </li>
 
-          {/* ⭐ NEW: FEATURES (IMPORTANT ADDITION) */}
+          {/* FEATURES */}
           <li className="dropdown">
             <span><FaTools /> Features <FaChevronDown /></span>
             <div className="dropdown-menu">
-
               <Link to="/mortgage-calculator">Mortgage Calculator</Link>
               <Link to="/property-alerts">Property Alerts</Link>
               <Link to="/virtual-tour">Virtual Tours</Link>
               <Link to="/market-trends">Market Trends</Link>
-
             </div>
           </li>
 
           <li><Link to="/about">About Us</Link></li>
-
           <li><Link to="/contact">Contact Us</Link></li>
+
+          {/* ⭐ FAQ ADDED */}
+          <li>
+            <Link to="/faq">
+              <FaQuestionCircle /> FAQ
+            </Link>
+          </li>
 
         </ul>
       </nav>

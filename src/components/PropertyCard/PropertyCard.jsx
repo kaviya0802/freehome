@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "./PropertyCard.css";
 
 function PropertyCard({ property }) {
   const navigate = useNavigate();

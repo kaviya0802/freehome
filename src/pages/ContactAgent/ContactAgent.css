@@ -83,6 +83,7 @@
 ========================= */
 
 .ac-right {
+  
   background: transparent;   /* 👈 NO CARD */
   padding: 0;                /* 👈 NO BOX EFFECT */
   display: flex;
@@ -97,6 +98,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 12px 14px;
+  font-family: inherit;
 
   background: #ffffff;   /* ONLY THIS IS WHITE */
   border: 1px solid #e0e0e0;
@@ -131,6 +133,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: 0.25s ease;
+  font-family: inherit;
 }
 
 .ac-right button:hover {

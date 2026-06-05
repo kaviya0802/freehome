@@ -1,4 +1,6 @@
 import { useLocation } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import properties from "../../data/generateProperties";
 import "./Properties.css";
@@ -10,10 +12,22 @@ function useQuery() {
 function Properties() {
   const query = useQuery();
 
-  const location = query.get("location");
-  const type = query.get("type");
+  const location = query.get("location")
+    ? decodeURIComponent(query.get("location"))
+    : "";
+
+  const type = query.get("type")
+    ? decodeURIComponent(query.get("type"))
+    : "";
+
   const budget = query.get("budget");
-  const mode = query.get("mode"); // ✅ NEW ADDED
+  const mode = query.get("mode");
+
+  const normalize = (str) =>
+    (str || "")
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .replace(/\//g, "");
 
   const filtered = properties.filter((property) => {
     const matchLocation =
@@ -22,15 +36,13 @@ function Properties() {
 
     const matchType =
       !type ||
-      property.type.toLowerCase() === type.toLowerCase();
+      normalize(property.type) === normalize(type);
 
     const matchMode =
       !mode ||
-      property.mode.toLowerCase() === mode.toLowerCase();
+      property.mode?.toLowerCase() === mode.toLowerCase();
 
-    // 💰 Budget filter FIXED (correct ranges)
     let matchBudget = true;
-
     const price = Number(property.price);
 
     if (budget === "200k") {
@@ -41,48 +53,64 @@ function Properties() {
       matchBudget = price > 1000000;
     }
 
-    return matchLocation && matchType && matchBudget && matchMode;
+    return (
+      matchLocation &&
+      matchType &&
+      matchBudget &&
+      matchMode
+    );
   });
 
+  // Dynamic page title
+  let pageTitle = "Explore Properties";
+
+  if (type) {
+    pageTitle = `${type} Properties`;
+  } else if (mode === "buy") {
+    pageTitle = "Properties for Sale";
+  } else if (mode === "rent") {
+    pageTitle = "Properties for Rent";
+  }
+
   return (
-    <div className="properties-container">
+    <>
+      <Navbar />
 
-      {/* HEADER */}
-      <div className="properties-header">
-        <h1>Explore Properties</h1>
-        <p>Find your perfect home across Australia</p>
+      <div className="properties-container">
 
-        {/* OPTIONAL: show active filter */}
-        {(location || type || budget || mode) && (
-          <div className="active-filters">
-            {location && <span>{location}</span>}
-            {type && <span>{type}</span>}
-            {budget && <span>{budget}</span>}
-            {mode && <span>{mode.toUpperCase()}</span>}
-          </div>
-        )}
+        <div className="properties-header">
+
+          <div className="page-tag">
+              FreeHome Property Collection
+          </div> 
+          <h1>{pageTitle}</h1>
+          <p>
+            {filtered.length} Properties Found
+          </p>
+
+        </div>
+
+        <div className="property-grid">
+
+          {filtered.length > 0 ? (
+            filtered.map((property) => (
+              <PropertyCard
+                key={property.id}
+                property={property}
+              />
+            ))
+          ) : (
+            <div className="no-results">
+              <h2>No Properties Found</h2>
+            </div>
+          )}
+
+        </div>
+
       </div>
 
-      {/* GRID */}
-      <div className="property-grid">
-
-        {filtered.length > 0 ? (
-          filtered.map((property) => (
-            <PropertyCard
-              key={property.id}
-              property={property}
-            />
-          ))
-        ) : (
-          <div className="no-results">
-            <h2>No Properties Found</h2>
-            <p>Try adjusting your filters</p>
-          </div>
-        )}
-
-      </div>
-
-    </div>
+      <Footer />
+    </>
   );
 }
 

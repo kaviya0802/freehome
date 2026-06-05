@@ -43,26 +43,49 @@ function PropertyDetails() {
         <p className="location">{property.location}</p>
 
         <div className="meta-box">
-          <div>
-            <h3>{property.bedrooms}</h3>
-            <p>Beds</p>
-          </div>
 
-          <div>
-            <h3>{property.bathrooms}</h3>
-            <p>Baths</p>
-          </div>
+  {property.type === "Land" ? (
+    <>
+      <div>
+        <h3>{property.area}</h3>
+        <p>Land Size (sqm)</p>
+      </div>
 
-          <div>
-            <h3>{property.area}</h3>
-            <p>Sqft</p>
-          </div>
+      <div>
+        <h3>{property.zoning}</h3>
+        <p>Zoning</p>
+      </div>
 
-          <div>
-            <h3>{property.mode.toUpperCase()}</h3>
-            <p>Status</p>
-          </div>
-        </div>
+      <div>
+        <h3>{property.mode.toUpperCase()}</h3>
+        <p>Status</p>
+      </div>
+    </>
+  ) : (
+    <>
+      <div>
+        <h3>{property.bedrooms}</h3>
+        <p>Beds</p>
+      </div>
+
+      <div>
+        <h3>{property.bathrooms}</h3>
+        <p>Baths</p>
+      </div>
+
+      <div>
+        <h3>{property.area}</h3>
+        <p>Sqft</p>
+      </div>
+
+      <div>
+        <h3>{property.mode.toUpperCase()}</h3>
+        <p>Status</p>
+      </div>
+    </>
+  )}
+
+</div>
 
         <div className="description">
           <h3>Overview</h3>

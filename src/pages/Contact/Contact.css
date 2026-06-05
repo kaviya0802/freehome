@@ -86,6 +86,7 @@
 .cf-form {
   background: #f9f9f9;
   padding: 26px;
+  font-family:inherit;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
@@ -99,6 +100,7 @@
   padding: 12px 14px;
   border: 1px solid #ddd;
   border-radius: 10px;
+  font-family:inherit;
   font-size: 14px;
   font-weight: 500;
   outline: none;
@@ -123,6 +125,7 @@
 .cf-form button {
   padding: 12px;
   background: #111;
+  font-family:inherit;
   color: #fff;
   border: none;
   border-radius: 10px;

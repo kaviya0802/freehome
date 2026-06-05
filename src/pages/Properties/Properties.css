@@ -20,11 +20,32 @@
 
 .property-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  align-items: stretch;
 }
 
 .no-results {
   text-align: center;
   grid-column: 1 / -1;
+}
+.page-tag {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.page-tag::after {
+  content: "";
+  display: block;
+
+  width: 60px;
+  height: 3px;
+
+  background: #2563eb;
+
+  margin: 8px auto 0;
+  border-radius: 20px;
 }

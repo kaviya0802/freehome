@@ -9,25 +9,70 @@ function Home() {
   const [type, setType] = useState("");
   const [budget, setBudget] = useState("");
 
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+
   const navigate = useNavigate();
 
   // SEARCH FUNCTION
-  const handleSearch = () => {
-    navigate(
-      `/properties?location=${location}&type=${type}&budget=${budget}`
-    );
-  };
+ const handleSearch = () => {
+  const query = new URLSearchParams();
+
+  if (location) query.append("location", location);
+  if (type) query.append("type", type);
+  if (budget) query.append("budget", budget);
+
+  console.log(query.toString()); // ADD THIS
+
+  navigate(`/properties?${query.toString()}`);
+};
+  
 
   // CATEGORY CLICK FUNCTION
-  const goCategory = (value) => {
-    navigate(`/properties?type=${value}`);
+ const goCategory = (value) => {
+  navigate(`/properties?type=${encodeURIComponent(value)}`);
+};
+
+  // NEWSLETTER
+  const handleSubscribe = () => {
+    const email = newsletterEmail.trim();
+
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+
+    if (!email) {
+      alert("Email is required");
+      return;
+    }
+
+    if (!regex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    if ("Notification" in window) {
+      if (Notification.permission === "granted") {
+        new Notification("Subscribed Successfully!", {
+          body: "We will send property updates to your email.",
+        });
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((perm) => {
+          if (perm === "granted") {
+            new Notification("Subscribed Successfully!", {
+              body: "We will send property updates to your email.",
+            });
+          }
+        });
+      }
+    }
+
+    alert("Subscribed successfully!");
+    setNewsletterEmail("");
   };
 
   return (
     <>
       <Navbar />
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="hero">
         <div className="hero-content">
 
@@ -41,14 +86,10 @@ function Home() {
             Discover premium apartments, villas, townhouses and commercial properties across Australia.
           </p>
 
-          {/* SEARCH BOX */}
+          {/* SEARCH */}
           <div className="search-box">
 
-            {/* LOCATION */}
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            >
+            <select value={location} onChange={(e) => setLocation(e.target.value)}>
               <option value="">Select Location</option>
               <option>Sydney</option>
               <option>Melbourne</option>
@@ -68,29 +109,34 @@ function Home() {
               <option>Northern Territory</option>
             </select>
 
-            {/* TYPE */}
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            >
+            {/* ✅ UPDATED TYPE DROPDOWN */}
+            <select value={type} onChange={(e) => setType(e.target.value)}>
               <option value="">Property Type</option>
+
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
               <option value="Townhouse">Townhouse</option>
               <option value="Commercial">Commercial</option>
+              <option value="Luxury">Luxury Homes</option>
+              <option value="Land">Land</option>
+
+             {/* IMPORTANT FIX */}
+              <option value="PG Hostel">PG Hostel</option>
             </select>
 
-            {/* BUDGET */}
-            <select
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-            >
-              <option value="">Budget</option>
-              <option value="200k">$200k - $500k</option>
-              <option value="500k">$500k - $1M</option>
-              <option value="1m">$1M+</option>
-            </select>
+            <select value={budget} onChange={(e) => setBudget(e.target.value)}>
+               <option value="">Budget</option>
 
+  {/* PG / Hostel Budgets */}
+               <option value="pg1">$0 - $5,000</option>
+               <option value="pg2">$5,000 - $10,000</option>
+               <option value="pg3">$10,000+</option>
+
+  {/* Property Budgets */}
+               <option value="200k">$200k - $500k</option>
+               <option value="500k">$500k - $1M</option>
+               <option value="1m">$1M+</option>
+            </select>
             <button className="search-btn" onClick={handleSearch}>
               Search Properties
             </button>
@@ -111,33 +157,42 @@ function Home() {
       <section className="categories">
         <h2>Browse By Category</h2>
 
-        <div className="category-grid">
+        <div className="circle-categories">
 
-          <div className="category-card" onClick={() => goCategory("Apartment")}>
-            Apartment
-          </div>
+  <div className="center-circle">
+    <h2>FreeHome</h2>
+    <p>Find Your Dream Home</p>
+  </div>
 
-          <div className="category-card" onClick={() => goCategory("Villa")}>
-            Villa
-          </div>
+  <div className="category-card card1" onClick={() => goCategory("Apartment")}>
+    Apartment
+  </div>
 
-          <div className="category-card" onClick={() => goCategory("Townhouse")}>
-            Townhouse
-          </div>
+  <div className="category-card card2" onClick={() => goCategory("Villa")}>
+    Villa
+  </div>
 
-          <div className="category-card" onClick={() => goCategory("Commercial")}>
-            Commercial
-          </div>
+  <div className="category-card card3" onClick={() => goCategory("Townhouse")}>
+    Townhouse
+  </div>
 
-          <div className="category-card" onClick={() => goCategory("Luxury")}>
-            Luxury Homes
-          </div>
+  <div className="category-card card4" onClick={() => goCategory("Commercial")}>
+    Commercial
+  </div>
 
-          <div className="category-card" onClick={() => goCategory("Land")}>
-            Land
-          </div>
+  <div className="category-card card5" onClick={() => goCategory("Luxury")}>
+    Luxury Homes
+  </div>
 
-        </div>
+  <div className="category-card card6" onClick={() => goCategory("Land")}>
+    Land
+  </div>
+
+  <div className="category-card card7" onClick={() => goCategory("PG Hostel")}>
+    PG Hostel
+  </div>
+
+</div>
       </section>
 
       {/* WHY US */}
@@ -203,8 +258,16 @@ function Home() {
           </p>
 
           <div className="newsletter-form">
-            <input type="email" placeholder="Enter your email" />
-            <button>Subscribe</button>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+            />
+
+            <button onClick={handleSubscribe}>
+              Subscribe
+            </button>
           </div>
 
         </div>

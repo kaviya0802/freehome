@@ -85,8 +85,7 @@
   border-radius: 8px;
   cursor: pointer;
 }
-
-/* dropdown popup */
+ropdown popup */
 .location-dropdown {
   position: absolute;
   top: 55px;
@@ -121,6 +120,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+.search-btn:hover {
+  background: #0056b3;
+}
 
 /* =========================
    STATS
@@ -150,7 +152,7 @@
 .why-us,
 .testimonials,
 .newsletter {
-  padding: 100px 10%;
+  padding: 30px 10%;
 }
 
 .featured h2,
@@ -192,87 +194,187 @@
 .property-card img {
   width: 100%;
   height: 240px;
-  object-fit: cover;
 }
-
-.property-info {
-  padding: 25px;
-}
-
-.property-info span {
-  color: #2563eb;
-  font-weight: 700;
-}
-
 /* =========================
    CATEGORIES (3 x 2 FIXED)
 ========================= */
 
-.categories {
-  background: #f8fafc;
-}
 
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* ✅ FIXED 3x2 */
-  gap: 20px;
-}
 
-.category-card {
+.circle-categories {
+  position: relative;
+  width: 750px;
+  height: 750px;
+  margin: 0px auto;
+}
+.center-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 220px;
   height: 220px;
-  border-radius: 18px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 20px;
+
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  background: #0f172a;
   color: white;
-  font-size: 18px;
-  font-weight: 700;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+
+.center-circle h2 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.center-circle p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.category-card {
+  position: absolute;
+
+  width: 170px;
+  height: 170px;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding-bottom: 20px;
+
+  color: white;
+  font-weight: bold;
+
   cursor: pointer;
+
+  overflow: hidden;
+
+  background-size: cover;
+  background-position: center;
+
   transition: 0.3s;
 }
 
+.category-card {
+  transition: all 0.3s ease;
+}
+
 .category-card:hover {
-  transform: translateY(-8px);
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+.card1:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
 }
 
-/* backgrounds */
-.category-card:nth-child(1) {
-  background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.7)),
-  url("https://images.unsplash.com/photo-1502672260266-1c1ef2d93688");
+.card5:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.card2:hover,
+.card3:hover,
+.card4:hover,
+.card6:hover,
+.card7:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+.card1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card2 {
+  top: 120px;
+  right: 70px;
+}
+
+.card3 {
+  top: 350px;
+  right: 40px;
+}
+
+.card4 {
+  bottom: 0px;
+  left:180px;
+}
+
+.card5 {
+  bottom: 0;
+  left: 70%;
+  transform: translateX(-50%);
+}
+
+.card6 {
+ top:340px;
+ left: 70px;
+}
+
+.card7 {
+  top: 120px;
+  left: 70px;
+}
+.card1 {
+  background:
+    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1502672260266-1c1ef2d93688");
   background-size: cover;
 }
 
-.category-card:nth-child(2) {
-  background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.7)),
-  url("https://images.unsplash.com/photo-1512917774080-9991f1c4c750");
+.card2 {
+  background:
+    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1512917774080-9991f1c4c750");
   background-size: cover;
 }
 
-.category-card:nth-child(3) {
-  background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.7)),
-  url("https://images.unsplash.com/photo-1568605114967-8130f3a36994");
+.card3 {
+  background:
+    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1568605114967-8130f3a36994");
   background-size: cover;
 }
 
-.category-card:nth-child(4) {
-  background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.7)),
-  url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab");
+.card4 {
+  background:
+    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab");
   background-size: cover;
 }
 
-.category-card:nth-child(5) {
-  background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.7)),
-  url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c");
+.card5 {
+  background:
+    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c");
   background-size: cover;
 }
 
-.category-card:nth-child(6) {
-  background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.7)),
-  url("https://images.unsplash.com/photo-1500382017468-9049fed747ef");
+.card6 {
+  background:
+    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef");
   background-size: cover;
 }
 
+.card7 {
+  background:
+    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1522708323590-d24dbb6b0267");
+  background-size: cover;
+}
 /* =========================
    WHY US
 ========================= */
@@ -293,13 +395,27 @@
   border-radius: 20px;
   padding: 30px;
 }
+.why-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 30px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.why-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
 
 /* =========================
    TESTIMONIALS
 ========================= */
 
 .testimonials {
-  background: #fff;
+  background: #f9f9f9;
 }
 
 .testimonial-grid {
@@ -313,6 +429,20 @@
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+.testimonial-card {
+  background: #f8fafc;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
 }
 
 .stars {
@@ -359,13 +489,16 @@
 }
 
 .newsletter-form button {
-  background: white;
-  color: #0f172a;
+  background: #3b82f6;
+  color: #fff;
   border: none;
   padding: 14px 25px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
+}
+.newsletter-form button:hover {
+  background: #0056b3;
 }
 
 /* =========================

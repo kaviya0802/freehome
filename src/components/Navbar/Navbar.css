@@ -10,17 +10,60 @@
   z-index: 1000;
 }
 
-/* LOGO */
+/* =========================
+   LOGO (UPDATED)
+========================= */
+
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #1a1a1a;
+  gap: 10px;
+  cursor: pointer;
 }
 
-/* NAV LINKS */
+/* icon box */
+.logo-icon {
+  font-size: 22px;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.logo:hover .logo-icon {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+/* text container */
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+/* brand name */
+.brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.5px;
+}
+
+/* tagline */
+.brand-tag {
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -50,7 +93,7 @@
 }
 
 /* =========================
-   DROPDOWN SYSTEM
+   DROPDOWN
 ========================= */
 
 .dropdown {
@@ -59,7 +102,6 @@
   align-items: center;
 }
 
-/* stable hover + keyboard support */
 .dropdown:hover .dropdown-menu,
 .dropdown:focus-within .dropdown-menu {
   display: flex;
@@ -78,6 +120,7 @@
   flex-direction: column;
   padding: 8px 0;
   margin-top: 8px;
+  z-index: 999;
 }
 
 /* hover bridge fix */
@@ -113,7 +156,7 @@
   gap: 12px;
 }
 
-/* ICON BUTTONS */
+/* icon buttons */
 .icon-btn {
   display: flex;
   align-items: center;
@@ -130,6 +173,7 @@
   background: #f2f2f2;
 }
 
+/* icons colors */
 .wishlist svg {
   color: crimson;
 }
@@ -138,7 +182,10 @@
   color: #007bff;
 }
 
-/* SIGN UP BUTTON */
+/* =========================
+   SIGNUP BUTTON
+========================= */
+
 .signup-btn {
   display: flex;
   align-items: center;
@@ -171,5 +218,9 @@
 
   .navbar {
     padding: 12px 20px;
+  }
+
+  .brand-tag {
+    display: none;
   }
 }

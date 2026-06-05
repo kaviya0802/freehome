@@ -1,14 +1,25 @@
 export function filterProperties(properties, filters) {
+  const normalize = (str) =>
+    (str || "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "")
+      .replace(/\//g, "")
+      .replace(/-/g, "");
+
+  const location = normalize(filters.location);
+  const type = normalize(filters.type);
+  const mode = filters.mode?.toLowerCase();
+
   return properties.filter((p) => {
-
-    const location = filters.location?.toLowerCase().trim();
-    const type = filters.type?.toLowerCase().trim();
-
     const matchLocation =
-      !location || p.location.toLowerCase().trim() === location;
+      !location || normalize(p.location) === location;
 
     const matchType =
-      !type || p.type.toLowerCase().trim() === type;
+      !type || normalize(p.type) === type;
+
+    const matchMode =
+      !mode || p.mode?.toLowerCase() === mode;
 
     const price = Number(p.price);
 
@@ -26,6 +37,6 @@ export function filterProperties(properties, filters) {
       matchBudget = price > 1000000;
     }
 
-    return matchLocation && matchType && matchBudget;
+    return matchLocation && matchType && matchBudget && matchMode;
   });
 }

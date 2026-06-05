@@ -1,6 +1,20 @@
-const types = ["Apartment", "Villa", "Townhouse", "Commercial", "Luxury", "Land"];
+const normalize = (str) =>
+  (str || "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
 
-const locations = [
+const TYPES = [
+  "Apartment",
+  "Villa",
+  "Townhouse",
+  "Commercial",
+  "Luxury",
+  "Land",
+  "PG Hostel"
+];
+
+const LOCATIONS = [
   "Sydney",
   "Melbourne",
   "Brisbane",
@@ -17,6 +31,12 @@ const locations = [
   "South Australia",
   "Tasmania",
   "Northern Territory"
+];
+
+const pgImages = [
+  "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=800",
+  "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+  "https://images.unsplash.com/photo-1560448075-bb485b067938?w=800"
 ];
 
 const imageMap = {
@@ -39,33 +59,95 @@ const imageMap = {
   ],
   Land: [
     "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800"
-  ]
+  ],
+  "PG Hostel": pgImages
 };
 
 const properties = [];
 
 for (let i = 1; i <= 150; i++) {
-  const type = types[i % types.length];
-  const location = locations[i % locations.length];
+  const type = TYPES[i % TYPES.length];
+  const location = LOCATIONS[i % LOCATIONS.length];
 
-  const images = imageMap[type];
+  const images = imageMap[type] || imageMap["Apartment"];
   const image = images[Math.floor(Math.random() * images.length)];
 
-  const price = Math.floor(Math.random() * 2000000) + 150000;
+  const isPG = type === "PG Hostel";
+
+let mode;
+let price;
+
+// PG Hostel
+if (isPG) {
+  mode = "rent";
+  price = Math.floor(Math.random() * 700) + 250; // $250-$950/week
+}
+
+// Land
+else if (type === "Land") {
+  mode = "buy";
+  price = Math.floor(Math.random() * 1500000) + 200000; // $200k-$1.7M
+}
+
+// Other Properties
+else {
+  mode = i % 2 === 0 ? "buy" : "rent";
+
+  if (mode === "buy") {
+    // Realistic Australia purchase prices
+    price = Math.floor(Math.random() * 1800000) + 350000;
+    // $350k - $2.15M
+  } else {
+    // Weekly rent prices
+    price = Math.floor(Math.random() * 1000) + 350;
+    // $350 - $1350/week
+  }
+}
 
   properties.push({
     id: i,
-    title: `${type} Property ${i}`,
+    title: isPG
+      ? `PG Hostel in ${location}`
+      : `${type} Property ${i}`,
+
     type,
     location,
     price,
     image,
-    bedrooms: Math.floor(Math.random() * 5) + 1,
-    bathrooms: Math.floor(Math.random() * 4) + 1,
-    area: Math.floor(Math.random() * 2000) + 500,
-    description:
-      "Beautiful modern property located in a prime location with premium amenities and excellent connectivity.",
-    mode: i % 2 === 0 ? "buy" : "rent"
+
+    bedrooms:
+  type === "Land"
+    ? null
+    : isPG
+    ? 1
+    : Math.floor(Math.random() * 5) + 1,
+
+bathrooms:
+  type === "Land"
+    ? null
+    : isPG
+    ? 1
+    : Math.floor(Math.random() * 4) + 1,
+
+area:
+  type === "Land"
+    ? Math.floor(Math.random() * 10000) + 2000
+    : isPG
+    ? "Shared"
+    : Math.floor(Math.random() * 2000) + 500,
+
+zoning:
+  type === "Land"
+    ? ["Residential", "Commercial", "Mixed Use"][
+        Math.floor(Math.random() * 3)
+      ]
+    : null,
+
+    description: isPG
+      ? "Affordable PG/Hostel with shared rooms, WiFi, food facilities and secure environment."
+      : "Beautiful modern property with premium amenities and excellent connectivity.",
+
+    mode
   });
 }
 
