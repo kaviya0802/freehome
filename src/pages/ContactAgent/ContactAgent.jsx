@@ -78,7 +78,7 @@ function ContactAgent() {
         {/* HERO */}
         <div className="ac-hero">
           <h1>Find Your Perfect Real Estate Agent</h1>
-          <p>Get matched with verified property experts instantly</p>
+          <p>GET MATCHED WITH VERIFIED PROPERTY EXPERTS INSTANTLY</p>
         </div>
 
         {/* MAIN LAYOUT */}

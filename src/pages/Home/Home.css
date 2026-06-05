@@ -3,7 +3,9 @@
 ========================= */
 
 .hero {
-  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  background: radial-gradient(circle at top right,
+    #2563eb,
+    #0f172a 60%);
   color: white;
   min-height: 90vh;
   display: flex;

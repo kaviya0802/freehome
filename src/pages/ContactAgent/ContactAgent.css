@@ -20,9 +20,13 @@
 
 .ac-hero p {
   margin-top: 8px;
-  color: #666;
   font-size: 14px;
+  color: #3b82f6;
+  letter-spacing: 3px;
+  font-size: 12px;
+  
 }
+
 
 /* LAYOUT */
 .ac-shell {

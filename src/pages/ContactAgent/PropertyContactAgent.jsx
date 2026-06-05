@@ -89,7 +89,7 @@ function PropertyContactAgent() {
 
         <div className="pc-header">
           <h1>Schedule Property Visit</h1>
-          <p>Book a verified visit with our expert agent</p>
+          <p>BOOK A VERIFIED VISIT WITH OUR EXPERT AGENT</p>
         </div>
 
         <div className="pc-box">

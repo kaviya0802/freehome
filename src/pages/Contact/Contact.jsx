@@ -70,7 +70,7 @@ function Contact() {
         {/* HERO */}
         <div className="cf-hero">
           <h1>Help Center</h1>
-          <p>Get support for accounts, listings, and property related issues</p>
+          <p className="contactus">GET SUPPORT FOR ACCOUNTS,LISTING AND PROPERTY RELATED ISSUES</p>
         </div>
 
         <div className="cf-shell">

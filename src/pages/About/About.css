@@ -15,8 +15,11 @@
 }
 
 .about-hero p {
-  color: #666;
-  margin-top: 10px;
+  color: #3b82f6;
+  margin-top: 6px;
+  letter-spacing: 3px;
+  font-size: 12px;
+  
 }
 
 .about-section {
