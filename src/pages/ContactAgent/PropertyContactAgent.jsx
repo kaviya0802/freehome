@@ -3,37 +3,79 @@ import { useState } from "react";
 import properties from "../../data/generateProperties";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import "./PropertyContactAgent.css";
 
 function PropertyContactAgent() {
   const { id } = useParams();
-
   const property = properties.find(p => String(p.id) === String(id));
 
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    message: "",
-    visitDate: ""
+    contactMode: "",
+    visitDate: "",
+    message: ""
   });
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const validate = () => {
+    const newErrors = {};
+
+    if (!form.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(form.name)) {
+      newErrors.name = "Only alphabets allowed";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = "Enter valid email";
+    }
+
+    if (!form.phone) {
+      newErrors.phone = "Phone is required";
+    } else if (!/^\d{10}$/.test(form.phone)) {
+      newErrors.phone = "Must be 10 digits";
+    }
+
+    if (!form.contactMode) {
+      newErrors.contactMode = "Select mode of contact";
+    }
+
+    if (!form.visitDate) {
+      newErrors.visitDate = "Select visiting date";
+    }
+
+    return newErrors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    alert(
-      `Request sent for ${property.title}\nAgent will contact you soon.`
-    );
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setErrors({});
+
+    // ✅ Browser alert only (no toast library)
+    alert("Booking Confirmed! Our agent will contact you soon.");
 
     setForm({
       name: "",
       email: "",
       phone: "",
-      message: "",
-      visitDate: ""
+      contactMode: "",
+      visitDate: "",
+      message: ""
     });
   };
 
@@ -43,31 +85,95 @@ function PropertyContactAgent() {
     <>
       <Navbar />
 
-      <div className="contact-container">
+      <div className="pc-page">
 
-        <h1>Contact Agent</h1>
+        <div className="pc-header">
+          <h1>Schedule Property Visit</h1>
+          <p>Book a verified visit with our expert agent</p>
+        </div>
 
-        <h3>{property.title}</h3>
-        <p>{property.location} | ${property.price.toLocaleString()}</p>
+        <div className="pc-box">
+          <div>
+            <h2>
+              {property.title}
+              <span className={`pc-badge ${property.mode}`}>
+                {property.mode === "rent" ? "For Rent" : "For Buy"}
+              </span>
+            </h2>
+            <p>{property.location}</p>
+          </div>
 
-        <form onSubmit={handleSubmit}>
+          <div className="pc-price">
+            ₹ {property.price.toLocaleString()}
+          </div>
+        </div>
 
-          <input name="name" placeholder="Name" onChange={handleChange} />
-          <input name="email" placeholder="Email" onChange={handleChange} />
-          <input name="phone" placeholder="Phone (+61)" onChange={handleChange} />
+        <form className="pc-form" onSubmit={handleSubmit}>
 
-          <input type="date" name="visitDate" onChange={handleChange} />
+          <input
+            name="name"
+            placeholder="Full Name *"
+            value={form.name}
+            onChange={handleChange}
+          />
+          {errors.name && <span className="pc-error">{errors.name}</span>}
+
+          <input
+            name="email"
+            placeholder="Email Address *"
+            value={form.email}
+            onChange={handleChange}
+          />
+          {errors.email && <span className="pc-error">{errors.email}</span>}
+
+          <input
+            name="phone"
+            placeholder="Phone Number *"
+            value={form.phone}
+            onChange={(e) => {
+              const value = e.target.value.replace(/\D/g, "");
+              setForm({ ...form, phone: value });
+            }}
+          />
+          {errors.phone && <span className="pc-error">{errors.phone}</span>}
+
+          {/* FIXED SELECT */}
+          <select
+            name="contactMode"
+            value={form.contactMode}
+            onChange={handleChange}
+          >
+            <option value="">Mode of Contact *</option>
+            <option value="Phone Call">Phone Call</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Email">Email</option>
+            <option value="Message">Message</option>
+          </select>
+          {errors.contactMode && <span className="pc-error">{errors.contactMode}</span>}
+
+          <input
+            type="text"
+            name="visitDate"
+            placeholder="Select visiting date *"
+            onFocus={(e) => (e.target.type = "date")}
+            onBlur={(e) => {
+              if (!e.target.value) e.target.type = "text";
+            }}
+            value={form.visitDate}
+            onChange={handleChange}
+          />
+          {errors.visitDate && <span className="pc-error">{errors.visitDate}</span>}
 
           <textarea
             name="message"
-            placeholder="Price negotiation / visit / offer details"
+            placeholder="Message (optional)"
+            value={form.message}
             onChange={handleChange}
           />
 
-          <button type="submit">Send Request</button>
+          <button type="submit">Book Visit</button>
 
         </form>
-
       </div>
 
       <Footer />

@@ -1,92 +1,145 @@
-import { useParams } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import properties from "../../data/generateProperties";
+import "./Contact.css";
 
 function Contact() {
-
-  const { id } = useParams();
-
-  const property = id
-    ? properties.find(p => String(p.id) === String(id))
-    : null;
-
   const [form, setForm] = useState({
     name: "",
     email: "",
+    category: "General",
     message: ""
   });
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const validate = () => {
+    let newErrors = {};
+
+    if (!form.name.trim()) {
+      newErrors.name = "Full name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(form.name)) {
+      newErrors.name = "Only alphabets allowed";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/.test(form.email)
+    ) {
+      newErrors.email = "Enter valid email address";
+    }
+
+    if (!form.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+
+    return newErrors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (property) {
-      alert(`Enquiry sent for ${property.title}`);
-    } else {
-      alert("Message sent to support team");
-    }
+    const err = validate();
+    setErrors(err);
 
-    setForm({ name: "", email: "", message: "" });
+    if (Object.keys(err).length > 0) return;
+
+    alert("Your request has been submitted successfully.");
+
+    setForm({
+      name: "",
+      email: "",
+      category: "General",
+      message: ""
+    });
+
+    setErrors({});
   };
 
   return (
     <>
       <Navbar />
 
-      <div className="contact-container">
+      <div className="cf-page">
 
-        {/* TITLE LOGIC */}
-        <h1>
-          {property ? "Contact Agent" : "Contact Us"}
-        </h1>
+        {/* HERO */}
+        <div className="cf-hero">
+          <h1>Help Center</h1>
+          <p>Get support for accounts, listings, and property related issues</p>
+        </div>
 
-        {/* PROPERTY CONTEXT (ONLY WHEN ID EXISTS) */}
-        {property && (
-          <div className="info-box">
-            <p><b>Property:</b> {property.title}</p>
-            <p><b>Location:</b> {property.location}</p>
-            <p><b>Price:</b> ${property.price.toLocaleString()}</p>
-            <p><b>Type:</b> {property.type}</p>
+        <div className="cf-shell">
+
+          {/* LEFT */}
+          <div className="cf-left">
+            <div className="cf-kicker">Support System</div>
+
+            <h2>One place for all assistance</h2>
+
+            <p className="cf-intro">
+              Our support system is designed to resolve issues quickly and efficiently.
+              Choose a category and submit your request.
+            </p>
+
+            <div className="cf-item">Account & login recovery support</div>
+            <div className="cf-item">Property listing & visibility issues</div>
+            <div className="cf-item">Booking & agent communication help</div>
+            <div className="cf-item">Technical bugs & performance issues</div>
+            <div className="cf-item">Fraud & safety reporting system</div>
+
+            <div className="cf-status">
+              Average response time: under 24 hours
+            </div>
           </div>
-        )}
 
-        {/* FORM */}
-        <form onSubmit={handleSubmit}>
+          {/* FORM */}
+          <form className="cf-form" onSubmit={handleSubmit} noValidate>
 
-          <input
-            name="name"
-            placeholder="Your Name"
-            onChange={handleChange}
-            required
-          />
+            <input
+              name="name"
+              placeholder="Full Name *"
+              value={form.name}
+              onChange={handleChange}
+            />
+            {errors.name && <span className="cf-error">{errors.name}</span>}
 
-          <input
-            name="email"
-            placeholder="Your Email"
-            onChange={handleChange}
-            required
-          />
+            <input
+              name="email"
+              placeholder="Email Address *"
+              value={form.email}
+              onChange={handleChange}
+            />
+            {errors.email && <span className="cf-error">{errors.email}</span>}
 
-          <textarea
-            name="message"
-            placeholder={
-              property
-                ? "Ask about price, visit date, negotiation, availability..."
-                : "Report issues or ask support questions..."
-            }
-            onChange={handleChange}
-            required
-          />
+            <select
+              name="category"
+              value={form.category}
+              onChange={handleChange}
+            >
+              <option value="General">General Inquiry</option>
+              <option value="Account Issue">Account Issue</option>
+              <option value="Property Issue">Property Issue</option>
+              <option value="Report Fraud">Report Fraud</option>
+            </select>
 
-          <button type="submit">Send Message</button>
+            <textarea
+              name="message"
+              placeholder="Describe your issue *"
+              value={form.message}
+              onChange={handleChange}
+            />
+            {errors.message && <span className="cf-error">{errors.message}</span>}
 
-        </form>
+            <button type="submit">Submit Request</button>
 
+          </form>
+
+        </div>
       </div>
 
       <Footer />

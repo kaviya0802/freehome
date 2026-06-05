@@ -2,7 +2,7 @@
   max-width: 1100px;
   margin: auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: inherit;
 }
 
 /* IMAGE */
@@ -99,21 +99,50 @@
   gap: 12px;
 }
 
-.primary-btn {
-  background: black;
-  color: white;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 8px;
-  cursor: pointer;
+/* =========================
+   PROPERTY DETAILS BUTTONS (ISOLATED)
+========================= */
+
+.pd-buttons {
+  margin-top: 25px;
+  margin-left:400px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.secondary-btn {
-  background: transparent;
-  border: 1px solid #ccc;
+/* BASE BUTTON */
+.pd-btn {
   padding: 12px 18px;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: 0.25s ease;
+}
+
+/* PRIMARY BUTTON (same style you used before) */
+.pd-btn-primary {
+  background: #111;
+  color: #fff;
+}
+
+.pd-btn-primary:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+}
+
+/* SECONDARY BUTTON (same system style) */
+.pd-btn-secondary {
+  background: #3b82f6;
+  border: 1px solid #ccc;
+  color: #fff;
+}
+
+.pd-btn-secondary:hover {
+  background: #111;
+  transform: translateY(-2px);
 }
 
 /* NOT FOUND */

@@ -1,0 +1,153 @@
+.ac-page {
+  background: #f9f9f9;
+  min-height: 100vh;
+  width: 100%;
+  padding: 50px 20px;
+  font-family: inherit;
+}
+
+/* HERO */
+.ac-hero {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.ac-hero h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #111;
+}
+
+.ac-hero p {
+  margin-top: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* LAYOUT */
+.ac-shell {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* LEFT SIDE (BLENDED) */
+.ac-left {
+  background: transparent;
+  padding: 10px;
+}
+
+.ac-left h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.ac-left p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* LIST */
+.ac-list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ac-list div {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: #222;
+  transition: 0.2s ease;
+}
+
+.ac-list div:hover {
+  transform: translateX(5px);
+  color: #000;
+}
+
+/* STATUS */
+.ac-status {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #555;
+  font-style: italic;
+}
+
+/* =========================
+   FORM (FLAT - NO CARD)
+========================= */
+
+.ac-right {
+  background: transparent;   /* 👈 NO CARD */
+  padding: 0;                /* 👈 NO BOX EFFECT */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ONLY INPUTS STAND OUT */
+.ac-right input,
+.ac-right select,
+.ac-right textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+
+  background: #ffffff;   /* ONLY THIS IS WHITE */
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+/* FOCUS */
+.ac-right input:focus,
+.ac-right select:focus,
+.ac-right textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+/* TEXTAREA */
+.ac-right textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+/* BUTTON (CLEAN FLAT STYLE) */
+.ac-right button {
+  padding: 14px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.ac-right button:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+}
+
+/* ERROR */
+.ac-error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: -6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .ac-shell {
+    grid-template-columns: 1fr;
+  }
+}

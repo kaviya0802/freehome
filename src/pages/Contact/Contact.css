@@ -1,74 +1,148 @@
-.contact-container {
-  display: flex;
-  gap: 40px;
-  padding: 50px;
+/* =========================
+   CONTACT PAGE ONLY (cf-)
+   FULLY ISOLATED SYSTEM
+========================= */
+
+.cf-page {
+  background:#f9f9f9;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* HERO */
+.cf-hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cf-hero h1 {
+  font-size: 34px;
+  color: #111;
+  font-weight: 700;
+}
+
+.cf-hero p {
+  color: #666;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* LAYOUT */
+.cf-shell {
   max-width: 1100px;
   margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
 }
 
-.contact-info {
-  flex: 1;
+/* LEFT */
+.cf-left {
+  padding: 10px;
 }
 
-.contact-info h1 {
-  font-size: 34px;
+.cf-kicker {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-.contact-info p {
-  color: #555;
-  margin-top: 10px;
+.cf-left h2 {
+  font-size: 30px;
+  color: #111;
+  margin-bottom: 10px;
 }
 
-.info-box {
+.cf-intro {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* ITEMS */
+.cf-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: #222;
+  font-size: 14px;
+}
+
+.cf-item:hover {
+  transform: translateX(5px);
+  transition: 0.2s;
+}
+
+/* STATUS */
+.cf-status {
   margin-top: 20px;
-  padding: 15px;
-  background: #f5f5f5;
-  border-radius: 10px;
+  font-size: 13px;
+  color: #555;
+  font-style: italic;
 }
 
-.contact-form {
-  flex: 1;
+/* FORM */
+.cf-form {
+  background: #f9f9f9;
+  padding: 26px;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
-.contact-form input,
-.contact-form textarea {
-  padding: 12px;
+/* INPUTS */
+.cf-form input,
+.cf-form select,
+.cf-form textarea {
+  padding: 12px 14px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  background: #fff;
 }
 
-.contact-form textarea {
-  height: 120px;
+/* FOCUS */
+.cf-form input:focus,
+.cf-form select:focus,
+.cf-form textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.18);
 }
 
-.contact-form button {
+/* TEXTAREA */
+.cf-form textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+/* BUTTON */
+.cf-form button {
   padding: 12px;
-  background: black;
-  color: white;
+  background: #111;
+  color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
 }
-.contact-form,
-.info-box {
-  transition: all 0.3s ease;
+
+.cf-form button:hover {
+  background: #3b82f6;
 }
 
-
-/* POP EFFECT for INFO BOX */
-.info-box:hover {
-  transform: translateY(-5px);
-  background: #eeeeee;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+/* ERROR */
+.cf-error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: -6px;
 }
 
-/* INPUT FOCUS IMPROVEMENT (optional but professional) */
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: #000;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
-  outline: none;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .cf-shell {
+    grid-template-columns: 1fr;
+  }
 }

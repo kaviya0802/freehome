@@ -69,16 +69,23 @@ function PropertyDetails() {
           <p>{property.description}</p>
         </div>
 
-        <button onClick={() => navigate(`/contact-agent/${property.id}`)}>
-          Contact Agent
-        </button>
+        <div className="pd-buttons">
 
-        <button
-          className="secondary-btn"
-          onClick={() => navigate("/properties")}
-        >
-          Back to Listings
-        </button>
+  <button
+    className="pd-btn pd-btn-primary"
+    onClick={() => navigate(`/contact-agent/${property.id}`)}
+  >
+    Contact Agent
+  </button>
+
+  <button
+    className="pd-btn pd-btn-secondary"
+    onClick={() => navigate("/properties")}
+  >
+    Back to Listings
+  </button>
+
+</div>
 
       </div>
     </div>

@@ -1,0 +1,186 @@
+.pc-page {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+  font-family: inherit;
+
+}
+
+/* HEADER */
+.pc-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.pc-header h1 {
+  font-size: 32px;
+  color: #111;
+  font-weight: 700;
+}
+
+.pc-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* PROPERTY BOX */
+.pc-box {
+  background: #f9f9f9;
+  padding: 18px;
+  border-radius: 12px;
+  border-left: 4px solid #111;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.pc-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* BADGE */
+.pc-badge {
+  margin-left: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  color: white;
+}
+
+.pc-badge.rent { background: #444; }
+.pc-badge.buy { background: #111; }
+
+/* PRICE */
+.pc-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+/* FORM */
+.pc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* =========================
+   INPUT / SELECT / TEXTAREA
+========================= */
+.pc-form input,
+.pc-form textarea,
+.pc-form select {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 500; /* FIXED (was 200, now proper readable) */
+
+  font-family: inherit;
+
+  color: #111 !important;
+  background: #fff;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  opacity: 1 !important;
+  -webkit-text-fill-color: #111 !important;
+
+  transition: 0.2s ease;
+}
+
+/* =========================
+   REMOVE BLUE AUTOFILL (CHROME)
+========================= */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #111 !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* =========================
+   REMOVE BLUE TOUCH / FOCUS GLOW (NEW FIX)
+========================= */
+.pc-form input,
+.pc-form textarea,
+.pc-form select {
+  -webkit-tap-highlight-color: transparent; /* removes mobile blue tap */
+  outline: none;
+}
+
+.pc-form input:focus,
+.pc-form textarea:focus,
+.pc-form select:focus,
+.pc-form input:focus-visible,
+.pc-form textarea:focus-visible,
+.pc-form select:focus-visible {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.20);
+}
+
+/* =========================
+   SELECT FIX
+========================= */
+.pc-form select {
+  color: #111 !important;
+}
+
+/* placeholder-like select */
+.pc-form select:invalid {
+  color: #888;
+}
+
+/* dropdown options */
+.pc-form select option {
+  color: #111;
+  background: #fff;
+}
+
+/* TEXTAREA */
+.pc-form textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+/* ERROR */
+.pc-error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: -6px;
+}
+
+/* BUTTON */
+.pc-form button {
+  padding: 12px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.pc-form button:hover {
+  background: #3b82f6;
+  transform: translateY(-1px);
+}
+.pc-form input[type="date"] {
+  color: #111;
+}
+

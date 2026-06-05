@@ -1,0 +1,28 @@
+.faq {
+  margin: 60px auto;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.faq h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.faq-item {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+.faq-item h4 {
+  margin: 0;
+}
+
+.faq-item p {
+  margin-top: 10px;
+  color: #666;
+}
