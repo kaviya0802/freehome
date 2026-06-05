@@ -114,8 +114,24 @@ else {
     location,
     price,
     image,
+commercialType:
+    type === "Commercial"
+      ? ["Office", "Retail", "Warehouse", "Medical"][
+          Math.floor(Math.random() * 4)
+        ]
+      : null,
 
-    bedrooms:
+commercialUnits:
+  type === "Commercial"
+    ? Math.floor(Math.random() * 20) + 5
+    : null,
+
+parkingSpaces:
+  type === "Commercial"
+    ? Math.floor(Math.random() * 50) + 10
+    : null,
+
+  bedrooms:
   type === "Land"
     ? null
     : isPG

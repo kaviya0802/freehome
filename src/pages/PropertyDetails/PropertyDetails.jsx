@@ -45,6 +45,7 @@ function PropertyDetails() {
         <div className="meta-box">
 
   {property.type === "Land" ? (
+
     <>
       <div>
         <h3>{property.area}</h3>
@@ -61,7 +62,33 @@ function PropertyDetails() {
         <p>Status</p>
       </div>
     </>
+
+  ) : property.type === "Commercial" ? (
+
+    <>
+      <div>
+        <h3>{property.commercialType}</h3>
+        <p>Property Type</p>
+      </div>
+
+      <div>
+        <h3>{property.commercialUnits}</h3>
+        <p>Units</p>
+      </div>
+
+      <div>
+        <h3>{property.parkingSpaces}</h3>
+        <p>Parking</p>
+      </div>
+
+      <div>
+        <h3>{property.mode.toUpperCase()}</h3>
+        <p>Status</p>
+      </div>
+    </>
+
   ) : (
+
     <>
       <div>
         <h3>{property.bedrooms}</h3>
@@ -75,7 +102,7 @@ function PropertyDetails() {
 
       <div>
         <h3>{property.area}</h3>
-        <p>Sqft</p>
+        <p>Area (sqft)</p>
       </div>
 
       <div>
@@ -83,6 +110,7 @@ function PropertyDetails() {
         <p>Status</p>
       </div>
     </>
+
   )}
 
 </div>
