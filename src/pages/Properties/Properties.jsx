@@ -53,12 +53,7 @@ function Properties() {
       matchBudget = price > 1000000;
     }
 
-    return (
-      matchLocation &&
-      matchType &&
-      matchBudget &&
-      matchMode
-    );
+    return matchLocation && matchType && matchBudget && matchMode;
   });
 
   // Dynamic page title
@@ -79,18 +74,21 @@ function Properties() {
       <div className="properties-container">
 
         <div className="properties-header">
-
           <div className="page-tag">
-              FreeHome Property Collection
-          </div> 
-          <h1>{pageTitle}</h1>
-          <p>
-            {filtered.length} Properties Found
-          </p>
+            FreeHome Property Collection
+          </div>
 
+          <h1>{pageTitle}</h1>
+
+          <p>{filtered.length} Properties Found</p>
         </div>
 
-        <div className="property-grid">
+        {/* ✅ IMPORTANT CHANGE HERE */}
+        <div
+          className={`property-grid ${
+            filtered.length === 1 ? "single-card" : ""
+          }`}
+        >
 
           {filtered.length > 0 ? (
             filtered.map((property) => (

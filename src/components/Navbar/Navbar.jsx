@@ -37,8 +37,8 @@ function Navbar() {
             <span>Properties <FaChevronDown /></span>
             <div className="dropdown-menu">
               <Link to="/properties">All Properties</Link>
-              <Link to="/properties?mode=buy">Buy Homes</Link>
-              <Link to="/properties?mode=rent">Rent Homes</Link>
+              <Link to="/properties?mode=buy">For Sale</Link>
+              <Link to="/properties?mode=rent">For Rent</Link>
               <Link to="/properties?type=PG Hostel">PG Hostel</Link>
             </div>
           </li>
@@ -83,7 +83,7 @@ function Navbar() {
 
         <Link to="/wishlist" className="icon-btn wishlist">
           <FaHeart />
-          <span>Saved</span>
+          <span>Wishlist</span>
         </Link>
 
         <Link to="/profile" className="icon-btn profile">

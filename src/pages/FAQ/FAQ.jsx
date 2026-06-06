@@ -66,6 +66,8 @@ function FAQ() {
     ["Will more features be added?", "Yes, future updates will include additional capabilities."]
   ];
 
+  const half = Math.ceil(faqs.length / 2);
+
   return (
     <>
       <Navbar />
@@ -77,32 +79,71 @@ function FAQ() {
           <h1>Frequently Asked Questions</h1>
         </div>
 
-        <div className="faq-stream">
+        <div className="faq-columns">
 
-          {faqs.map((item, index) => (
-            <div
-              key={index}
-              className={`faq-item ${
-                open === index ? "active" : ""
-              }`}
-            >
-              <button
-                className="faq-question"
-                onClick={() =>
-                  setOpen(open === index ? null : index)
-                }
+          {/* LEFT COLUMN */}
+          <div className="faq-column">
+            {faqs.slice(0, half).map((item, index) => (
+              <div
+                key={index}
+                className={`faq-item ${open === index ? "active" : ""}`}
               >
-                <span>{item[0]}</span>
-                <span>{open === index ? "−" : "+"}</span>
-              </button>
+                <button
+                  className="faq-question"
+                  onClick={() =>
+                    setOpen(open === index ? null : index)
+                  }
+                >
+                  <span>{item[0]}</span>
+                  <span>{open === index ? "−" : "+"}</span>
+                </button>
 
-              {open === index && (
-                <div className="faq-answer">
-                  {item[1]}
+                {open === index && (
+                  <div className="faq-answer">
+                    {item[1]}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* RIGHT COLUMN */}
+          <div className="faq-column">
+            {faqs.slice(half).map((item, index) => {
+              const realIndex = index + half;
+
+              return (
+                <div
+                  key={realIndex}
+                  className={`faq-item ${
+                    open === realIndex ? "active" : ""
+                  }`}
+                >
+                  <button
+                    className="faq-question"
+                    onClick={() =>
+                      setOpen(
+                        open === realIndex
+                          ? null
+                          : realIndex
+                      )
+                    }
+                  >
+                    <span>{item[0]}</span>
+                    <span>
+                      {open === realIndex ? "−" : "+"}
+                    </span>
+                  </button>
+
+                  {open === realIndex && (
+                    <div className="faq-answer">
+                      {item[1]}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              );
+            })}
+          </div>
 
         </div>
 

@@ -57,6 +57,7 @@
 .search-box input,
 .search-box select {
   padding: 14px;
+  font-family: inherit;
   width: 220px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -115,6 +116,7 @@ ropdown popup */
 /* search button */
 .search-btn {
   background: #2563eb;
+  font-family: inherit;
   color: white;
   border: none;
   padding: 14px 25px;
