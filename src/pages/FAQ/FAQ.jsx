@@ -75,8 +75,8 @@ function FAQ() {
       <div className="faq-page">
 
         <div className="faq-title">
-          <span>FREEHOME KNOWLEDGE BASE</span>
           <h1>Frequently Asked Questions</h1>
+          <span>FREEHOME KNOWLEDGE BASE</span>
         </div>
 
         <div className="faq-columns">
