@@ -6,6 +6,7 @@ import Contact from "./pages/Contact/Contact";
 import ContactAgent from "./pages/ContactAgent/ContactAgent";
 import PropertyContactAgent from "./pages/ContactAgent/PropertyContactAgent";
 import Wishlist from "./pages/Wishlist/Wishlist";
+import HomeLoan from "./pages/HomeLoan/HomeLoan";
 import Compare from "./pages/Compare/Compare";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/contact-agent" element={<ContactAgent />} />
         <Route path="/contact-agent/:id" element={<PropertyContactAgent />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/home-loan" element={<HomeLoan />} />
       </Routes>
     </>
   );
