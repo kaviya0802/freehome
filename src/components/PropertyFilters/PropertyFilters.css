@@ -1,27 +1,79 @@
-.filter-container {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-  padding: 10px;
-  background: #fff;
+.pf-filter-wrapper {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+}
+
+/* 🔘 BUTTON (small but modern) */
+/* 🔘 BUTTON (modern clickable effect) */
+.pf-filter-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
   border-radius: 10px;
-  border: 1px solid #eee;
+  cursor: pointer;
+  color: white;
+
+  background: linear-gradient(135deg, #111, #333);
+
+  margin-top: 10px;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.pf-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+  background: linear-gradient(135deg, #000, #444);
+}
+.pf-filter-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-.filter-container input,
-.filter-container select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+
+
+/* 📦 SMALL DROPDOWN */
+.pf-filter-dropdown {
+  position: absolute;
+  top: 42px;
+  right: 0;
+
+  width: 220px;   /* 🔥 smaller box */
+  background: #fff;
+  border-radius: 12px;
+
+  padding: 8px;   /* 🔥 reduced padding */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;       /* 🔥 tight spacing */
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+  z-index: 100;
+}
+
+/* 🎯 SMALL INPUT FIELDS */
+.pf-filter-dropdown select,
+.pf-filter-dropdown input {
+  height: 32px;     /* 🔥 smaller */
+  font-size: 12px;
+  font-family: inherit;
+  padding: 0 8px;
+  border-radius: 6px;
+
+  border: 1px solid #e5e5e5;
+  background: transparent;
   outline: none;
-  font-size: 14px;
 }
 
-.filter-container input {
-  min-width: 180px;
-}
-
-.filter-container select {
-  min-width: 140px;
+/* focus */
+.pf-filter-dropdown select:focus,
+.pf-filter-dropdown input:focus {
+  border-color: #111;
+  background: #fff;
 }

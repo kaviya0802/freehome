@@ -8,7 +8,9 @@
   text-align: center;
   margin-bottom: 30px;
 }
-
+.propertypage-title{
+margin-top: 0px;
+}
 
 .properties-header h1 {
   font-size: 32px;
@@ -41,22 +43,127 @@
   grid-column: 1 / -1;
 }
 .page-tag {
-  color: #64748b;
-  font-size: 14px;
+  color: #3b82f6;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 10px;
+  margin-top: 25px;
 }
-.page-tag::after {
-  content: "";
-  display: block;
 
-  width: 60px;
-  height: 3px;
+.properties-searchbar {
+  display: flex;
+  align-items: center;
+  margin-left: 350px;
+  width: 420px; /* IMPORTANT: keeps filter close */
+  
+  padding: 10px 14px;
 
-  background: #2563eb;
+  background: #fff;
+  border-radius: 16px;
 
-  margin: 8px auto 0;
-  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.08);
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+
+  transition: all 0.25s ease;
 }
+
+/* hover effect */
+.properties-searchbar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+}
+
+/* focus effect */
+/* INPUT FOCUS (like cf-form style) */
+.properties-searchbar:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.18);
+  transform: translateY(-2px);
+}
+
+/* input */
+.properties-searchbar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  background: transparent;
+  color: #111;
+}
+
+/* placeholder */
+.properties-searchbar input::placeholder {
+  color: #888;
+  font-size: 13px;
+}
+/* =========================
+   NO RESULTS BUTTON WRAPPER
+========================= */
+.no-results-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   BASE BUTTON STYLE
+========================= */
+.no-results-buttons button {
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+/* =========================
+   CLEAR SEARCH BUTTON
+========================= */
+.btn-clear-search {
+  background: #111;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.btn-clear-search:hover {
+  transform: translateY(-2px);
+  background:#3b82f6;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================
+   RESET FILTERS BUTTON
+========================= */
+.btn-reset-filters {
+  background:#3b82f6;
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-reset-filters:hover {
+  background: black;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 500px) {
+  .no-results-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .no-results-buttons button {
+    width: 80%;
+  }
+}
+

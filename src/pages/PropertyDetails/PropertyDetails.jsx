@@ -365,7 +365,6 @@ function PropertyDetails() {
               <div><h3>{property.villaFeatures.garage ? "Yes" : "No"}</h3><p>Garage</p></div>
               <div><h3>{new Date().getFullYear() - property.yearBuilt} Years</h3><p>Property Age</p></div>
               <div><h3>{property.furnished ? "Furnished" : "Unfurnished"}</h3><p>Furnishing</p></div>
-              <div><h3>{property.parking}</h3><p>Parking Spaces</p></div>
             </div>
           )}
 
