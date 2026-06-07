@@ -17,15 +17,12 @@ function PropertyDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const property = properties.find(
-    (p) => String(p.id) === String(id)
-  );
+  const property = properties.find((p) => String(p.id) === String(id));
 
   const [liked, setLiked] = useState(false);
   const [burst, setBurst] = useState(false);
   const [toast, setToast] = useState("");
 
-  // ✅ NEW: slider state
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -62,17 +59,21 @@ function PropertyDetails() {
     setTimeout(() => setToast(""), 2000);
   };
 
-  const handleDoubleClick = () => {
-    triggerWishlist();
-  };
+  const handleDoubleClick = () => triggerWishlist();
 
   const handleClickHeart = (e) => {
     e.stopPropagation();
     triggerWishlist();
   };
 
-  // ✅ SLIDER CONTROLS
   const images = property.images || [property.image];
+  const safe = (value) => {
+  return value === null ||
+    value === undefined ||
+    value === ""
+    ? "Not Available"
+    : value;
+};
 
   const nextImage = () => {
     setCurrentIndex((prev) =>
@@ -85,6 +86,7 @@ function PropertyDetails() {
       prev === 0 ? images.length - 1 : prev - 1
     );
   };
+  const propertyAge = new Date().getFullYear() - property.yearBuilt;
 
   return (
     <>
@@ -92,13 +94,8 @@ function PropertyDetails() {
 
       <div className="details-page">
 
-        {/* IMAGE SECTION */}
-        <div
-          className="image-section"
-          onDoubleClick={handleDoubleClick}
-        >
-
-          {/* ❤️ Wishlist icon */}
+        {/* IMAGE */}
+        <div className="image-section" onDoubleClick={handleDoubleClick}>
           <button
             className={`wishlist-icon ${liked ? "active" : ""}`}
             onClick={handleClickHeart}
@@ -106,19 +103,10 @@ function PropertyDetails() {
             {liked ? "❤️" : "🤍"}
           </button>
 
-          {/* 💥 HEART BURST */}
-          {burst && (
-            <div className="heart-burst">
-              ❤️ ❤️ ❤️
-            </div>
-          )}
+          {burst && <div className="heart-burst">❤️ ❤️ ❤️</div>}
 
-          {/* ✅ ONLY ONE IMAGE SHOWN */}
           <div className="slider-wrapper">
-            
-            <button className="slider-btn left" onClick={prevImage}>
-              ◀
-            </button>
+            <button className="slider-btn left" onClick={prevImage}>◀</button>
 
             <img
               src={images[currentIndex]}
@@ -126,97 +114,311 @@ function PropertyDetails() {
               className="slider-image"
             />
 
-            <button className="slider-btn right" onClick={nextImage}>
-              ▶
-            </button>
-
+            <button className="slider-btn right" onClick={nextImage}>▶</button>
           </div>
 
           <span className="type-badge">{property.type}</span>
         </div>
 
-        {/* CONTENT SECTION (UNCHANGED) */}
+        {/* CONTENT */}
         <div className="content-section">
 
           <div className="top-row">
             <h1>{property.title}</h1>
-
-            <h2 className="price">
-              ${property.price.toLocaleString()}
-            </h2>
+            <h2 className="price">${property.price.toLocaleString()}</h2>
           </div>
 
           <p className="location">{property.location}</p>
 
-          {/* ❗ YOUR META BOX - NO CHANGE AT ALL */}
-          <div className="meta-box">
-            {property.type === "Land" ? (
-              <>
-                <div>
-                  <h3>{property.area}</h3>
-                  <p>Land Size (sqm)</p>
-                </div>
-                <div>
-                  <h3>{property.zoning}</h3>
-                  <p>Zoning</p>
-                </div>
-                <div>
-                  <h3>{property.mode.toUpperCase()}</h3>
-                  <p>Status</p>
-                </div>
-              </>
-            ) : property.type === "Commercial" ? (
-              <>
-                <div>
-                  <h3>{property.commercialType}</h3>
-                  <p>Property Type</p>
-                </div>
-                <div>
-                  <h3>{property.commercialUnits}</h3>
-                  <p>Units</p>
-                </div>
-                <div>
-                  <h3>{property.parkingSpaces}</h3>
-                  <p>Parking</p>
-                </div>
-                <div>
-                  <h3>{property.mode.toUpperCase()}</h3>
-                  <p>Status</p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div>
-                  <h3>{property.bedrooms}</h3>
-                  <p>Beds</p>
-                </div>
-                <div>
-                  <h3>{property.bathrooms}</h3>
-                  <p>Baths</p>
-                </div>
-                <div>
-                  <h3>{property.area}</h3>
-                  <p>Area (sqft)</p>
-                </div>
-                <div>
-                  <h3>{property.mode.toUpperCase()}</h3>
-                  <p>Status</p>
-                </div>
-              </>
-            )}
-          </div>
+        {/* ================= MAIN META CARDS ================= */}
+{/* ================= MAIN META CARDS ================= */}
 
+<div className="meta-box">
+
+  {property.type === "Apartment" && (
+    <>
+      <div>
+        <h3>{property.bedrooms}</h3>
+        <p>Bedrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.bathrooms}</h3>
+        <p>Bathrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.area}</h3>
+        <p>Area (sqft)</p>
+      </div>
+
+      <div>
+        <h3>{property.apartmentFeatures?.floor}</h3>
+        <p>Floor</p>
+      </div>
+   <div>
+  <h3>
+  {property.mode === "buy" ? "SALE" : "RENT"}
+</h3>
+  <p>Status</p>
+</div>
+
+    </>
+  )}
+
+  {property.type === "Villa" && (
+    <>
+      <div>
+        <h3>{property.bedrooms}</h3>
+        <p>Bedrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.bathrooms}</h3>
+        <p>Bathrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.area}</h3>
+        <p>Area (sqft)</p>
+      </div>
+      
+
+      <div>
+        <h3>{property.parking}</h3>
+        <p>Parking</p>
+      </div>
+      <div>
+  <h3>
+  {property.mode === "buy" ? "SALE" : "RENT"}
+</h3>
+  <p>Status</p>
+</div>
+
+    </>
+  )}
+
+  {property.type === "Townhouse" && (
+    <>
+      <div>
+        <h3>{property.bedrooms}</h3>
+        <p>Bedrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.bathrooms}</h3>
+        <p>Bathrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.area}</h3>
+        <p>Area (sqft)</p>
+      </div>
+
+      <div>
+        <h3>{property.parking}</h3>
+        <p>Parking</p>
+      </div>
+      
+    <div>
+ <h3>
+  {property.mode === "buy" ? "SALE" : "RENT"}
+</h3>
+  <p>Status</p>
+</div>
+
+    </>
+  )}
+
+  {property.type === "Luxury" && (
+    <>
+      <div>
+        <h3>{property.bedrooms}</h3>
+        <p>Bedrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.bathrooms}</h3>
+        <p>Bathrooms</p>
+      </div>
+
+      <div>
+        <h3>{property.area}</h3>
+        <p>Area (sqft)</p>
+      </div>
+ 
+
+      <div>
+        <h3>{property.parking}</h3>
+        <p>Parking</p>
+      </div>
+      <div>
+<h3>
+  {property.mode === "buy" ? "SALE" : "RENT"}
+</h3>
+  <p>Status</p>
+</div>
+           
+    </>
+  )}
+
+  {property.type === "Commercial" && (
+    <>
+      <div>
+        <h3>{property.commercialFeatures?.officeType}</h3>
+        <p>Property Type</p>
+      </div>
+
+      <div>
+        <h3>{property.area}</h3>
+        <p>Floor Area(sqft)</p>
+      </div>
+      
+
+      <div>
+        <h3>{property.commercialFeatures?.parkingSpaces}</h3>
+        <p>Parking Spaces</p>
+      </div>
+
+      
+      <div>
+         <h3>{property.mode === "buy" ? "SALE" : "RENT"}</h3>
+         <p>Status</p>
+</div>
+
+    </>
+  )}
+
+  {property.type === "Land" && (
+    <>
+      <div>
+        <h3>{property.area}</h3>
+        <p>Land Size(Hectares)</p>
+      </div>
+
+      <div>
+        <h3>{property.landFeatures?.soilType}</h3>
+        <p>Soil Type</p>
+      </div>
+
+      <div>
+        <h3>
+          {property.landFeatures?.roadAccess ? "Yes" : "No"}
+        </h3>
+        <p>Road Access</p>
+      </div>
+
+      <div>
+      <h3>
+   {property.mode === "buy" ? "SALE" : "RENT"}
+</h3>
+        <p>Status</p>
+      </div>
+   
+    </>
+  )}
+
+  {property.type === "PG Hostel" && (
+    <>
+      <div>
+        <h3>{property.pgFeatures?.sharingType ?"Single Sharing":"Double Sharing"}</h3>
+        <p>Room Type</p>
+      </div>
+
+      <div>
+        <h3>
+          {property.pgFeatures?.wifi ? "Yes" : "No"}
+        </h3>
+        <p>WiFi</p>
+      </div>
+
+      <div>
+        <h3>
+          {property.pgFeatures?.mealsIncluded ? "Yes" : "No"}
+        </h3>
+        <p>Meals</p>
+      </div>
+        <div>
+        <h3>{property.area}</h3>
+        <p>Area (sqft)</p>
+      </div>
+
+      <div>
+<h3>
+  {property.mode === "buy" ? "SALE" : "RENT"}
+</h3>
+  <p>Status</p>
+</div>
+ 
+
+    </>
+  )}
+
+</div>
+
+          {/* ================= TYPE SPECIFIC CARDS ================= */}
+
+          {property.villaFeatures && (
+            <div className="meta-box">
+              <div><h3>{property.villaFeatures.pool ? "Yes" : "No"}</h3><p>Pool</p></div>
+              <div><h3>{property.villaFeatures.garden ? "Yes" : "No"}</h3><p>Garden</p></div>
+              <div><h3>{property.villaFeatures.garage ? "Yes" : "No"}</h3><p>Garage</p></div>
+              <div><h3>{new Date().getFullYear() - property.yearBuilt} Years</h3><p>Property Age</p></div>
+              <div><h3>{property.furnished ? "Furnished" : "Unfurnished"}</h3><p>Furnishing</p></div>
+              <div><h3>{property.parking}</h3><p>Parking Spaces</p></div>
+            </div>
+          )}
+
+          {property.apartmentFeatures && (
+            <div className="meta-box">
+              <div><h3>{property.apartmentFeatures.lift ? "Yes" : "No"}</h3><p>Lift</p></div>
+              <div><h3>{new Date().getFullYear() - property.yearBuilt} Years</h3><p>Property Age</p></div>
+              <div><h3>{property.furnished ? "Furnished" : "Unfurnished"}</h3><p>Furnishing</p></div>
+              <div><h3>{property.parking}</h3><p>Parking Spaces</p></div>
+              
+            </div>
+          )}
+          {property.townhouseFeatures && (
+         <div className="meta-box">
+    <    div><h3>{property.townhouseFeatures.duplex ? "Yes" : "No"}</h3><p>Duplex</p></div>
+        <div><h3>{property.townhouseFeatures.garden ? "Yes" : "No"}</h3><p>Garden</p></div>
+        <div><h3>{new Date().getFullYear() - property.yearBuilt} Years</h3><p>Property Age</p></div>
+        <div><h3>{property.furnished ? "Furnished" : "Unfurnished"}</h3><p>Furnishing</p></div>
+        <div><h3>{property.parking}</h3><p>Parking Spaces</p></div>
+       </div>
+        )}
+
+          {property.luxuryFeatures && (
+            <div className="meta-box">
+        
+              <div><h3>{property.luxuryFeatures.privatePool ? "Yes" : "No"}</h3><p>Private Pool</p></div>
+              <div><h3>{property.luxuryFeatures.homeTheatre ? "Yes" : "No"}</h3><p>Home Theatre</p></div>
+              <div><h3>{new Date().getFullYear() - property.yearBuilt} Years</h3><p>Property Age</p></div>
+              <div><h3>{property.furnished ? "Furnished" : "Unfurnished"}</h3><p>Furnishing</p></div>
+              <div><h3>{property.parking}</h3><p>Parking Spaces</p></div>
+            </div>
+          )}
+
+          {property.commercialFeatures && (
+            <div className="meta-box">
+              <div><h3>{property.commercialFeatures.officeType}</h3><p>Type</p></div>
+              <div><h3>{property.commercialFeatures.liftAccess ? "Yes" : "No"}</h3><p>Lift</p></div>
+              <div><h3>{new Date().getFullYear() - property.yearBuilt} Years</h3><p>Property Age</p></div>
+              <div><h3>{property.furnished ? "Furnished" : "Unfurnished"}</h3><p>Furnishing</p></div>
+            </div>
+          )}
+
+          {/* DESCRIPTION */}
           <div className="description">
             <h3>Overview</h3>
             <p>{property.description}</p>
           </div>
 
+          {/* BUTTONS */}
           <div className="pd-buttons">
             <button
               className="pd-btn pd-btn-primary"
-              onClick={() =>
-                navigate(`/contact-agent/${property.id}`)
-              }
+              onClick={() => navigate(`/contact-agent/${property.id}`)}
             >
               Contact Agent
             </button>

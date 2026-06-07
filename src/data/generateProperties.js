@@ -9,15 +9,11 @@ const TYPES = [
 ];
 
 const LOCATIONS = [
-  "Sydney",
-  "Melbourne",
-  "Brisbane",
-  "Perth",
-  "Adelaide",
-  "Canberra",
-  "Gold Coast",
-  "Hobart",
-  "Darwin"
+  "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide",
+  "Canberra", "Gold Coast", "Hobart", "Darwin",
+  "New South Wales", "Victoria", "Queensland",
+  "Western Australia", "South Australia",
+  "Tasmania", "Northern Territory"
 ];
 
 const imageMap = {
@@ -59,32 +55,121 @@ const properties = [];
 for (let i = 1; i <= 150; i++) {
   const type = TYPES[i % TYPES.length];
   const location = LOCATIONS[i % LOCATIONS.length];
-
-  // ✅ FIXED (NO RANDOM EVERY RENDER)
   const images = imageMap[type];
 
+  // MODE
+  let mode;
+  if (type === "PG Hostel") mode = "rent";
+  else mode = i % 2 === 0 ? "buy" : "rent";
+
+  // PRICE
+  let price;
+
+  if (mode === "rent") {
+    if (type === "PG Hostel") price = Math.floor(Math.random() * 600) + 200;
+    else if (type === "Luxury") price = Math.floor(Math.random() * 2000) + 1200;
+    else if (type === "Apartment") price = Math.floor(Math.random() * 900) + 350;
+    else if (type === "Villa") price = Math.floor(Math.random() * 1500) + 600;
+    else price = Math.floor(Math.random() * 1200) + 300;
+  } else {
+    if (type === "Luxury") price = Math.floor(Math.random() * 5000000) + 2500000;
+    else if (type === "Villa") price = Math.floor(Math.random() * 3000000) + 900000;
+    else if (type === "Townhouse") price = Math.floor(Math.random() * 2000000) + 500000;
+    else if (type === "Apartment") price = Math.floor(Math.random() * 1500000) + 300000;
+    else if (type === "Commercial") price = Math.floor(Math.random() * 4000000) + 1000000;
+    else if (type === "Land") price = Math.floor(Math.random() * 3000000) + 200000;
+    else price = Math.floor(Math.random() * 1200000) + 250000;
+  }
+
+  // ✅ BUILD PROPERTY INSIDE LOOP (FIXED)
   properties.push({
     id: i,
-
     title: `${type} Property ${i}`,
     type,
     location,
 
-    // 🔥 IMPORTANT:
-    image: images[0],   // ONLY FIRST IMAGE (for card)
+    image: images[0],
+    images,
 
-    images: images,     // FULL LIST (for details page)
+    price,
+    mode,
 
-    price: 500000 + i * 1000,
+    bedrooms: type === "Land" ? null : Math.floor(Math.random() * 5) + 1,
+    bathrooms: type === "Land" ? null : Math.floor(Math.random() * 4) + 1,
+    area: type === "Land"
+      ? Math.floor(Math.random() * 8000) + 2000
+      : Math.floor(Math.random() * 2000) + 500,
 
-    mode: i % 2 === 0 ? "buy" : "rent",
+    yearBuilt: 1990 + (i % 35),
+    condition: ["New", "Good", "Renovated", "Well Maintained"][i % 4],
+    furnished:
+  type === "Land"
+    ? false
+    : type === "PG Hostel"
+    ? true
+    : Math.random() > 0.5,
+    parking:
+  type === "Land"
+    ? 0
+    : type === "PG Hostel"
+    ? 0
+    : type === "Apartment"
+    ? 1 + (i % 2)
+    : type === "Townhouse"
+    ? 1 + (i % 2)
+    : type === "Villa"
+    ? 2 + (i % 2)
+    : type === "Luxury"
+    ? 3 + (i % 3)
+    : type === "Commercial"
+    ? 5 + (i % 10)
+    : 0,
+    description: `${type} property offering modern design, excellent connectivity, and premium lifestyle.`,
 
-    bedrooms: type === "Land" ? null : 2,
-    bathrooms: type === "Land" ? null : 2,
-    area: type === "Land" ? 5000 : 1200,
+    // TYPE SPECIFIC
+    villaFeatures: type === "Villa" ? {
+      pool: i % 2 === 0,
+      garden: true,
+      security: "Gated Community"
+    } : null,
+    townhouseFeatures: type === "Townhouse" ? {
+  sharedWalls: true,
+  communityType: "Gated Community",
+  parking:
+  type === "Apartment" ? 1 + (i % 2) :
+  type === "Townhouse" ? 1 + (i % 2) :
+  type === "Villa" ? 2 + (i % 2) :
+  type === "Luxury" ? 3 + (i % 3) :
+  type === "Commercial" ? 5 + (i % 10) :
+  type === "Land" ? 0 :
+  type === "PG Hostel" ? 0 :
+  0,
 
-    description:
-      "Beautiful modern property with premium amenities and excellent connectivity."
+  duplex: i % 2 === 0,
+  garden: i % 3 === 0,
+} : null,
+
+    apartmentFeatures: type === "Apartment" ? {
+      floor: (i % 20) + 1,
+      lift: true,
+      amenities: ["Gym", "Pool", "Security"]
+    } : null,
+
+    luxuryFeatures: type === "Luxury" ? {
+      smartHome: true,
+      privatePool: true,
+      concierge: true
+    } : null,
+
+    commercialFeatures: type === "Commercial" ? {
+      officeType: "Corporate Space",
+      parkingSpaces: 10 + (i % 10)
+    } : null,
+
+    landFeatures: type === "Land" ? {
+      soilType: ["Clay", "Sandy", "Loamy"][i % 3],
+      roadAccess: true
+    } : null
   });
 }
 

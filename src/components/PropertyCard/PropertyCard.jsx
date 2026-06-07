@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+
 import "./PropertyCard.css";
 
 import {
@@ -56,7 +57,9 @@ function PropertyCard({ property }) {
 
     // SINGLE CLICK → delay navigation slightly
     clickTimeout.current = setTimeout(() => {
-      navigate(`/property/${property.id}`);
+      navigate(`/property/${property.id}`, {
+  state: { fromProperties: true }
+});
     }, 250);
   };
 
