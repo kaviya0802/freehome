@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import { useCompare } from "../../context/CompareContext";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
@@ -22,9 +22,12 @@ function PropertyDetails() {
   const [liked, setLiked] = useState(false);
   const [burst, setBurst] = useState(false);
   const [toast, setToast] = useState("");
-
+  const [compareToast, setCompareToast] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { selected, toggleProperty } = useCompare();
 
+  const isSelected = selected.find((p) => p.id === property.id); 
+ 
   useEffect(() => {
     if (property) {
       setLiked(isWishlisted(property.id));
@@ -65,7 +68,24 @@ function PropertyDetails() {
     e.stopPropagation();
     triggerWishlist();
   };
+   const handleCompare = (e) => {
+  e.stopPropagation();
 
+  if (isSelected) {
+    toggleProperty(property);
+    setToast("Removed from compare List");
+  } else {
+    const added = toggleProperty(property);
+
+    if (!added) {
+      setToast("Only 3 properties can be compared");
+    } else {
+      setToast("Added to compare List");
+    }
+  }
+
+  setTimeout(() => setToast(""), 2000);
+};
   const images = property.images || [property.image];
   const safe = (value) => {
   return value === null ||
@@ -119,6 +139,12 @@ function PropertyDetails() {
           </div>
 
           <span className="type-badge">{property.type}</span>
+          <button
+  className={`compare-img-btn ${isSelected ? "active" : ""}`}
+  onClick={handleCompare}
+>
+  {isSelected ? "✔ Compare" : "+ Compare"}
+</button>
         </div>
 
         {/* CONTENT */}
@@ -482,7 +508,7 @@ function PropertyDetails() {
       </div>
 
       {toast && <div className="toast">{toast}</div>}
-
+      {compareToast && <div className="toast">{compareToast}</div>}
       <Footer />
     </>
   );

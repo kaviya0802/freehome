@@ -255,7 +255,7 @@
   border-radius: 25px;
   font-size: 13px;
   z-index: 9999;
-  animation: fadeToast 2s ease;
+  animation: fadeToast 5s ease;
 }
 
 @keyframes fadeToast {
@@ -300,4 +300,27 @@
 
 .slider-btn:hover {
   background: rgba(0,0,0,0.7);
+}
+/* COMPARE BUTTON (NEW) */
+.compare-img-btn{
+  position: absolute;
+  top: 15px;
+  left: 100px;
+  background: black;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 40px;
+  z-index: 2;
+}
+
+.compare-img-btn.active {
+  background: #00c853;
+}
+
+.compare-img-btn:hover {
+  opacity: 0.9;
 }

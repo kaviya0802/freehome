@@ -9,8 +9,13 @@ import {
   isWishlisted,
 } from "../../utils/wishlist";
 
+import { useCompare } from "../../context/CompareContext";
+
 function PropertyCard({ property }) {
   const navigate = useNavigate();
+
+  const { selected, toggleProperty } = useCompare();
+  const isSelected = selected.find((p) => p.id === property.id);
 
   const [liked, setLiked] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -24,11 +29,12 @@ function PropertyCard({ property }) {
     setLiked(isWishlisted(property.id));
   }, [property.id]);
 
+  // ❤️ WISHLIST TOGGLE
   const triggerWishlist = () => {
     if (liked) {
       removeFromWishlist(property.id);
       setLiked(false);
-      setToast("Removed from wishlist");
+      setToast("Removed from wishlist ❌");
     } else {
       addToWishlist(property);
       setLiked(true);
@@ -43,30 +49,56 @@ function PropertyCard({ property }) {
     setTimeout(() => setToast(""), 2000);
   };
 
+  // 🖱 SINGLE + DOUBLE CLICK LOGIC
   const handleClick = () => {
     const now = Date.now();
     const timeDiff = now - lastClickTime.current;
     lastClickTime.current = now;
 
-    // DOUBLE CLICK → wishlist only
+    // DOUBLE CLICK → wishlist
     if (timeDiff < 300) {
       clearTimeout(clickTimeout.current);
       triggerWishlist();
       return;
     }
 
-    // SINGLE CLICK → delay navigation slightly
+    // SINGLE CLICK → navigate
     clickTimeout.current = setTimeout(() => {
       navigate(`/property/${property.id}`, {
-  state: { fromProperties: true }
-});
+        state: { fromProperties: true },
+      });
     }, 250);
   };
 
-  return (
-    <div className="property-card" onClick={handleClick}>
+  // 📊 COMPARE TOGGLE (LIMIT SAFE)
+   const handleCompare = (e) => {
+  e.stopPropagation();
 
-      {/* ❤️ HEART BUTTON */}
+  if (isSelected) {
+    toggleProperty(property);
+    setToast("Removed from compare List");
+  } else {
+    const added = toggleProperty(property);
+
+    if (!added) {
+      setToast("Only 3 properties can be compared");
+    } else {
+      setToast("Added to compare List");
+    }
+  }
+
+  setTimeout(() => setToast(""), 2000);
+};
+
+  return (
+    <div
+      className="property-card"
+      onClick={handleClick}
+      style={{
+        border: isSelected ? "2px solid #00c853" : "1px solid #ddd",
+      }}
+    >
+      {/* ❤️ WISHLIST BUTTON */}
       <button
         className={`wishlist-icon ${liked ? "active" : ""} ${
           animate ? "animate" : ""
@@ -79,24 +111,34 @@ function PropertyCard({ property }) {
         {liked ? "❤️" : "🤍"}
       </button>
 
-      {/* 💥 BURST */}
+      {/* 📊 COMPARE BUTTON */}
+      <button
+        className={`compare-btn ${isSelected ? "active" : ""}`}
+        onClick={handleCompare}
+      >
+        {isSelected ? "✔ Compare" : "+ Compare"}
+      </button>
+
+      {/* 💥 BURST ANIMATION */}
       {burst && <div className="heart-burst">❤️ ❤️ ❤️</div>}
 
+      {/* 🏠 IMAGE */}
       <img
         src={property.image}
         alt={property.title}
         onError={(e) =>
-          (e.target.src =
-            "https://source.unsplash.com/600x400/?house")
+          (e.target.src = "https://source.unsplash.com/600x400/?house")
         }
       />
 
+      {/* 📄 INFO */}
       <div className="property-info">
         <h3>{property.title}</h3>
         <p>{property.location}</p>
-        <span>${property.price.toLocaleString()}</span>
+        <span>₹{property.price.toLocaleString()}</span>
       </div>
 
+      {/* 🔔 TOAST */}
       {toast && <div className="toast">{toast}</div>}
     </div>
   );

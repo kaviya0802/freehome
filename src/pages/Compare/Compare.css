@@ -1,0 +1,150 @@
+.compare-page {
+  min-height: 100vh;
+  background: #f7f9fc;
+  padding: 40px;
+}
+
+/* EMPTY STATE */
+
+.compare-empty-card {
+  max-width: 800px;
+  margin: 80px auto;
+  text-align: center;
+
+  background: white;
+  padding: 60px;
+
+  border-radius: 24px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.compare-empty-card h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.compare-empty-card p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.compare-select-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.compare-select-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* HEADER */
+
+.compare-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.compare-header h1 {
+  font-size: 38px;
+}
+
+.compare-header p {
+  color: #666;
+  margin-top: 10px;
+}
+
+.compare-clear-btn {
+  margin-top: 15px;
+  border: none;
+  background: crimson;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* SELECTED PROPERTY CARDS */
+
+.compare-selected-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.compare-property-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+  transition: 0.3s;
+}
+
+.compare-property-card:hover {
+  transform: translateY(-6px);
+}
+
+.compare-property-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.compare-property-info {
+  padding: 20px;
+}
+
+.compare-property-info h3 {
+  margin-bottom: 10px;
+}
+
+.compare-property-info p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.compare-property-info span {
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* COMPARISON TABLE */
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+
+  background: white;
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+  padding: 20px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table th {
+  background: #f5f7fb;
+  padding: 16px;
+  text-align: left;
+}
+
+.comparison-table td {
+  padding: 16px;
+  text-align: center;
+}
+
+.comparison-table tr {
+  border-bottom: 1px solid #eee;
+}

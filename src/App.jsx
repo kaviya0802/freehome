@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Home/Home";
 import Properties from "./pages/Properties/Properties";
 import PropertyDetails from "./pages/PropertyDetails/PropertyDetails";
@@ -14,12 +15,17 @@ import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
 import FAQ from "./pages/FAQ/FAQ";
 import Admin from "./pages/Admin/Admin";
-import AreaInsights from "./pages/AreaInsights/AreaInsights.jsx";
+
 import ScrollToTop from "./components/ScrollToTop";
+
+// 👇 ADD THIS
+import { CompareProvider } from "./context/CompareContext";
+
 function App() {
   return (
-    <>
+    <CompareProvider>
       <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/properties" element={<Properties />} />
@@ -35,10 +41,10 @@ function App() {
         <Route path="/contact-agent" element={<ContactAgent />} />
         <Route path="/contact-agent/:id" element={<PropertyContactAgent />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/area-insights" element={<AreaInsights />} />
         <Route path="/home-loan" element={<HomeLoan />} />
       </Routes>
-    </>
+    </CompareProvider>
   );
 }
- export default App;
+
+export default App;
