@@ -83,93 +83,214 @@ for (let i = 1; i <= 150; i++) {
 
   // ✅ BUILD PROPERTY INSIDE LOOP (FIXED)
   properties.push({
-    id: i,
-    title: `${type} Property ${i}`,
-    type,
-    location,
+  id: i,
+  title: `${type} Property ${i}`,
+  type,
+  location,
 
-    image: images[0],
-    images,
+  image: images[0],
+  images,
 
-    price,
-    mode,
+  price,
+  mode,
 
-    bedrooms: type === "Land" ? null : Math.floor(Math.random() * 5) + 1,
-    bathrooms: type === "Land" ? null : Math.floor(Math.random() * 4) + 1,
-    area: type === "Land"
+  bedrooms: type === "Land" ? null : Math.floor(Math.random() * 5) + 1,
+  bathrooms: type === "Land" ? null : Math.floor(Math.random() * 4) + 1,
+  area:
+    type === "Land"
       ? Math.floor(Math.random() * 8000) + 2000
       : Math.floor(Math.random() * 2000) + 500,
 
-    yearBuilt: 1990 + (i % 35),
-    condition: ["New", "Good", "Renovated", "Well Maintained"][i % 4],
-    furnished:
-  type === "Land"
-    ? false
-    : type === "PG Hostel"
-    ? true
-    : Math.random() > 0.5,
-    parking:
-  type === "Land"
-    ? 0
-    : type === "PG Hostel"
-    ? 0
-    : type === "Apartment"
-    ? 1 + (i % 2)
-    : type === "Townhouse"
-    ? 1 + (i % 2)
-    : type === "Villa"
-    ? 2 + (i % 2)
-    : type === "Luxury"
-    ? 3 + (i % 3)
-    : type === "Commercial"
-    ? 5 + (i % 10)
-    : 0,
+  yearBuilt: 1990 + (i % 35),
+
+  // ✅ NEW STANDARD FILTER FIELD
+  propertyAge: new Date().getFullYear() - (1990 + (i % 35)),
+
+  condition: ["New", "Good", "Renovated", "Well Maintained"][i % 4],
+
+  furnished:
+    type === "Land"
+      ? false
+      : type === "PG Hostel"
+      ? true
+      : Math.random() > 0.5,
+
+  // ✅ NEW STANDARD FILTER FIELD (for UI filtering)
+  furnishing:
+    type === "Land"
+      ? null
+      : type === "PG Hostel"
+      ? "Fully Furnished"
+      : Math.random() > 0.5
+      ? "Furnished"
+      : "Unfurnished",
+
+  parking:
+    type === "Land"
+      ? 0
+      : type === "PG Hostel"
+      ? 0
+      : type === "Apartment"
+      ? 1 + (i % 2)
+      : type === "Townhouse"
+      ? 1 + (i % 2)
+      : type === "Villa"
+      ? 2 + (i % 2)
+      : type === "Luxury"
+      ? 3 + (i % 3)
+      : type === "Commercial"
+      ? 5 + (i % 10)
+      : 0,
+      propertyType: ["Office", "Shop", "Warehouse"][i % 3],
+      soilType: ["Red Soil", "Black Soil", "Sandy", "Clay"][i % 4],
     description: `${type} property offering modern design, excellent connectivity, and premium lifestyle.`,
 
     // TYPE SPECIFIC
-    villaFeatures: type === "Villa" ? {
-      pool: i % 2 === 0,
-      garden: true,
-      security: "Gated Community"
-    } : null,
-    townhouseFeatures: type === "Townhouse" ? {
-  sharedWalls: true,
-  communityType: "Gated Community",
-  parking:
-  type === "Apartment" ? 1 + (i % 2) :
-  type === "Townhouse" ? 1 + (i % 2) :
-  type === "Villa" ? 2 + (i % 2) :
-  type === "Luxury" ? 3 + (i % 3) :
-  type === "Commercial" ? 5 + (i % 10) :
-  type === "Land" ? 0 :
-  type === "PG Hostel" ? 0 :
-  0,
+   propertyDetails:
+  type === "Villa"
+    ? {
+        address: `${10 + i} Palm Street`,
+        landArea: 2500 + i * 10,
+        builtUpArea: 1800 + i * 8,
+        balconies: (i % 3) + 1,
+        floors: 2,
+        privateGarden: i % 2 === 0,
+        privatePool: i % 3 === 0,
+        facingDirection: ["East", "West", "North", "South"][i % 4],
+        security: true,
+        powerBackup: true,
+        nearbySchools: (i % 8) + 1,
+        nearbyHospitals: (i % 5) + 1,
+        metroConnectivity: ["Excellent", "Good", "Moderate"][i % 3],
+        trafficCondition: ["Low", "Medium", "High"][i % 3],
+        safetyScore: (i % 3) + 8,
+        propertyDemand: ["High", "Medium"][i % 2],
+        investmentPotential: ["High", "Excellent"][i % 2]
+      }
 
-  duplex: i % 2 === 0,
-  garden: i % 3 === 0,
-} : null,
+    : type === "Apartment"
+    ? {
+        address: `${20 + i} Apartment Avenue`,
+        floorNumber: (i % 20) + 1,
+        builtUpArea: 800 + i * 5,
+        balconies: (i % 2) + 1,
+        totalFloors: 20,
+        maintenanceFee: 150 + i,
+        liftAvailable: true,
+        gym: true,
+        swimmingPool: i % 2 === 0,
+        clubhouse: true,
+        powerBackup: true,
+        security: true,
+        nearbySchools: (i % 8) + 1,
+        nearbyHospitals: (i % 5) + 1,
+        metroConnectivity: ["Excellent", "Good", "Moderate"][i % 3],
+        trafficCondition: ["Low", "Medium", "High"][i % 3],
+        safetyScore: (i % 3) + 8,
+        propertyDemand: ["High", "Medium"][i % 2]
+      }
 
-    apartmentFeatures: type === "Apartment" ? {
-      floor: (i % 20) + 1,
-      lift: true,
-      amenities: ["Gym", "Pool", "Security"]
-    } : null,
+    : type === "Luxury"
+    ? {
+        address: `${50 + i} Luxury Boulevard`,
+        landArea: 5000 + i * 20,
+        builtUpArea: 4000 + i * 15,
+        privatePool: true,
+        privateGym: true,
+        homeTheater: true,
+        smartHomeFeatures: true,
+        privateGarden: true,
+        parkingCapacity: 4 + (i % 4),
+        rooftopTerrace: true,
+        waterView: ["Sea View", "Lake View"][i % 2],
+        securitySystem: true,
+        nearbySchools: (i % 8) + 1,
+        nearbyHospitals: (i % 5) + 1,
+        metroConnectivity: "Excellent",
+        safetyScore: 10,
+        investmentPotential: "Excellent",
+        luxuryRating: 5
+      }
 
-    luxuryFeatures: type === "Luxury" ? {
-      smartHome: true,
-      privatePool: true,
-      concierge: true
-    } : null,
+    : type === "Townhouse"
+    ? {
+        address: `${30 + i} Townhouse Lane`,
+        builtUpArea: 1500 + i * 8,
+        balconies: (i % 2) + 1,
+        floors: 2,
+        privateTerrace: i % 2 === 0,
+        maintenanceFee: 100 + i,
+        gatedCommunity: true,
+        clubhouse: true,
+        security: true,
+        powerBackup: true,
+        nearbySchools: (i % 8) + 1,
+        nearbyHospitals: (i % 5) + 1,
+        metroConnectivity: ["Excellent", "Good", "Moderate"][i % 3],
+        trafficCondition: ["Low", "Medium", "High"][i % 3],
+        safetyScore: (i % 3) + 8,
+        propertyDemand: ["High", "Medium"][i % 2]
+      }
 
-    commercialFeatures: type === "Commercial" ? {
-      officeType: "Corporate Space",
-      parkingSpaces: 10 + (i % 10)
-    } : null,
+    : type === "Commercial"
+    ? {
+        address: `${100 + i} Business Park`,
+        floorNumber: (i % 10) + 1,
+        conferenceRooms: (i % 5) + 1,
+        receptionArea: true,
+        cabins: (i % 10) + 1,
+        workstations: 20 + i,
+        pantry: true,
+        washrooms: (i % 4) + 1,
+        powerBackup: true,
+        internetReady: true,
+        liftAccess: true,
+        nearbyMetro: `${500 + i}m`,
+        trafficCondition: ["Medium", "High"][i % 2],
+        businessDemand: ["High", "Medium"][i % 2],
+        safetyScore: (i % 3) + 8
+      }
 
-    landFeatures: type === "Land" ? {
-      soilType: ["Clay", "Sandy", "Loamy"][i % 3],
-      roadAccess: true
-    } : null
+    : type === "Land"
+    ? {
+        address: `${200 + i} Green Acres`,
+        plotWidth: 40 + (i % 20),
+        plotLength: 60 + (i % 30),
+        cornerPlot: i % 2 === 0,
+        roadWidth: 30 + (i % 20),
+        facingDirection: ["East", "West", "North", "South"][i % 4],
+        boundaryWall: i % 2 === 0,
+        waterConnection: true,
+        electricityConnection: true,
+        approvedLayout: true,
+        zoningType: ["Residential", "Commercial"][i % 2],
+        nearbySchools: (i % 8) + 1,
+        nearbyHospitals: (i % 5) + 1,
+        metroConnectivity: ["Good", "Moderate"][i % 2],
+        safetyScore: (i % 3) + 8,
+        propertyDemand: ["High", "Medium"][i % 2],
+        futureDevelopmentPotential: ["High", "Excellent"][i % 2]
+      }
+
+    : {
+        address: `${300 + i} Student Residency`,
+        genderPreference: ["Boys", "Girls", "Co-Living"][i % 3],
+        totalBeds: 50,
+        availableBeds: (i % 15) + 1,
+        attachedBathroom: true,
+        wifiAvailable: true,
+        foodIncluded: true,
+        laundryService: true,
+        housekeeping: true,
+        acRoom: i % 2 === 0,
+        powerBackup: true,
+        security: true,
+        cctv: true,
+        nearbyCollege: `College ${i % 5}`,
+        nearbyMetro: `${400 + i}m`,
+        safetyScore: (i % 3) + 8,
+        occupancyRate: `${80 + (i % 20)}%`
+      },
   });
 }
 
