@@ -49,7 +49,7 @@ function Navbar() {
             <div className="dropdown-menu">
               <Link to="/contact-agent">Find Agent</Link>
               <Link to="/home-loan">Home Loan Help</Link>
-              <Link to="/property-valuation">Valuation</Link>
+               <Link to="/area-insights">Area Insights</Link>
               <Link to="/compare">Compare</Link>
             </div>
           </li>

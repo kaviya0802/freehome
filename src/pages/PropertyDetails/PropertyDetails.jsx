@@ -178,6 +178,14 @@ function PropertyDetails() {
 
   {property.type === "Villa" && (
     <>
+    {/* STANDARD FIELDS */}
+    <div><h3>{property.bedrooms}</h3><p>Bedrooms</p></div>
+    <div><h3>{property.bathrooms}</h3><p>Bathrooms</p></div>
+    <div><h3>{property.area}</h3><p>Area (sqft)</p></div>
+    <div><h3>{property.parking}</h3><p>Parking</p></div>
+    <div><h3>{property.propertyAge}</h3><p>Property Age</p></div>
+    <div><h3>{property.furnishing}</h3><p>Furnishing</p></div>
+    <div><h3>{property.mode === "buy" ? "SALE" : "RENT"}</h3><p>Status</p></div>
       {/* CORE VILLA DETAILS */}
     <div><h3>{details.address}</h3><p>Address</p></div>
     <div><h3>{details.landArea}</h3><p>Land Area (sqft)</p></div>
@@ -410,7 +418,7 @@ function PropertyDetails() {
         <h3>{property.area}</h3>
         <p>Area (sqft)</p>
       </div>
-
+<div><h3>{property.furnishing}</h3><p>Furnishing</p></div>
       <div>
 <h3>
   {property.mode === "buy" ? "SALE" : "RENT"}

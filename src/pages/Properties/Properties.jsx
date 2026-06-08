@@ -117,16 +117,22 @@ function Properties() {
       (filters.propertyAge === "20+" && age > 20);
 
     const matchFurnishing =
-      !filters.furnishing ||
-      (filters.furnishing === "furnished" && property.furnished) ||
-      (filters.furnishing === "unfurnished" && !property.furnished);
+  !filters.furnishing ||
+  (property.furnishing &&
+    property.furnishing.toLowerCase() === filters.furnishing.toLowerCase());
 
     const matchParking =
-      !filters.parking ||
-      (property.parking > 0 &&
-        (filters.parking === "3"
-          ? property.parking >= 3
-          : property.parking === Number(filters.parking)));
+  !filters.parking ||
+  (() => {
+    const p = Number(property.parking);
+
+    if (filters.parking === "3+") return p >= 3;
+    if (filters.parking === "3") return p === 3;
+    if (filters.parking === "2") return p === 2;
+    if (filters.parking === "1") return p === 1;
+
+    return true;
+  })();
 
     const price = Number(property.price);
 
