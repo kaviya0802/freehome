@@ -15,17 +15,12 @@ import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
 import FAQ from "./pages/FAQ/FAQ";
 import Admin from "./pages/Admin/Admin";
-
 import ScrollToTop from "./components/ScrollToTop";
-
-// 👇 ADD THIS
 import { CompareProvider } from "./context/CompareContext";
-
 function App() {
   return (
     <CompareProvider>
       <ScrollToTop />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/properties" element={<Properties />} />
@@ -46,5 +41,4 @@ function App() {
     </CompareProvider>
   );
 }
-
 export default App;

@@ -10,6 +10,8 @@ const getComparisonData = (property) => {
   switch (property.type) {
     case "Apartment":
       return {
+        "Property Type": property.type,
+        Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
         Bedrooms: property.bedrooms,
         Bathrooms: property.bathrooms,
@@ -55,6 +57,8 @@ const getComparisonData = (property) => {
 
     case "Villa":
       return {
+        "Property Type": property.type,
+        Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
         Bedrooms: property.bedrooms,
         Bathrooms: property.bathrooms,
@@ -98,6 +102,8 @@ const getComparisonData = (property) => {
 
     case "Townhouse":
       return {
+        "Property Type": property.type,
+        Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
         Bedrooms: property.bedrooms,
         Bathrooms: property.bathrooms,
@@ -137,6 +143,8 @@ const getComparisonData = (property) => {
 
     case "Luxury":
       return {
+        "Property Type": property.type,
+        Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
         Bedrooms: property.bedrooms,
         Bathrooms: property.bathrooms,
@@ -182,6 +190,8 @@ const getComparisonData = (property) => {
 
     case "Commercial":
       return {
+        "Property": property.type,
+        Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
         "Property Type": property.propertyType,
         Area:
@@ -214,8 +224,13 @@ const getComparisonData = (property) => {
 
     case "Land":
       return {
+        "Property Type": property.type,
+        Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
-        Area: property.area,
+        Area:
+  property.type !== "Land"
+    ? `${property.area} sqft`
+    : `${property.area} hectares`,
         "Soil Type": property.soilType,
         "Road Access": property.landFeatures?.roadAccess ? "Yes" : "No",
         Status: property.mode,
@@ -244,6 +259,8 @@ const getComparisonData = (property) => {
 
     case "PG Hostel":
       return {
+        "Property Type": property.type,
+        Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
         "Room Type": property.pgFeatures?.sharingType
           ? "Single Sharing"
@@ -298,8 +315,15 @@ function Compare() {
         <Navbar />
 
         <div className="compare-page">
+          <div className="compare-header">
+          <h1>Property Comparison</h1>
+
+          <span className="compare-span">
+            COMPARE PROPERTIES SIDE BY SIDE AND DISCOVER THE BEST OPTION.
+          </span>
+        </div>
           <div className="compare-empty-card">
-            <h1>Compare Properties</h1>
+            
 
             <p>
               No properties selected for comparison.
@@ -328,10 +352,14 @@ function Compare() {
       <Navbar />
 
       <div className="compare-page">
-        <div className="compare-empty-card">
-
+        <div className="compare-header">
           <h1>Property Comparison</h1>
 
+          <span className="compare-span">
+            COMPARE PROPERTIES SIDE BY SIDE AND DISCOVER THE BEST OPTION.
+          </span>
+        </div>
+        <div className="compare-empty-card">
           <p>
             One property cannot be compared.
             Please select at least one more
@@ -382,10 +410,10 @@ const commonFields = Object.keys(
 
         <div className="compare-header">
           <h1>Property Comparison</h1>
+          <span className="compare-span">COMPARE PROPERTIES SIDE BY SIDE AND DISCOVER THE BEST OPTION.</span>
 
-          <p>
-            Comparing {selected.length}
-            Properties
+          <p className="compare-p">
+            Comparing {selected.length} Properties
           </p>
 
           <button
@@ -438,34 +466,32 @@ const commonFields = Object.keys(
               types.
             </p>
           </div>
-        ) : (
-          <div className="comparison-table-wrapper">
+       ) : (
+  <>
+    <div className="comparison-table-wrapper">
+      <table className="comparison-table">
+        <tbody>
+          {commonFields.map((field) => (
+            <tr key={field}>
+              <th>{field}</th>
 
-            <table className="comparison-table">
+              {propertyMaps.map((map, index) => (
+                <td key={index}>
+                  {map[field]}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </>
+)}
 
-                <tbody>
-  {commonFields.map((field) => (
-    <tr key={field}>
-      <th>{field}</th>
+</div>
 
-      {propertyMaps.map((map, index) => (
-        <td key={index}>
-          {map[field]}
-        </td>
-      ))}
-    </tr>
-  ))}
-</tbody>
-            </table>
-
-          </div>
-        )}
-
-      </div>
-
-      <Footer />
-    </>
-  );
+<Footer />
+</>
+);
 }
-
 export default Compare;

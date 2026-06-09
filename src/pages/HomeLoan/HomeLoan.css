@@ -141,6 +141,7 @@
   border-radius: 10px;
   outline: none;
   font-size: 14px;
+  font-family: inherit;
   transition: all 0.25s ease;
   background: white;
   box-sizing: border-box;
