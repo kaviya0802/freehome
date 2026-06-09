@@ -1,0 +1,368 @@
+/* =========================
+   WRAPPER
+========================= */
+.lp-wrapper {
+  background: #f9f9f9;
+  font-family: inherit;
+}
+
+/* =========================
+   TOP BAR (WHITE HEADER)
+========================= */
+.lp-topbar {
+  background: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+/* Tagline */
+.lp-topbar-tagline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.lp-dot {
+  color:black;
+  font-weight: 700;
+}
+/* logo */
+/* =========================
+   LOGO (TOPBAR STYLE)
+========================= */
+
+.lp-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* ICON */
+.lp-logo-icon {
+  font-size: 22px;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+  padding: 10px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.3s ease;
+}
+
+/* hover effect */
+.lp-logo:hover .lp-logo-icon {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+/* TEXT WRAPPER */
+.lp-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+/* BRAND NAME */
+.lp-logo-text .brand-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.5px;
+}
+
+/* TAGLINE */
+.lp-logo-text .brand-tag {
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* =========================
+   HERO
+========================= */
+.lp-hero {
+  min-height: 85vh;
+  padding: 70px 40px;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: radial-gradient(circle at top right, #2563eb, #0f172a 60%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow background */
+.lp-hero::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -200px;
+  background: rgba(37, 99, 235, 0.25);
+  filter: blur(120px);
+  border-radius: 50%;
+}
+
+.lp-hero::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  bottom: -200px;
+  left: -200px;
+  background: rgba(255, 120, 24, 0.15);
+  filter: blur(120px);
+  border-radius: 50%;
+}
+
+/* =========================
+   HERO CONTENT
+========================= */
+.lp-hero-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1100px;
+  width: 100%;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* badge */
+.lp-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+/* title */
+.lp-hero-content h1 {
+  font-size: 62px;
+  margin: 0;
+  font-weight: 800;
+}
+
+/* subtitle */
+.lp-hero-content h2 {
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0.9;
+  max-width: 750px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.lp-hero-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.lp-register-btn{
+  margin-top: 20px;
+  padding: 16px 34px;
+
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  color: white;
+  border: none;
+  border-radius: 50px;
+
+  cursor: pointer;
+
+  /* premium gradient */
+  background: linear-gradient(135deg, #ff7a18, #af002d 60%, #319197);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+  transition: all 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* hover effect */
+.lp-register-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* shine animation */
+.lp-register-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-25deg);
+}
+
+.lp-register-btn:hover::after {
+  animation: shine 0.8s ease;
+}
+
+@keyframes shine {
+  100% {
+    left: 130%;
+  }
+}
+
+/* =========================
+   STATS
+========================= */
+
+.lp-stats {
+  margin-top: 60px;
+  display: flex;
+  font-weight:500px;
+  justify-content: center;
+  gap: 80px;
+}
+
+.lp-stats h2 {
+  font-size: 42px;
+}
+
+.lp-stats p {
+  opacity: 0.8;
+}
+
+
+
+/* =========================
+   INFO SECTION (HOME STYLE GRID)
+========================= */
+.lp-info {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.lp-info h2 {
+  font-size: 40px;
+}
+
+.lp-info p {
+  max-width: 850px;
+  margin: 20px auto;
+  
+}
+
+.lp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 50px;
+}
+
+
+.lp-box{
+  background: #0f172a;
+  color:white;
+  border-radius: 20px;
+  padding: 30px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lp-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+
+/* =========================
+   FEATURES TAGS
+========================= */
+.lp-features {
+  background:#0f172a;
+  color:white;
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.lp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.lp-tags span {
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size:14px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lp-tags span:hover {
+  transform: translateY(-10px);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   ROLE SECTION
+========================= */
+.lp-role {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.lp-role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.lp-role-card {
+  background: #f8fafc;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.lp-role-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   FOOTER SPACE FIX
+========================= */
+.lp-wrapper footer {
+  margin-top: 40px;
+}
+

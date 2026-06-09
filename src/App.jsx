@@ -11,18 +11,22 @@ import HomeLoan from "./pages/HomeLoan/HomeLoan";
 import Compare from "./pages/Compare/Compare";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import Profile from "./pages/Profile/Profile";
+import Profile from "./pages/UserProfile/UserProfile";
 import About from "./pages/About/About";
 import FAQ from "./pages/FAQ/FAQ";
 import Admin from "./pages/Admin/Admin";
 import ScrollToTop from "./components/ScrollToTop";
 import { CompareProvider } from "./context/CompareContext";
+import Landing from "./pages/Landing/Landing";
+import AgentDashboard from "./pages/AgentDashboard/AgentDashboard";
+
 function App() {
   return (
     <CompareProvider>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/properties" element={<Properties />} />
         <Route path="/property/:id" element={<PropertyDetails />} />
         <Route path="/wishlist" element={<Wishlist />} />
@@ -37,6 +41,9 @@ function App() {
         <Route path="/contact-agent/:id" element={<PropertyContactAgent />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/home-loan" element={<HomeLoan />} />
+       
+        <Route path="/home" element={<Home />} />
+        <Route path="/agent" element={<AgentDashboard />} />
       </Routes>
     </CompareProvider>
   );

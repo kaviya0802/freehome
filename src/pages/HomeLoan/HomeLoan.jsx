@@ -145,7 +145,6 @@ function HomeLoan() {
           <input
   type="text"
   inputMode="numeric"
-  placeholder="Property Price (₹)"
   value={price}
   onChange={(e) => setPrice(e.target.value.replace(/\D/g, ""))}
 />
@@ -204,7 +203,6 @@ function HomeLoan() {
           <input
   type="text"
   inputMode="numeric"
-  placeholder="Monthly Income (₹)"
   value={income}
   onChange={(e) => setIncome(e.target.value.replace(/\D/g, ""))}
 />
