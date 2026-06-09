@@ -10,22 +10,27 @@
    TOP BAR (WHITE HEADER)
 ========================= */
 .lp-topbar {
-  background: white;
-  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  padding: 14px 40px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
 }
 
 /* Tagline */
 .lp-topbar-tagline {
+  gap: 12px;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: black;
-  font-size: 14px;
-  font-weight: 500;
+  transition: 0.3s;
 }
 
 .lp-dot {
@@ -90,42 +95,17 @@
    HERO
 ========================= */
 .lp-hero {
-  min-height: 85vh;
-  padding: 70px 40px;
-  color:white;
+   background: radial-gradient(circle at top right,
+    #2563eb,
+    #0f172a 60%);
+  color: white;
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: radial-gradient(circle at top right, #2563eb, #0f172a 60%);
-  position: relative;
-  overflow: hidden;
+  padding: 20px;
 }
 
-/* glow background */
-.lp-hero::before {
-  content: "";
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: -200px;
-  right: -200px;
-  background: rgba(37, 99, 235, 0.25);
-  filter: blur(120px);
-  border-radius: 50%;
-}
-
-.lp-hero::after {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  bottom: -200px;
-  left: -200px;
-  background: rgba(255, 120, 24, 0.15);
-  filter: blur(120px);
-  border-radius: 50%;
-}
 
 /* =========================
    HERO CONTENT
@@ -155,14 +135,14 @@
 
 /* title */
 .lp-hero-content h1 {
-  font-size: 62px;
+  font-size: 64px;
   margin: 0;
   font-weight: 800;
 }
 
 /* subtitle */
 .lp-hero-content h2 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   opacity: 0.9;
   max-width: 750px;
@@ -182,7 +162,7 @@
 .lp-register-btn{
   margin-top: 20px;
   padding: 16px 34px;
-
+  font-family:inherit;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -239,7 +219,6 @@
 .lp-stats {
   margin-top: 60px;
   display: flex;
-  font-weight:500px;
   justify-content: center;
   gap: 80px;
 }

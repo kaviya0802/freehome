@@ -34,13 +34,8 @@ function LandingPage() {
     <span className="lp-dot">•</span>
     <span>Verified Listings</span>
       <span className="lp-dot">•</span>
-    <span>Smart Property Search</span>
-      <span className="lp-dot">•</span>
-    <span>Home Loan Support</span>
-      <span className="lp-dot">•</span>
     <span>Trusted Agents</span>
-      <span className="lp-dot">•</span>
-    <span>Australia Wide</span>
+      
   
 </div>
       </div>

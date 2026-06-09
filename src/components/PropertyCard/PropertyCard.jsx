@@ -34,7 +34,7 @@ function PropertyCard({ property }) {
     if (liked) {
       removeFromWishlist(property.id);
       setLiked(false);
-      setToast("Removed from wishlist ❌");
+      setToast("Removed from wishlist");
     } else {
       addToWishlist(property);
       setLiked(true);

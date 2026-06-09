@@ -47,7 +47,7 @@
 .explore-btn {
   margin-top: 20px;
   padding: 16px 34px;
-
+  font-family:inherit;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -110,6 +110,7 @@
 }
 
 .stats h2 {
+  font-weight: 500;
   font-size: 42px;
 }
 
