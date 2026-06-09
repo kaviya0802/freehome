@@ -30,7 +30,7 @@ function Navbar() {
       <nav>
         <ul className="nav-links">
 
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/home">Home</Link></li>
 
           {/* PROPERTIES */}
           <li className="dropdown">
@@ -77,12 +77,6 @@ function Navbar() {
           <FaUserCircle />
           <span>Account</span>
         </Link>
-
-        <Link to="/register" className="signup-btn">
-          <FaUserPlus />
-          Sign Up
-        </Link>
-
       </div>
 
     </header>

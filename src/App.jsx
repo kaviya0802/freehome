@@ -19,6 +19,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import { CompareProvider } from "./context/CompareContext";
 import Landing from "./pages/Landing/Landing";
 import AgentDashboard from "./pages/AgentDashboard/AgentDashboard";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+
 
 function App() {
   return (
@@ -41,9 +43,9 @@ function App() {
         <Route path="/contact-agent/:id" element={<PropertyContactAgent />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/home-loan" element={<HomeLoan />} />
-       
-        <Route path="/home" element={<Home />} />
         <Route path="/agent" element={<AgentDashboard />} />
+        <Route path="/agent-dashboard" element={<AgentDashboard />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </CompareProvider>
   );
