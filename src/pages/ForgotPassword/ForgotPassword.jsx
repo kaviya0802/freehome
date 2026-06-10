@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./ForgotPassword.css";
+import "../Register/Register.css";
 
 function ForgotPassword() {
   const navigate = useNavigate();
 
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
 
   const [formData, setFormData] = useState({
@@ -21,76 +21,82 @@ function ForgotPassword() {
       [e.target.name]: e.target.value,
     });
 
-    setError("");
+    setErrors({});
     setSuccess("");
   };
 
   const handleResetPassword = (e) => {
     e.preventDefault();
 
+    const newErrors = {};
+
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
+    // 1️⃣ EMPTY FIELD VALIDATION
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    if (!formData.confirmPassword.trim()) {
+      newErrors.confirmPassword = "Confirm password is required";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // 2️⃣ PASSWORD RULE VALIDATION
     if (!passwordRegex.test(formData.password)) {
-      setError(
-        "Password must contain uppercase, lowercase, number and special character."
-      );
-      return;
+      newErrors.password =
+        "Password must contain uppercase, lowercase, number and special character.";
     }
 
-    if (
-      formData.password !== formData.confirmPassword
-    ) {
-      setError("Passwords do not match.");
-      return;
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
     }
 
+    // 3️⃣ USER VERIFICATION
     const users =
       JSON.parse(localStorage.getItem("users")) || [];
 
     const userIndex = users.findIndex(
       (user) =>
-        user.email.toLowerCase() ===
-          formData.email.toLowerCase() &&
+        user.email.toLowerCase() === formData.email.toLowerCase() &&
         user.phone === formData.phone
     );
 
     if (userIndex === -1) {
-      setError(
-        "Email and phone number do not match our records."
-      );
+      newErrors.email = "Invalid email or phone number";
+      newErrors.phone = "Invalid email or phone number";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
-    users[userIndex].password =
-      formData.password;
+    // 4️⃣ UPDATE PASSWORD
+    users[userIndex].password = formData.password;
+    localStorage.setItem("users", JSON.stringify(users));
 
-    localStorage.setItem(
-      "users",
-      JSON.stringify(users)
-    );
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    const currentUser = JSON.parse(
-      localStorage.getItem("currentUser")
-    );
-
-    if (
-      currentUser &&
-      currentUser.email ===
-        users[userIndex].email
-    ) {
-      currentUser.password =
-        formData.password;
-
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify(currentUser)
-      );
+    if (currentUser && currentUser.email === users[userIndex].email) {
+      currentUser.password = formData.password;
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
     }
 
-    setSuccess(
-      "Password changed successfully. Redirecting to login..."
-    );
+    setSuccess("Password reset successful. Redirecting to login...");
 
     setTimeout(() => {
       navigate("/login");
@@ -98,76 +104,97 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>Forgot Password</h1>
+    <div className="rg-page">
 
-        <p>
-          Verify your account and create a new
-          password.
-        </p>
+      {/* HERO */}
+      <div className="rg-hero">
+        <h1>Reset Password</h1>
+        <span className="rg-kicker">SECURE ACCOUNT RECOVERY</span>
+      </div>
 
-        {error && (
-          <div className="error-message">
-            {error}
+      <div className="rg-shell">
+
+        {/* LEFT SIDE CONTENT */}
+        <div className="rg-left">
+          <h2>Recover Your Account</h2>
+
+          <p>
+            Verify your registered email and phone number to securely reset your password and regain access to your FreeHome account.
+          </p>
+
+          <div className="rg-features">
+            <div>Identity verification required</div>
+            <div>Secure password reset system</div>
+            <div>Instant account recovery</div>
+            <div>Supports Buyer & Agent accounts</div>
           </div>
-        )}
 
-        {success && (
-          <div className="success-message">
-            {success}
+          <div className="rg-status">
+            Only verified users can reset passwords
           </div>
-        )}
+        </div>
 
-        <form onSubmit={handleResetPassword}>
+        {/* FORM */}
+        <form className="rg-form" onSubmit={handleResetPassword}>
+
           <input
             type="email"
             name="email"
-            placeholder="Registered Email"
+            placeholder="Registered Email*"
             value={formData.email}
             onChange={handleChange}
-            required
           />
+          {errors.email && (
+            <span className="rg-field-error">{errors.email}</span>
+          )}
 
           <input
             type="tel"
             name="phone"
-            placeholder="Registered Phone Number"
+            placeholder="Registered Phone Number*"
             value={formData.phone}
             onChange={handleChange}
-            required
           />
+          {errors.phone && (
+            <span className="rg-field-error">{errors.phone}</span>
+          )}
 
           <input
             type="password"
             name="password"
-            placeholder="New Password"
+            placeholder="New Password*"
             value={formData.password}
             onChange={handleChange}
-            required
           />
+          {errors.password && (
+            <span className="rg-field-error">{errors.password}</span>
+          )}
 
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Confirm New Password"
+            placeholder="Confirm New Password*"
             value={formData.confirmPassword}
             onChange={handleChange}
-            required
           />
+          {errors.confirmPassword && (
+            <span className="rg-field-error">{errors.confirmPassword}</span>
+          )}
 
-          <button
-            type="submit"
-            className="auth-btn"
-          >
+          {success && (
+            <span className="rg-status">{success}</span>
+          )}
+
+          <button type="submit" className="rg-btn">
             Reset Password
           </button>
+
+          <p className="rg-login">
+            Back to <Link to="/login">Login</Link>
+          </p>
+
         </form>
 
-        <p className="switch-auth">
-          Back to
-          <Link to="/login"> Login</Link>
-        </p>
       </div>
     </div>
   );

@@ -1,21 +1,179 @@
-.error-message {
-  background: #ffe5e5;
-  color: #d60000;
-  border: 1px solid #ffb3b3;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 15px;
+/* =========================
+   REGISTER PAGE (CLEAN FIXED)
+========================= */
+
+/* REMOVE DEBUG - IMPORTANT */
+* {
+  box-sizing: border-box;
+}
+
+/* PAGE */
+.rg-page {
+  background: #f9f9f9;
+  min-height: 100vh;
+  width: 100%;
+  padding: 50px 20px;
+  overflow-x: hidden;
+}
+
+/* HERO */
+.rg-hero {
   text-align: center;
+  margin-bottom: 10px;
+}
+
+.rg-hero h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #111;
+}
+
+.rg-hero span {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #3b82f6;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* GRID */
+.rg-shell {
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+
+  overflow-x: hidden;
+}
+/* CRITICAL FIX */
+.rg-left,
+.rg-form {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* LEFT SIDE */
+.rg-left {
+  background: transparent;
+  padding: 10px;
+}
+
+.rg-left h2 {
+  font-size: 30px;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.rg-left p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.rg-features {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rg-features div {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: #222;
+  transition: 0.2s;
+}
+
+.rg-features div:hover {
+  transform: translateX(5px);
+}
+
+.rg-status {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
+}
+
+/* FORM */
+.rg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.rg-form input {
+  width: 100%;
+  max-width: 100%;
+  padding: 13px 14px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  font-family:inherit;
+  transition: 0.25s ease;
+}
+
+.rg-form input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+/* RADIO */
+.rg-role {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.rg-role label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
   font-size: 14px;
 }
 
-.success-message {
-  background: #e7ffe7;
-  color: #008000;
-  border: 1px solid #9be69b;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 15px;
+/* BUTTON */
+.rg-btn {
+  max-width: 100%;
+  padding: 14px;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-family:inherit;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.rg-btn:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+}
+
+/* LOGIN */
+.rg-login {
   text-align: center;
-  font-size: 14px;
+  margin-top: 10px;
+  color: #666;
+}
+
+.rg-login a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ERROR */
+.rg-field-error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: -6px;
 }

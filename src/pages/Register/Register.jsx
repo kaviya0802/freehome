@@ -5,7 +5,7 @@ import "./Register.css";
 function Register() {
   const navigate = useNavigate();
 
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
 
   const [formData, setFormData] = useState({
@@ -23,15 +23,15 @@ function Register() {
       [e.target.name]: e.target.value,
     });
 
-    setError("");
-    setSuccess("");
+     setErrors({});
+     setSuccess("");
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    setError("");
-    setSuccess("");
+     setErrors({});
+     setSuccess("");
 
     const nameRegex = /^[A-Za-z\s]+$/;
 
@@ -43,51 +43,51 @@ function Register() {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
-    if (!nameRegex.test(formData.fullName.trim())) {
-      setError("Name should contain only letters.");
-      return;
-    }
+    const newErrors = {};
 
-    if (!emailRegex.test(formData.email.trim())) {
-      setError(
-        "Email must end with .com or .in and be in a valid format."
-      );
-      return;
-    }
+if (!nameRegex.test(formData.fullName.trim())) {
+  newErrors.fullName =
+    "Name should contain only letters.";
+}
 
-    if (!phoneRegex.test(formData.phone)) {
-      setError(
-        "Phone number must contain exactly 10 digits."
-      );
-      return;
-    }
+if (!emailRegex.test(formData.email.trim())) {
+  newErrors.email =
+    "Enter a valid email address.";
+}
 
-    if (!passwordRegex.test(formData.password)) {
-      setError(
-        "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character."
-      );
-      return;
-    }
+if (!phoneRegex.test(formData.phone)) {
+  newErrors.phone =
+    "Phone number must contain exactly 10 digits.";
+}
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+if (!passwordRegex.test(formData.password)) {
+  newErrors.password =
+    "Password must contain uppercase, lowercase, number and special character.";
+}
 
-    const users =
-      JSON.parse(localStorage.getItem("users")) || [];
+if (formData.password !== formData.confirmPassword) {
+  newErrors.confirmPassword =
+    "Passwords do not match.";
+}
 
-    const existingUser = users.find(
-      (user) =>
-        user.email.toLowerCase() ===
-        formData.email.toLowerCase()
-    );
+const users =
+  JSON.parse(localStorage.getItem("users")) || [];
 
-    if (existingUser) {
-      setError("Email already registered.");
-      return;
-    }
+const existingUser = users.find(
+  (user) =>
+    user.email.toLowerCase() ===
+    formData.email.toLowerCase()
+);
 
+if (existingUser) {
+  newErrors.email =
+    "Email already registered.";
+}
+
+if (Object.keys(newErrors).length > 0) {
+  setErrors(newErrors);
+  return;
+}
     const newUser = {
       id: Date.now(),
       fullName: formData.fullName.trim(),
@@ -128,71 +128,113 @@ function Register() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>Create Account</h1>
-        <p>Join FreeHome today</p>
+    <div className="rg-page">
+         {/* HERO */}
+    <div className="rg-hero">
+      <h1>Sign Up</h1>
+      <span className="rg-kicker">CREATE. CONNECT. EXPLORE.</span>
+    </div>
+      <div className="rg-shell">
+        {/* LEFT SIDE */}
+        <div className="rg-left">
+          <h2>Create Your FreeHome Account</h2>
 
-        {error && (
-          <div className="error-message">
-            {error}
+          <p>
+            Join thousands of buyers and agents using
+            FreeHome to discover, compare and manage
+            properties effortlessly.
+          </p>
+
+          <div className="rg-features">
+            <div>Secure account creation</div>
+            <div>Verified buyers and agents</div>
+            <div>Save favourite properties</div>
+            <div>Compare properties easily</div>
           </div>
-        )}
 
-        {success && (
-          <div className="success-message">
-            {success}
+          <div className="rg-status">
+            Registration takes less than a minute
           </div>
-        )}
+        </div>
 
-        <form onSubmit={handleRegister}>
+        {/* RIGHT SIDE FORM */}
+        <form
+          className="rg-form"
+          onSubmit={handleRegister}
+          noValidate
+        >
           <input
             type="text"
             name="fullName"
-            placeholder="Full Name"
+            placeholder="Full Name*"
             value={formData.fullName}
             onChange={handleChange}
             required
           />
+          {errors.fullName && (
+  <span className="rg-field-error">
+    {errors.fullName}
+  </span>
+)}
 
           <input
             type="email"
             name="email"
-            placeholder="Email Address"
+            placeholder="Email Address*"
             value={formData.email}
             onChange={handleChange}
             required
           />
+          {errors.email && (
+  <span className="rg-field-error">
+    {errors.email}
+  </span>
+)}
 
           <input
             type="tel"
             name="phone"
-            placeholder="Phone Number"
+            placeholder="Phone Number*"
             value={formData.phone}
             onChange={handleChange}
             maxLength="10"
             required
           />
+          {errors.phone && (
+  <span className="rg-field-error">
+    {errors.phone}
+  </span>
+)}
 
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="Password*"
             value={formData.password}
             onChange={handleChange}
             required
           />
+          {errors.password && (
+  <span className="rg-field-error">
+    {errors.password}
+  </span>
+)}
 
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Confirm Password"
+            placeholder="Confirm Password*"
             value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
+          {errors.confirmPassword && (
+  <span className="rg-field-error">
+    {errors.confirmPassword}
+  </span>
+)}
 
-          <div className="role-select">
+          <div className="rg-role">
             <label>
               <input
                 type="radio"
@@ -218,16 +260,17 @@ function Register() {
 
           <button
             type="submit"
-            className="auth-btn"
+            className="rg-btn"
           >
             Create Account
           </button>
+
+          <p className="rg-login">
+            Already have an account?
+            <Link to="/login"> Login</Link>
+          </p>
         </form>
 
-        <p className="switch-auth">
-          Already have an account?
-          <Link to="/login"> Login</Link>
-        </p>
       </div>
     </div>
   );

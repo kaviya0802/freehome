@@ -84,6 +84,7 @@
 
 /* FORM */
 .cf-form {
+  margin-top:20px;
   background: #f9f9f9;
   padding: 26px;
   font-family:inherit;

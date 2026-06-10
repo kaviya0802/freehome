@@ -87,7 +87,7 @@
 ========================= */
 
 .ac-right {
-  
+  margin-top:30px;
   background: transparent;   /* 👈 NO CARD */
   padding: 0;                /* 👈 NO BOX EFFECT */
   display: flex;
@@ -152,9 +152,3 @@
   margin-top: -6px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .ac-shell {
-    grid-template-columns: 1fr;
-  }
-}

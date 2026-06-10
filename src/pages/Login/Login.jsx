@@ -5,7 +5,7 @@ import "./Login.css";
 function Login() {
   const navigate = useNavigate();
 
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     email: "",
@@ -18,88 +18,135 @@ function Login() {
       [e.target.name]: e.target.value,
     });
 
-    setError("");
+    setErrors({});
   };
 
   const handleLogin = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const users =
-      JSON.parse(localStorage.getItem("users")) || [];
+  const newErrors = {};
 
-    const user = users.find(
-      (u) =>
-        u.email.toLowerCase() ===
-          formData.email.toLowerCase() &&
-        u.password === formData.password
-    );
+  // 1. EMPTY FIELD VALIDATION FIRST
+  if (!formData.email.trim()) {
+    newErrors.email = "Email is required";
+  }
 
-    if (!user) {
-      setError("Invalid email or password.");
-      return;
-    }
+  if (!formData.password.trim()) {
+    newErrors.password = "Password is required";
+  }
 
-    localStorage.setItem(
-      "currentUser",
-      JSON.stringify(user)
-    );
+  // STOP HERE if empty fields exist
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
+  }
 
-    if (user.role === "buyer") {
-      navigate("/home");
-    } else {
-      navigate("/agent-dashboard");
-    }
-  };
+  // 2. ONLY NOW CHECK LOGIN CREDENTIALS
+  const users =
+    JSON.parse(localStorage.getItem("users")) || [];
 
+  const user = users.find(
+    (u) =>
+      u.email.toLowerCase() === formData.email.toLowerCase() &&
+      u.password === formData.password
+  );
+
+  // INVALID LOGIN
+  if (!user) {
+    setErrors({
+      general: "Invalid email or password"
+    });
+    return;
+  }
+
+  // SUCCESS LOGIN
+  localStorage.setItem("currentUser", JSON.stringify(user));
+
+  if (user.role === "buyer") {
+    navigate("/home");
+  } else {
+    navigate("/agent-dashboard");
+  }
+};
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>Welcome Back</h1>
-        <p>Login to continue</p>
+    <div className="rg-page">
 
-        {error && (
-          <div className="error-message">
-            {error}
+      {/* HERO */}
+      <div className="rg-hero">
+        <h1>Login</h1>
+        <span>WELCOME BACK</span>
+      </div>
+
+      <div className="rg-shell">
+
+        {/* LEFT SIDE */}
+        <div className="rg-left">
+          <h2>Login to FreeHome</h2>
+
+          <p>
+            Access your account as a Buyer or Agent to manage properties,
+            saved listings and enquiries.
+          </p>
+
+          <div className="rg-features">
+            <div>Buyers: Save & compare properties</div>
+            <div>Buyers: Track shortlisted homes</div>
+            <div>Agents: Manage listings</div>
+            <div>Agents: Handle enquiries</div>
           </div>
-        )}
 
-        <form onSubmit={handleLogin}>
+          <div className="rg-status">
+            Secure login for all users
+          </div>
+        </div>
+
+        {/* FORM */}
+        <form 
+        className="rg-form" 
+        onSubmit={handleLogin}
+        noValidate
+        >
+
           <input
             type="email"
             name="email"
-            placeholder="Email Address"
+            placeholder="Email Address*"
             value={formData.email}
             onChange={handleChange}
-            required
           />
+          {errors.email && (
+            <span className="rg-field-error">{errors.email}</span>
+          )}
 
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="Password*"
             value={formData.password}
             onChange={handleChange}
-            required
           />
+          {errors.password && (
+            <span className="rg-field-error">{errors.password}</span>
+          )}
 
-          <button
-            type="submit"
-            className="auth-btn"
-          >
+          {errors.general && (
+            <span className="rg-field-error">{errors.general}</span>
+          )}
+
+          <button type="submit" className="rg-btn">
             Login
           </button>
+
+          <p className="rg-login">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </p>
+
+          <p className="rg-login">
+            Don't have an account? <Link to="/register">Sign Up</Link>
+          </p>
+
         </form>
 
-        <p className="forgot-password">
-          <Link to="/forgot-password">
-            Forgot Password?
-          </Link>
-        </p>
-
-        <p className="switch-auth">
-          Don't have an account?
-          <Link to="/register"> Sign Up</Link>
-        </p>
       </div>
     </div>
   );
