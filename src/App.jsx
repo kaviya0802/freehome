@@ -11,7 +11,8 @@ import HomeLoan from "./pages/HomeLoan/HomeLoan";
 import Compare from "./pages/Compare/Compare";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import Profile from "./pages/UserProfile/UserProfile";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import AgentProfile from "./pages/AgentProfile/AgentProfile";
 import About from "./pages/About/About";
 import FAQ from "./pages/FAQ/FAQ";
 import Admin from "./pages/Admin/Admin";
@@ -35,7 +36,8 @@ function App() {
         <Route path="/compare" element={<Compare />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/agent-profile" element={<AgentProfile />} />
         <Route path="/about" element={<About />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
@@ -43,7 +45,7 @@ function App() {
         <Route path="/contact-agent/:id" element={<PropertyContactAgent />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/home-loan" element={<HomeLoan />} />
-        <Route path="/agent" element={<AgentDashboard />} />
+        
         <Route path="/agent-dashboard" element={<AgentDashboard />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>

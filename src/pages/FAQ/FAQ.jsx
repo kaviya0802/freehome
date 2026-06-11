@@ -6,65 +6,56 @@ import "./FAQ.css";
 function FAQ() {
   const [open, setOpen] = useState(null);
 
-  const faqs = [
-    ["How do I search properties?", "Use filters such as location, type, budget, and status."],
-    ["Are listings verified?", "Yes, all listings go through a verification process."],
-    ["Can I contact agents directly?", "Yes, every property includes a Contact Agent option."],
-    ["Is FreeHome free to use?", "Yes, searching and browsing properties is completely free."],
-    ["Can I save properties?", "Yes, add properties to your wishlist."],
-    ["How do I compare properties?", "Use the Compare feature to evaluate multiple listings."],
-    ["Can I rent properties?", "Yes, rental and purchase properties are available."],
-    ["What property types are available?", "Apartment, Villa, Townhouse, Commercial, Luxury, Land and PG Hostel."],
-    ["How often are listings updated?", "New properties are added regularly."],
-    ["Can I search by city?", "Yes, choose any available Australian city."],
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const role = user?.role || "buyer";
 
-    ["What is a PG Hostel?", "A shared accommodation with facilities for students and professionals."],
-    ["Do PG Hostels include WiFi?", "Most PG Hostels include WiFi and shared amenities."],
-    ["Can I find furnished properties?", "Yes, many listings are fully furnished."],
-    ["How do I know a property's status?", "Each property clearly shows Buy or Rent status."],
-    ["Can I view property images?", "Yes, every listing contains property photos."],
-    ["Can I filter by budget?", "Yes, budget filters are available on the search page."],
-    ["Are luxury homes available?", "Yes, premium luxury listings are available."],
-    ["Do commercial properties include parking?", "Most commercial listings include parking information."],
-    ["Can I buy land?", "Yes, land listings are available for purchase."],
-    ["What zoning information is shown?", "Land listings display zoning details."],
+  const faqData = {
+    buyer: [
+      ["How do I search properties?", "Use filters such as location, type, budget, and status."],
+      ["Are listings verified?", "Yes, all listings go through a verification process."],
+      ["Can I contact agents directly?", "Yes, every property includes a Contact Agent option."],
+      ["Is FreeHome free to use?", "Yes, searching and browsing is completely free."],
+      ["Can I save properties?", "Yes, add properties to your wishlist."],
+      ["How do I compare properties?", "Use the Compare feature to evaluate multiple listings."],
+      ["Can I rent properties?", "Yes, rental and purchase properties are available."],
+      ["What property types are available?", "Apartment, Villa, Townhouse, Commercial, Luxury, Land and PG Hostel."],
+       // ⭐ NEW BUYER QUESTIONS
+    ["How do I know if a property is available?", "Each listing shows real-time availability status."],
+    ["Can I filter properties by price range?", "Yes, you can set minimum and maximum budget filters."],
+    ["Do I need an account to view details?", "Basic browsing is allowed without login, but saving requires account."],
+    ["Can I contact multiple agents?", "Yes, you can contact agents from different listings."],
+    ["How do I remove a saved property?", "Go to Wishlist and click remove option."],
+    ["Are property images real?", "Yes, all images are uploaded by verified agents."],
+    ["Can I search by city or state?", "Yes, location-based filtering is available."],
+    ["How often are new listings added?", "New properties are added regularly by agents."],
+    ["Can I see property size and details?", "Yes, each listing includes full specifications."],
+    ["Is FreeHome safe to use?", "Yes, all data is secured and verified."],
+    ],
 
-    ["Can I access FreeHome on mobile?", "Yes, the platform is fully responsive."],
-    ["Do I need an account?", "Browsing is available without an account."],
-    ["Can I register as a buyer?", "Yes, registration is available."],
-    ["How do I update my profile?", "Use the Profile section after login."],
-    ["Can I remove wishlist items?", "Yes, wishlist items can be removed anytime."],
-    ["Can agents upload listings?", "Currently listings are managed through the platform."],
-    ["Are prices displayed in AUD?", "Yes, Australian Dollar pricing is used."],
-    ["Can I search by state?", "Yes, all major Australian states are supported."],
-    ["Do listings show property size?", "Yes, area details are included."],
-    ["Can I view rental properties only?", "Yes, rental filtering is available."],
+    agent: [
+      ["How do I add a property?", "Go to Add Property section and submit details."],
+      ["Where can I see my listings?", "Go to My Listings in your agent dashboard."],
+      ["How do I manage requests?", "Open Requests section to view buyer inquiries."],
+      ["What are leads?", "Leads are potential buyers interested in your properties."],
+      ["How do I edit a listing?", "Open a listing from My Listings and update details."],
+      ["Can I delete a property?", "Yes, you can manage listings from dashboard options."],
+      ["How do I contact buyers?", "Use the Leads section to follow up with buyers."],
+      ["Is there analytics for my listings?", "Yes, Analytics shows views and engagement."],
+      // ⭐ NEW AGENT QUESTIONS
+    ["How do I get more leads?", "Keep listings updated and add clear images and descriptions."],
+    ["Can I track property views?", "Yes, analytics shows how many users viewed your listings."],
+    ["How do I respond to requests?", "Go to Requests section and reply to buyer messages."],
+    ["Can I update property details later?", "Yes, you can edit listings anytime."],
+    ["What happens after I get a lead?", "You can contact the buyer directly from Leads section."],
+    ["Can I remove old listings?", "Yes, you can delete or deactivate listings."],
+    ["How do I improve listing visibility?", "Use good images, correct pricing, and detailed descriptions."],
+    ["Do I get notifications for new requests?", "Yes, new requests appear in your dashboard."],
+    ["Can I manage multiple properties?", "Yes, agents can manage multiple listings easily."],
+    ["Is there support for agents?", "Yes, support section helps with all issues."]
+    ]
+  };
 
-    ["Can I view properties for sale only?", "Yes, sale filtering is available."],
-    ["What locations are supported?", "Major cities and states across Australia."],
-    ["Can I find investment properties?", "Yes, many listings are suitable for investors."],
-    ["How can I contact support?", "Use the Contact page."],
-    ["Is there a newsletter?", "Yes, subscribe from the homepage."],
-    ["Can I receive property updates?", "Yes, through newsletter subscriptions."],
-    ["Are commercial offices available?", "Yes, office spaces are listed."],
-    ["Can I find retail spaces?", "Yes, retail properties are available."],
-    ["Can I find warehouses?", "Yes, warehouse listings are included."],
-    ["Can I find medical facilities?", "Yes, some commercial listings are medical facilities."],
-
-    ["Can I search luxury villas?", "Yes, luxury property filtering is supported."],
-    ["How many properties are available?", "The platform contains hundreds of listings."],
-    ["Can I compare prices?", "Yes, compare properties side-by-side."],
-    ["Can I contact multiple agents?", "Yes, each property has its own agent contact option."],
-    ["Do listings include descriptions?", "Yes, every property includes details."],
-    ["Can I view property status quickly?", "Yes, status badges are displayed."],
-    ["Can I revisit viewed properties?", "Save them to your wishlist."],
-    ["Can I search land by zoning?", "Land details include zoning information."],
-    ["Is FreeHome suitable for students?", "Yes, PG Hostels are available."],
-    ["Can families find homes here?", "Yes, family homes are widely available."],
-
-    ["Can businesses use FreeHome?", "Yes, commercial property listings are available."],
-    ["Will more features be added?", "Yes, future updates will include additional capabilities."]
-  ];
+  const faqs = faqData[role] || faqData.buyer;
 
   const half = Math.ceil(faqs.length / 2);
 
@@ -76,7 +67,9 @@ function FAQ() {
 
         <div className="faq-title">
           <h1>Frequently Asked Questions</h1>
-          <span>FREEHOME KNOWLEDGE BASE</span>
+          <span>
+            {role === "agent" ? "AGENT KNOWLEDGE BASE" : "FREEHOME KNOWLEDGE BASE"}
+          </span>
         </div>
 
         <div className="faq-columns">
@@ -123,9 +116,7 @@ function FAQ() {
                     className="faq-question"
                     onClick={() =>
                       setOpen(
-                        open === realIndex
-                          ? null
-                          : realIndex
+                        open === realIndex ? null : realIndex
                       )
                     }
                   >

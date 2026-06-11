@@ -1,0 +1,74 @@
+@import "../Home/Home.css";
+/* =========================
+   AGENT TOOL CARDS IMAGES
+========================= */
+
+/* 🏠 My Listings (uploaded properties) */
+.card1 {
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1560518883-ce09059eeffa");
+  background-size: cover;
+}
+
+/* ➕ Add Property (create/upload) */
+.card2 {
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1554224155-6726b3ff858f");
+  background-size: cover;
+}
+
+/* 📩 Requests (messages/inquiries) */
+.card3 {
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1557200134-90327ee9fafa");
+  background-size: cover;
+}
+
+/* 🎯 Leads (buyers/conversions) */
+.card4 {
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1551836022-d5d88e9218df");
+  background-size: cover;
+}
+
+/* 👤 Profile (professional identity - no face) */
+.card5 {
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1551434678-e076c223a692");
+  background-size: cover;
+}
+
+/* 📊 Analytics (charts/data/dashboard) */
+.card6 {
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1551288049-bebda4e38f71");
+  background-size: cover;
+}
+
+/* 🛠 Support (help desk/customer support) */
+.card7 {
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.7)),
+    url("https://images.unsplash.com/photo-1553877522-43269d4ea984");
+  background-size: cover;
+}
+.profile-warning {
+  position: fixed;
+  top: 90px;
+  left:490px;
+
+  background:#dc2626;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 500;
+
+  
+}

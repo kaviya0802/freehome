@@ -58,7 +58,7 @@ function ForgotPassword() {
     // 2️⃣ PASSWORD RULE VALIDATION
     if (!passwordRegex.test(formData.password)) {
       newErrors.password =
-        "Password must contain uppercase, lowercase, number and special character.";
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.";
     }
 
     if (formData.password !== formData.confirmPassword) {

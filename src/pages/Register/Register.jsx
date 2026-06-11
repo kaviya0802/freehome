@@ -35,8 +35,8 @@ function Register() {
 
     const nameRegex = /^[A-Za-z\s]+$/;
 
-    const emailRegex =
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/;
+     const emailRegex =
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|au|com\.au|org|org\.au|net|edu|gov|gov\.au)$/i;
 
     const phoneRegex = /^\d{10}$/;
 
@@ -62,7 +62,7 @@ if (!phoneRegex.test(formData.phone)) {
 
 if (!passwordRegex.test(formData.password)) {
   newErrors.password =
-    "Password must contain uppercase, lowercase, number and special character.";
+    "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.";
 }
 
 if (formData.password !== formData.confirmPassword) {
@@ -89,20 +89,37 @@ if (Object.keys(newErrors).length > 0) {
   return;
 }
     const newUser = {
-      id: Date.now(),
-      fullName: formData.fullName.trim(),
-      email: formData.email.trim().toLowerCase(),
-      phone: formData.phone,
-      password: formData.password,
-      role: formData.role,
+  id: Date.now(),
 
-      address: "",
-      city: "",
-      state: "",
-      pincode: "",
-      bio: "",
-      profileImage: "",
-    };
+  // registration
+  fullName: formData.fullName.trim(),
+  email: formData.email.trim().toLowerCase(),
+  phone: formData.phone,
+  password: formData.password,
+  role: formData.role,
+
+  // common profile
+  age: "",
+  gender: "",
+  bio: "",
+  profileImage: "",
+
+  // address
+  address: "",
+  city: "",
+  state: "",
+  pincode: "",
+
+  // buyer fields
+  preferredLocation: "",
+  budgetRange: "",
+
+  // agent fields
+  agencyName: "",
+  experience: "",
+  licenseNumber: "",
+  officeAddress: ""
+};
 
     users.push(newUser);
 

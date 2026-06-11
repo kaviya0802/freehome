@@ -26,13 +26,15 @@ function Contact() {
       newErrors.name = "Only alphabets allowed";
     }
 
-    if (!form.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/.test(form.email)
-    ) {
-      newErrors.email = "Enter valid email address";
-    }
+   if (!form.email.trim()) {
+  newErrors.email = "Email is required";
+} else if (
+  !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|au|com\.au|org|org\.au|net|edu|gov|gov\.au)$/i.test(
+    form.email.trim()
+  )
+) {
+  newErrors.email = "Enter a valid email address";
+}
 
     if (!form.message.trim()) {
       newErrors.message = "Message is required";
