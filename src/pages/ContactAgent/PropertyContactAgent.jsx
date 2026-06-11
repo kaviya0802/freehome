@@ -8,7 +8,8 @@ import "./PropertyContactAgent.css";
 function PropertyContactAgent() {
   const { id } = useParams();
   const property = properties.find(p => String(p.id) === String(id));
-
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -59,28 +60,36 @@ function PropertyContactAgent() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const validationErrors = validate();
-    setErrors(validationErrors);
+  const validationErrors = validate();
+  setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length > 0) return;
+  if (Object.keys(validationErrors).length > 0) return;
 
-    setErrors({});
+  setErrors({});
 
-    // ✅ Browser alert only (no toast library)
-    alert("Booking Confirmed! Our agent will contact you soon.");
+  // ✅ Toast instead of alert
+  triggerToast("Booking Confirmed! Our agent will contact you soon.");
 
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      contactMode: "",
-      visitDate: "",
-      message: ""
-    });
-  };
+  setForm({
+    name: "",
+    email: "",
+    phone: "",
+    contactMode: "",
+    visitDate: "",
+    message: ""
+  });
+};
+  const triggerToast = (message) => {
+  setToastMessage(message);
+  setShowToast(true);
+
+  setTimeout(() => {
+    setShowToast(false);
+  }, 5000);
+};
 
   if (!property) return <h2>Property not found</h2>;
 
@@ -177,6 +186,11 @@ function PropertyContactAgent() {
           <button type="submit">Book Visit</button>
 
         </form>
+        {showToast && (
+  <div className="toast">
+    {toastMessage}
+  </div>
+)}
       </div>
 
       <Footer />

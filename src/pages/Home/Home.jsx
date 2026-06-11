@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
-
+  const [emailError, setEmailError] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);;
   const navigate = useNavigate();
 
   // EXPLORE BUTTON (ONLY NAVIGATION)
@@ -21,39 +23,52 @@ function Home() {
 
   // NEWSLETTER
   const handleSubscribe = () => {
-    const email = newsletterEmail.trim();
+  const email = newsletterEmail.trim();
 
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|au|com\.au|org|org\.au|net|edu|gov|gov\.au)$/i;
 
-    if (!email) {
-      alert("Email is required");
-      return;
+  // reset previous error
+  setEmailError("");
+
+  if (!email) {
+    setEmailError("Email is required");
+    return;
+  }
+
+  if (!regex.test(email)) {
+    setEmailError("Please enter a valid email address");
+    return;
+  }
+
+  // Notifications (unchanged)
+  if ("Notification" in window) {
+    if (Notification.permission === "granted") {
+      new Notification("Subscribed Successfully!", {
+        body: "We will send property updates to your email.",
+      });
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((perm) => {
+        if (perm === "granted") {
+          new Notification("Subscribed Successfully!", {
+            body: "We will send property updates to your email.",
+          });
+        }
+      });
     }
+  }
 
-    if (!regex.test(email)) {
-      alert("Please enter a valid email address");
-      return;
-    }
+  // SUCCESS → toast only
+  triggerToast("Subscribed successfully!");
+  setNewsletterEmail("");
+};
+  const triggerToast = (message) => {
+  setToastMessage(message);
+  setShowToast(true);
 
-    if ("Notification" in window) {
-      if (Notification.permission === "granted") {
-        new Notification("Subscribed Successfully!", {
-          body: "We will send property updates to your email.",
-        });
-      } else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then((perm) => {
-          if (perm === "granted") {
-            new Notification("Subscribed Successfully!", {
-              body: "We will send property updates to your email.",
-            });
-          }
-        });
-      }
-    }
-
-    alert("Subscribed successfully!");
-    setNewsletterEmail("");
-  };
+  setTimeout(() => {
+    setShowToast(false);
+  }, 5000);
+};
 
   return (
     <>
@@ -196,16 +211,26 @@ function Home() {
 
           <div className="newsletter-form">
             <input
-              type="email"
-              placeholder="Enter your email"
-              value={newsletterEmail}
-              onChange={(e) => setNewsletterEmail(e.target.value)}
-            />
+  type="email"
+  value={newsletterEmail}
+  onChange={(e) => setNewsletterEmail(e.target.value)}
+  placeholder="Enter your email"
+/>
 
+{emailError && (
+  <p className="home-error-text">
+    {emailError}
+  </p>
+)}
             <button onClick={handleSubscribe}>
               Subscribe
             </button>
           </div>
+            {showToast && (
+  <div className="toast">
+    {toastMessage}
+  </div>
+)}
 
         </div>
       </section>

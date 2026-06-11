@@ -21,6 +21,7 @@ import { CompareProvider } from "./context/CompareContext";
 import Landing from "./pages/Landing/Landing";
 import AgentDashboard from "./pages/AgentDashboard/AgentDashboard";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import MatchedAgents from "./pages/matchedagents/MatchedAgents";
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
         <Route path="/contact-agent/:id" element={<PropertyContactAgent />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/home-loan" element={<HomeLoan />} />
-        
+        <Route path="/matched-agents" element={<MatchedAgents />} />
         <Route path="/agent-dashboard" element={<AgentDashboard />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>

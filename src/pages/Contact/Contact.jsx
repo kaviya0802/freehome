@@ -12,7 +12,8 @@ function Contact() {
   });
 
   const [errors, setErrors] = useState({});
-
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -43,25 +44,31 @@ function Contact() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const err = validate();
-    setErrors(err);
+  const err = validate();
+  setErrors(err);
 
-    if (Object.keys(err).length > 0) return;
+  if (Object.keys(err).length > 0) return;
 
-    alert("Your request has been submitted successfully.");
+  triggerToast("Your request has been submitted successfully.");
 
-    setForm({
-      name: "",
-      email: "",
-      category: "General",
-      message: ""
-    });
+  setForm({
+    name: "",
+    email: "",
+    category: "General",
+    message: ""
+  });
+};
+const triggerToast = (message) => {
+  setToastMessage(message);
+  setShowToast(true);
 
-    setErrors({});
-  };
+  setTimeout(() => {
+    setShowToast(false);
+  }, 5000);
+};
 
   return (
     <>
@@ -140,6 +147,11 @@ function Contact() {
             <button type="submit">Submit Request</button>
 
           </form>
+          {showToast && (
+  <div className="toast">
+    {toastMessage}
+  </div>
+)}
 
         </div>
       </div>

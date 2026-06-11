@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./ContactAgent.css";
@@ -13,9 +14,10 @@ function ContactAgent() {
     type: "Buy",
     message: ""
   });
-
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -47,29 +49,77 @@ function ContactAgent() {
 
     return newErrors;
   };
+const calculateScore = (agent, buyer) => {
+  let score = 0;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Location match
+  if (agent.serviceLocation === buyer.location) {
+    score += 3;
+  }
 
-    const err = validate();
-    setErrors(err);
+  // Property type match
+  if (agent.specialization === buyer.preference) {
+    score += 3;
+  }
 
-    if (Object.keys(err).length > 0) return;
+  // Budget match
+  if (agent.budgetHandled === buyer.budget) {
+    score += 2;
+  }
 
-    alert("Agent request submitted successfully!");
+  // Experience bonus
+  if (Number(agent.experience) >= 5) {
+    score += 1;
+  }
 
-    setForm({
-      name: "",
-      email: "",
-      location: "",
-      preference: "",
-      budget: "",
-      type: "Buy",
-      message: ""
-    });
+  return score;
+};
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    setErrors({});
-  };
+  const err = validate();
+  setErrors(err);
+
+  if (Object.keys(err).length > 0) return;
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const matchedAgents = getMatchedAgents(form, users);
+
+  navigate("/matched-agents", {
+    state: { matchedAgents }
+  });
+
+  setForm({
+    name: "",
+    email: "",
+    location: "",
+    preference: "",
+    budget: "",
+    type: "Buy",
+    message: ""
+  });
+
+  setErrors({});
+};
+  const triggerToast = (message) => {
+  setToastMessage(message);
+  setShowToast(true);
+
+  setTimeout(() => {
+    setShowToast(false);
+  }, 5000);
+};
+const getMatchedAgents = (buyer, users) => {
+  return users
+    .filter((user) => user.role === "agent")
+    .map((agent) => ({
+      ...agent,
+      score: calculateScore(agent, buyer)
+    }))
+    .filter((agent) => agent.score > 0) // remove zero matches
+    .sort((a, b) => b.score - a.score); // highest score first
+};
 
   return (
     <>
@@ -194,7 +244,11 @@ function ContactAgent() {
             <button type="submit">Find My Agent</button>
 
           </form>
-
+        {showToast && (
+  <div className="toast">
+    {toastMessage}
+  </div>
+)}
         </div>
       </div>
 
