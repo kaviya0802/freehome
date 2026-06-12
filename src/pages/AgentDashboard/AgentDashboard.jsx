@@ -69,54 +69,30 @@ function AgentDashboard() {
       </section>
 
       {/* QUICK ACTIONS (like categories but agent tools) */}
-      <section className="categories">
-        <h2>Agent Tools</h2>
+     <section className="agent-workflow">
+  <h2>Grow Your Business with FreeHome</h2>
 
-        <div className="circle-categories">
+  <div className="workflow-grid">
 
-          <div className="center-circle">
-            <h2>Agent</h2>
-            <p>Dashboard Hub</p>
-          </div>
+    <div className="workflow-card">
+      <span>01</span>
+      <h3>Add Property</h3>
+      <p>Publish property listings quickly and reach more buyers.</p>
+    </div>
 
-          <div className="category-card card1"
-            onClick={() => goPage("/agent/listings")}>
-            My Listings
-          </div>
+    <div className="workflow-card">
+      <span>02</span>
+      <h3>Manage Listings</h3>
+      <p>Update property details, pricing, and availability anytime.</p>
+    </div>
 
-          <div className="category-card card2"
-            onClick={() => goPage("/agent/add-property")}>
-            Add Property
-          </div>
-
-          <div className="category-card card3"
-            onClick={() => goPage("/agent/requests")}>
-            Requests
-          </div>
-
-          <div className="category-card card4"
-            onClick={() => goPage("/agent/leads")}>
-            Leads
-          </div>
-
-          <div className="category-card card5"
-            onClick={() => goPage("/agent/profile")}>
-            Profile
-          </div>
-
-          <div className="category-card card6"
-          onClick={() => goPage("/Analytics")}>
-            Analytics
-          </div>
-
-          <div className="category-card card7"
-          onClick={() => goPage("/contact")}>
-            Support
-          </div>
-
-        </div>
-      </section>
-
+    <div className="workflow-card">
+      <span>03</span>
+      <h3>Connect with Buyers</h3>
+      <p>Receive direct inquiries from interested customers.</p>
+    </div>
+  </div>
+</section>
       {/* WHY US (agent version) */}
       <section className="why-us">
         <h2>Why Agents Use FreeHome</h2>
