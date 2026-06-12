@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import AgentCard from "../../components/AgentCard/AgentCard";
 import "./AgentProfile.css";
 function AgentProfile() {
   const navigate = useNavigate();
@@ -295,115 +296,7 @@ return (
 
       {/* LEFT PROFILE CARD */}
 
-      <div className="profile-card">
-
-        <div className="profile-header">
-
-          {user.profileImage ? (
-            <img
-              src={user.profileImage}
-              alt="Profile"
-              className="profile-avatar"
-            />
-          ) : (
-            <div className="profile-avatar default-avatar">
-  {user.fullName
-    ? user.fullName.charAt(0).toUpperCase()
-    : "A"}
-</div>
-          )}
-
-          <h3 className="profile-name">
-            {user.fullName || "Agent Name"}
-          </h3>
-
-          <p className="profile-role">
-            {user.role}
-          </p>
-
-        </div>
-
-        <div className="profile-info">
-
-          {user.email && (
-            <div className="profile-item">
-              <span>Email</span>
-              <p>{user.email}</p>
-            </div>
-          )}
-
-          {user.phone && (
-            <div className="profile-item">
-              <span>Phone</span>
-              <p>{user.phone}</p>
-            </div>
-          )}
-          {user.serviceLocation && (
-  <div className="profile-item">
-    <span>Service Location</span>
-    <p>{user.serviceLocation}</p>
-  </div>
-)}
-
-{user.budgetHandled && (
-  <div className="profile-item">
-    <span>Budget Handled</span>
-    <p>{user.budgetHandled}</p>
-  </div>
-)}
-
-{user.specialization && (
-  <div className="profile-item">
-    <span>Specialization</span>
-    <p>{user.specialization}</p>
-  </div>
-)}
-
-          {user.age && (
-            <div className="profile-item">
-              <span>Age</span>
-              <p>{user.age}</p>
-            </div>
-          )}
-
-          {user.gender && (
-            <div className="profile-item">
-              <span>Gender</span>
-              <p>{user.gender}</p>
-            </div>
-          )}
-
-          {user.agencyName && (
-            <div className="profile-item">
-              <span>Agency</span>
-              <p>{user.agencyName}</p>
-            </div>
-          )}
-
-          {user.experience && (
-            <div className="profile-item">
-              <span>Experience</span>
-              <p>{user.experience} Years</p>
-            </div>
-          )}
-
-          {user.licenseNumber && (
-            <div className="profile-item">
-              <span>License</span>
-              <p>{user.licenseNumber}</p>
-            </div>
-          )}
-          {user.bio && (
-            <div className="profile-item">
-              <span>About</span>
-              <p>{user.bio}</p>
-            </div>
-          )}
-
-        </div>
-
-      </div>
-
+      <AgentCard user={user} />
       {/* RIGHT EDIT CARD */}
 
       <div className="edit-card">

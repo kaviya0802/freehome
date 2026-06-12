@@ -100,7 +100,6 @@ function Navbar() {
             <>
               <li><Link to="/agent/listings">My Listings</Link></li>
               <li><Link to="/agent/add-property">Add Property</Link></li>
-              <li><Link to="/agent/requests">Requests</Link></li>
               <li><Link to="/agent/leads">Leads</Link></li>
 
               <li><Link to="/about">About Us</Link></li>
