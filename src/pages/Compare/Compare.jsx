@@ -13,16 +13,16 @@ const getComparisonData = (property) => {
         "Property Type": property.type,
         Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
-        Bedrooms: property.bedrooms,
-        Bathrooms: property.bathrooms,
+        Bedrooms: d.bedrooms,
+        Bathrooms: d.bathrooms,
         Area:
-  property.type !== "Land"
-    ? `${property.area} sqft`
-    : `${property.area} hectares`,
-        Parking: property.parking,
-        "Property Age": property.propertyAge,
-        Furnishing: property.furnishing,
-        Status: property.mode,
+  d.type !== "Land"
+    ? `${d.area} sqft`
+    : `${d.area} hectares`,
+        Parking: d.parking,
+        "Property Age": d.propertyAge,
+        Furnishing: d.furnishing,
+        Status: d.mode,
 
         Address: d.address,
         "Floor Number": d.floorNumber,
@@ -60,16 +60,16 @@ const getComparisonData = (property) => {
         "Property Type": property.type,
         Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
-        Bedrooms: property.bedrooms,
-        Bathrooms: property.bathrooms,
+        Bedrooms: d.bedrooms,
+        Bathrooms: d.bathrooms,
         Area:
-  property.type !== "Land"
-    ? `${property.area} sqft`
-    : `${property.area} hectares`,
-        Parking: property.parking,
-        "Property Age": property.propertyAge,
-        Furnishing: property.furnishing,
-        Status: property.mode,
+  d.type !== "Land"
+    ? `${d.area} sqft`
+    : `${d.area} hectares`,
+        Parking: d.parking,
+        "Property Age": d.propertyAge,
+        Furnishing: d.furnishing,
+        Status: d.mode,
 
         Address: d.address,
          "Land Area":
@@ -105,16 +105,16 @@ const getComparisonData = (property) => {
         "Property Type": property.type,
         Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
-        Bedrooms: property.bedrooms,
-        Bathrooms: property.bathrooms,
+        Bedrooms: d.bedrooms,
+        Bathrooms: d.bathrooms,
         Area:
-  property.type !== "Land"
-    ? `${property.area} sqft`
-    : `${property.area} hectares`,
-        Parking: property.parking,
-        "Property Age": property.propertyAge,
-        Furnishing: property.furnishing,
-        Status: property.mode,
+  d.type !== "Land"
+    ? `${d.area} sqft`
+    : `${d.area} hectares`,
+        Parking: d.parking,
+        "Property Age": d.propertyAge,
+        Furnishing: d.furnishing,
+        Status: d.mode,
 
         Address: d.address,
        "Built Up Area":
@@ -146,16 +146,16 @@ const getComparisonData = (property) => {
         "Property Type": property.type,
         Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
-        Bedrooms: property.bedrooms,
-        Bathrooms: property.bathrooms,
+        Bedrooms: d.bedrooms,
+        Bathrooms: d.bathrooms,
          Area:
-  property.type !== "Land"
-    ? `${property.area} sqft`
-    : `${property.area} hectares`,
-        Parking: property.parking,
-        "Property Age": property.propertyAge,
-        Furnishing: property.furnishing,
-        Status: property.mode,
+  d.type !== "Land"
+    ? `${d.area} sqft`
+    : `${d.area} hectares`,
+        Parking: d.parking,
+        "Property Age": d.propertyAge,
+        Furnishing: d.furnishing,
+        Status: d.mode,
 
         Address: d.address,
          "Built Up Area":
@@ -193,15 +193,15 @@ const getComparisonData = (property) => {
         "Property": property.type,
         Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
-        "Property Type": property.propertyType,
+        "Property Type": d.propertyType,
         Area:
-  property.type !== "Land"
-    ? `${property.area} sqft`
-    : `${property.area} hectares`,
-        Parking: property.parking,
-        "Property Age": property.propertyAge,
-        Furnishing: property.furnishing,
-        Status: property.mode,
+  d.type !== "Land"
+    ? `${d.area} sqft`
+    : `${d.area} hectares`,
+        Parking: d.parking,
+        "Property Age": d.propertyAge,
+        Furnishing: d.furnishing,
+        Status: d.mode,
 
         Address: d.address,
         "Floor Number": d.floorNumber,
@@ -228,12 +228,12 @@ const getComparisonData = (property) => {
         Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
         Area:
-  property.type !== "Land"
-    ? `${property.area} sqft`
-    : `${property.area} hectares`,
-        "Soil Type": property.soilType,
-        "Road Access": property.landFeatures?.roadAccess ? "Yes" : "No",
-        Status: property.mode,
+  d.type !== "Land"
+    ? `${d.area} sqft`
+    : `${d.area} hectares`,
+        "Soil Type": d.soilType,
+        "Road Access": d.landFeatures?.roadAccess ? "Yes" : "No",
+        Status: d.mode,
 
         Address: d.address,
         "Plot Width": d.plotWidth,
@@ -262,19 +262,19 @@ const getComparisonData = (property) => {
         "Property Type": property.type,
         Location: property.location,
         Price: `$${property.price.toLocaleString()}`,
-        "Room Type": property.pgFeatures?.sharingType
+        "Room Type": d.pgFeatures?.sharingType
           ? "Single Sharing"
           : "Double Sharing",
 
-        WiFi: property.pgFeatures?.wifi ? "Yes" : "No",
-        Meals: property.pgFeatures?.mealsIncluded ? "Yes" : "No",
+        WiFi: d.pgFeatures?.wifi ? "Yes" : "No",
+        Meals: d.pgFeatures?.mealsIncluded ? "Yes" : "No",
 
         Area:
-  property.type !== "Land"
-    ? `${property.area} sqft`
-    : `${property.area} hectares`,
-        Furnishing: property.furnishing,
-        Status: property.mode,
+  d.type !== "Land"
+    ? `${d.area} sqft`
+    : `${d.area} hectares`,
+        Furnishing: d.furnishing,
+        Status: d.mode,
 
         Address: d.address,
         "Gender Preference": d.genderPreference,
@@ -433,17 +433,16 @@ const commonFields = Object.keys(
               className="compare-property-card"
             >
               <img
-                src={property.image}
-                alt={property.title}
-              />
-
+  src={property.images?.[0] || "/placeholder.jpg"}
+  alt={property.title}
+/>
               <div className="compare-property-info">
                 <h3>{property.title}</h3>
 
                 <p>{property.location}</p>
 
                 <span>
-                  ₹
+                  $
                   {property.price.toLocaleString()}
                 </span>
               </div>

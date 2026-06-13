@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import PropertyFilters from "../../components/PropertyFilters/PropertyFilters";
-import properties from "../../data/generateProperties";
+import { getAgentProperties } from "../../utils/propertyStorage";
 import "./Properties.css";
 
 function useQuery() {
@@ -29,6 +29,10 @@ function Properties() {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
   const [resetKey, setResetKey] = useState(0);
+
+  // ✅ ONLY AGENT PROPERTIES (NEW SOURCE)
+  const allProperties = getAgentProperties();
+
   const normalize = (str) =>
     (str || "")
       .toLowerCase()
@@ -36,10 +40,10 @@ function Properties() {
       .replace(/\//g, "");
 
   // STEP 1: URL FILTERS
-  const urlFiltered = properties.filter((property) => {
+  const urlFiltered = allProperties.filter((property) => {
     const matchLocation =
       !location ||
-      property.location.toLowerCase() === location.toLowerCase();
+      property.location?.toLowerCase() === location.toLowerCase();
 
     const matchType =
       !type ||
@@ -61,7 +65,12 @@ function Properties() {
       matchBudget = price > 1000000;
     }
 
-    return matchLocation && matchType && matchMode && matchBudget;
+    return (
+      matchLocation &&
+      matchType &&
+      matchMode &&
+      matchBudget
+    );
   });
 
   // STEP 2: SEARCH FILTER
@@ -70,14 +79,10 @@ function Properties() {
 
     const s = search.toLowerCase().trim();
 
-    const title = property.title?.toLowerCase() || "";
-    const location = property.location?.toLowerCase() || "";
-    const type = property.type?.toLowerCase() || "";
-
     return (
-      title.startsWith(s) ||
-      type.startsWith(s) ||
-      location.startsWith(s)
+      property.title?.toLowerCase().startsWith(s) ||
+      property.type?.toLowerCase().startsWith(s) ||
+      property.location?.toLowerCase().startsWith(s)
     );
   });
 
@@ -91,9 +96,9 @@ function Properties() {
 
     const matchLocation =
       !filters.location ||
-      property.location.toLowerCase().includes(
-        filters.location.toLowerCase()
-      );
+      property.location
+        ?.toLowerCase()
+        .includes(filters.location.toLowerCase());
 
     const matchBedrooms =
       !filters.bedrooms ||
@@ -107,7 +112,9 @@ function Properties() {
         ? Number(property.bathrooms) >= 3
         : Number(property.bathrooms) === Number(filters.bathrooms));
 
-    const age = new Date().getFullYear() - property.yearBuilt;
+    const age =
+      new Date().getFullYear() -
+      (property.yearBuilt || new Date().getFullYear());
 
     const matchPropertyAge =
       !filters.propertyAge ||
@@ -117,34 +124,36 @@ function Properties() {
       (filters.propertyAge === "20+" && age > 20);
 
     const matchFurnishing =
-  !filters.furnishing ||
-  (property.furnishing &&
-    property.furnishing.toLowerCase() === filters.furnishing.toLowerCase());
+      !filters.furnishing ||
+      property.furnishing?.toLowerCase() === filters.furnishing.toLowerCase();
 
     const matchParking =
-  !filters.parking ||
-  (() => {
-    const p = Number(property.parking);
+      !filters.parking ||
+      (() => {
+        const p = Number(property.parking);
 
-    if (filters.parking === "3+") return p >= 3;
-    if (filters.parking === "3") return p === 3;
-    if (filters.parking === "2") return p === 2;
-    if (filters.parking === "1") return p === 1;
+        if (filters.parking === "3+") return p >= 3;
+        if (filters.parking === "3") return p === 3;
+        if (filters.parking === "2") return p === 2;
+        if (filters.parking === "1") return p === 1;
 
-    return true;
-  })();
+        return true;
+      })();
 
     const price = Number(property.price);
 
     const matchBudget =
       !filters.budget ||
       (() => {
-        if (filters.budget === "pg1") return price <= 5000;
-        if (filters.budget === "pg2") return price > 5000 && price <= 10000;
-        if (filters.budget === "pg3") return price > 10000;
-        if (filters.budget === "200k") return price >= 200000 && price <= 500000;
-        if (filters.budget === "500k") return price > 500000 && price <= 1000000;
-        if (filters.budget === "1m") return price > 1000000;
+        if (filters.budget === "200k")
+          return price >= 200000 && price <= 500000;
+
+        if (filters.budget === "500k")
+          return price > 500000 && price <= 1000000;
+
+        if (filters.budget === "1m")
+          return price > 1000000;
+
         return true;
       })();
 
@@ -165,51 +174,48 @@ function Properties() {
   let finalResults = [...advancedFiltered];
 
   if (filters.sort === "low") {
-    finalResults.sort((a, b) => a.price - b.price);
+    finalResults.sort((a, b) => Number(a.price) - Number(b.price));
   }
 
   if (filters.sort === "high") {
-    finalResults.sort((a, b) => b.price - a.price);
+    finalResults.sort((a, b) => Number(b.price) - Number(a.price));
   }
 
   let pageTitle = "Explore Properties";
 
-  if (type) {
-    pageTitle = `${type} Properties`;
-  } else if (mode === "buy") {
-    pageTitle = "Properties for Sale";
-  } else if (mode === "rent") {
-    pageTitle = "Properties for Rent";
-  }
+  if (type) pageTitle = `${type} Properties`;
+  else if (mode === "buy") pageTitle = "Properties for Sale";
+  else if (mode === "rent") pageTitle = "Properties for Rent";
 
-  // ✅ FIXED RESET FUNCTION (ONLY CHANGE)
- const handleResetFilters = () => {
-  setSearch("");
+  const handleResetFilters = () => {
+    setSearch("");
+    setFilters({
+      type: "",
+      mode: "",
+      location: "",
+      bedrooms: "",
+      bathrooms: "",
+      propertyAge: "",
+      furnishing: "",
+      parking: "",
+      budget: "",
+      sort: "",
+    });
+    setResetKey((prev) => prev + 1);
+  };
 
-  setFilters({
-    type: "",
-    mode: "",
-    location: "",
-    bedrooms: "",
-    bathrooms: "",
-    propertyAge: "",
-    furnishing: "",
-    parking: "",
-    budget: "",
-    sort: ""
-  });
-
-  setResetKey(prev => prev + 1);   // ✅ ADD THIS LINE
-};
   return (
     <>
       <Navbar />
 
       <div className="properties-container">
-
         <div className="properties-header">
           <h1 className="propertypage-title">{pageTitle}</h1>
-          <div className="page-tag">FreeHome Property Collection</div>
+
+          <div className="page-tag">
+            FreeHome Property Collection
+          </div>
+
           <p>{finalResults.length} Properties Found</p>
 
           <div className="properties-searchbar">
@@ -221,37 +227,34 @@ function Properties() {
             />
           </div>
 
-          <div className="properties-filter">
-            <PropertyFilters
-  key={resetKey}
-  onChange={setFilters}
-/>
-          </div>
+          <PropertyFilters key={resetKey} onChange={setFilters} />
         </div>
 
-        <div className={`property-grid ${finalResults.length === 1 ? "single-card" : ""}`}>
+        <div
+          className={`property-grid ${
+            finalResults.length === 1 ? "single-card" : ""
+          }`}
+        >
           {finalResults.length > 0 ? (
             finalResults.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))
           ) : (
-            <div className="no-results">
+            <div className="properties-no-results">
               <h2>No Properties Found</h2>
               <p>Try adjusting filters or search keywords</p>
+               <div className="no-results-buttons">
+              <button className="btn-clear-search" onClick={() => setSearch("")}>
+                Clear Search
+              </button>
 
-                 <div className="no-results-buttons">
-  <button className="btn-clear-search" onClick={() => setSearch("")}>
-    Clear Search
-  </button>
-
-  <button className="btn-reset-filters" onClick={handleResetFilters}>
-    Reset Filters
-  </button>
-</div>
+              <button className="btn-reset-filters" onClick={handleResetFilters}>
+                Reset Filters
+              </button>
+             </div>
             </div>
           )}
         </div>
-
       </div>
 
       <Footer />

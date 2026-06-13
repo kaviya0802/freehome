@@ -1,0 +1,368 @@
+.mypd-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  font-family: inherit;
+}
+
+/* IMAGE */
+.mypd-image-section {
+  position: relative;
+}
+
+.mypd-image-section img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.mypd-slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.mypd-slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mypd-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.mypd-slider-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.mypd-slider-btn.mypd-left {
+  left: 12px;
+}
+
+.mypd-slider-btn.mypd-right {
+  right: 12px;
+}
+
+
+/* TYPE BADGE */
+.mypd-type-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: black;
+  color: white;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+}
+
+/* CONTENT */
+.content-section {
+  margin-top: 25px;
+}
+
+/* TOP ROW */
+.mypd-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mypd-top-row h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.mypd-price {
+  font-size: 24px;
+  color: #1a7f37;
+}
+
+/* LOCATION */
+.mypd-location {
+  color: #666;
+  margin: 8px 0 20px;
+}
+
+.mypd-meta-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, max-content));
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.mypd-meta-box div {
+  width: 180px;
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 10px;
+  min-height: 75px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* HOVER EFFECT */
+.mypd-meta-box div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* VALUE */
+.mypd-meta-box h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* LABEL */
+.mypd-meta-box p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #777;
+}
+/* DESCRIPTION */
+.mypd-description {
+  margin-top: 25px;
+}
+
+.mypd-description h3 {
+  margin-bottom: 10px;
+}
+
+
+
+/* =========================
+   PROPERTY DETAILS BUTTONS (ISOLATED)
+========================= */
+
+.mypd-pd-buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* BASE BUTTON */
+.mypd-pd-btn {
+  width: 130px;
+  height: 46px;
+
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: 0.25s ease;
+}
+/* PRIMARY BUTTON (same style you used before) */
+.mypd-pd-btn-primary {
+  background: #111;
+  color: #fff;
+}
+
+.mypd-pd-btn-primary:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+}
+
+/* SECONDARY BUTTON (same system style) */
+.mypd-pd-btn-secondary {
+  background: #3b82f6;
+  border: 1px solid #ccc;
+  color: #fff;
+}
+
+.mypd-pd-btn-secondary:hover {
+  background: #111;
+  transform: translateY(-2px);
+}
+
+
+/* NOT FOUND */
+.mypd-not-found {
+  text-align: center;
+  padding: 50px;
+}
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s ease;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.slider-btn.left {
+  left: 10px;
+}
+
+.slider-btn.right {
+  right: 10px;
+}
+
+.slider-btn:hover {
+  background: rgba(0,0,0,0.7);
+}
+/* Wishlist icon (same as card) */
+.wishlist-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.9);
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+  z-index: 10;
+}
+
+.wishlist-icon:hover {
+  transform: scale(1.1);
+}
+
+.wishlist-icon.active {
+  background: #ffe3e3;
+}
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.wishlist-icon.active,
+.details .wishlist-icon.active {
+  animation: heartPop 0.3s ease;
+}
+/* =========================
+   3 HEART BURST ANIMATION
+========================= */
+
+.heart-burst {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 26px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 20;
+  animation: burstUp 0.8s ease forwards;
+}
+
+/* smooth upward float */
+@keyframes burstUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px) scale(0.6);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(-50%, 0px) scale(1.2);
+  }
+
+  60% {
+    opacity: 0.9;
+    transform: translate(-50%, -40px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -80px) scale(0.7);
+  }
+}
+/* COMPARE BUTTON (NEW) */
+.compare-img-btn{
+  position: absolute;
+  top: 15px;
+  left: 100px;
+  background: black;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 40px;
+  z-index: 2;
+}
+
+.compare-img-btn.active {
+  background: #00c853;
+}
+
+.compare-img-btn:hover {
+  opacity: 0.9;
+}
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-size: 13px;
+  z-index: 9999;
+  animation: fadeToast 5s ease;
+}
+
+@keyframes fadeToast {
+  0% { opacity: 0; transform: translate(-50%, 10px); }
+  10% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
+}
+

@@ -1,0 +1,71 @@
+.mylistings-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.mylistings-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.mylistings-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.mylistings-header p {
+  color: #666;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.listing-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.delete-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+.empty-listing {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.empty-listing h2 {
+  margin-bottom: 10px;
+}
+
+.empty-listing p {
+  color: #666;
+}
+/* SINGLE PROPERTY CARD */
+.single-card {
+  display: flex;
+  justify-content: center;
+}
+
+.single-card .mylisting-card {
+  width: 1200px;
+  max-width: 100%;
+}
+
+.single-card .mylisting-image {
+  height: 450px;
+}

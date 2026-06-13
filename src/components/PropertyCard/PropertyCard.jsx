@@ -123,13 +123,16 @@ function PropertyCard({ property }) {
       {burst && <div className="heart-burst">❤️ ❤️ ❤️</div>}
 
       {/* 🏠 IMAGE */}
-      <img
-        src={property.image}
-        alt={property.title}
-        onError={(e) =>
-          (e.target.src = "https://source.unsplash.com/600x400/?house")
+         <img
+        src={
+          property.images?.[0]
+            ? property.images[0]
+            : "https://source.unsplash.com/600x400/?house"
         }
+        alt={property.title}
+        className="mylisting-image"
       />
+
 
       {/* 📄 INFO */}
       <div className="property-info">

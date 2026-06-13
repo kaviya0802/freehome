@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home/Home";
 import Properties from "./pages/Properties/Properties";
 import PropertyDetails from "./pages/PropertyDetails/PropertyDetails";
@@ -22,7 +21,9 @@ import Landing from "./pages/Landing/Landing";
 import AgentDashboard from "./pages/AgentDashboard/AgentDashboard";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import MatchedAgents from "./pages/matchedagents/MatchedAgents";
-
+import MyListings from "./pages/MyListings/MyListings";
+import AddProperty from "./pages/AddProperty/AddProperty";
+import MyPropertyDetails from "./pages/MyPropertyDetails/MyPropertyDetails";
 
 function App() {
   return (
@@ -49,6 +50,9 @@ function App() {
         <Route path="/matched-agents" element={<MatchedAgents />} />
         <Route path="/agent-dashboard" element={<AgentDashboard />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/agent/listings" element={<MyListings />} />
+        <Route path="/agent/add-property" element={<AddProperty />} />
+        <Route path="/my-property/:id" element={<MyPropertyDetails />}/>
       </Routes>
     </CompareProvider>
   );

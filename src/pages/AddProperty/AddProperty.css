@@ -1,0 +1,25 @@
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-size: 13px;
+  z-index: 9999;
+  animation: fadeToast 5s ease;
+}
+
+@keyframes fadeToast {
+  0% { opacity: 0; transform: translate(-50%, 10px); }
+  10% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
+}

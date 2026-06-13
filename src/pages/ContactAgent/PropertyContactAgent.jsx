@@ -1,13 +1,24 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import properties from "../../data/generateProperties";
+import { useState, useEffect } from "react";
+
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./PropertyContactAgent.css";
 
 function PropertyContactAgent() {
   const { id } = useParams();
-  const property = properties.find(p => String(p.id) === String(id));
+  const [property, setProperty] = useState(null);
+
+useEffect(() => {
+  const allProperties =
+    JSON.parse(localStorage.getItem("agentProperties")) || [];
+
+  const found = allProperties.find(
+    (p) => String(p.id) === String(id)
+  );
+
+  setProperty(found);
+}, [id]);
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [form, setForm] = useState({
