@@ -7,21 +7,14 @@ function MyListingCard({ property, onDelete }) {
   const handleDelete = (e) => {
     e.stopPropagation();
 
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this property?"
-    );
-
-    if (confirmDelete) {
-      onDelete(property.id);
-    }
+    // ✅ NO window.confirm anymore
+    onDelete(property.id);
   };
 
   return (
     <div
       className="mylisting-card"
-      onClick={() =>
-        navigate(`/my-property/${property.id}`)
-      }
+      onClick={() => navigate(`/my-property/${property.id}`)}
     >
       <button
         className="mylisting-delete-btn"
@@ -43,14 +36,9 @@ function MyListingCard({ property, onDelete }) {
 
       <div className="mylisting-info">
         <h3>{property.title}</h3>
-
         <p>{property.location}</p>
-
         <span>
-          $
-          {Number(property.price).toLocaleString(
-            "en-AU"
-          )}
+          ${Number(property.price).toLocaleString("en-AU")}
         </span>
       </div>
     </div>

@@ -1,204 +1,305 @@
-function ApartmentFields({ details, handleChange, errors = {} }) {
-  const showError = (key) =>
-    errors[key] ? <p className="error">{errors[key]}</p> : null;
-
+const FieldWrapper = ({ children, error }) => (
+    <div className="addprop-field">
+      {children}
+      {error && <p className="error">{error}</p>}
+    </div>
+  );
+function LuxuryFields({ details, handleChange, errors = {} }) {
   return (
     <>
-      <input
-        type="number"
-        name="bedrooms"
-        placeholder="Bedrooms"
-        value={details.bedrooms || ""}
-        onChange={handleChange}
-      />
-      {showError("bedrooms")}
+      <FieldWrapper error={errors.bedrooms}>
+        <input
+          type="number"
+          name="bedrooms"
+          placeholder="Bedrooms"
+          value={details.bedrooms || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="bathrooms"
-        placeholder="Bathrooms"
-        value={details.bathrooms || ""}
-        onChange={handleChange}
-      />
-      {showError("bathrooms")}
+      <FieldWrapper error={errors.bathrooms}>
+        <input
+          type="number"
+          name="bathrooms"
+          placeholder="Bathrooms"
+          value={details.bathrooms || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="area"
-        placeholder="Area (sqft)"
-        value={details.area || ""}
-        onChange={handleChange}
-      />
-      {showError("area")}
+      <FieldWrapper error={errors.area}>
+        <input
+          type="number"
+          name="area"
+          placeholder="Area (sqft)"
+          value={details.area || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="parking"
-        placeholder="Parking Spaces"
-        value={details.parking || ""}
-        onChange={handleChange}
-      />
-      {showError("parking")}
+      <FieldWrapper error={errors.parking}>
+        <input
+          type="number"
+          name="parking"
+          placeholder="Parking Spaces"
+          value={details.parking || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <select
-        name="propertyAge"
-        value={details.propertyAge || ""}
-        onChange={handleChange}
-      >
-        <option value="">Property Age</option>
-        <option value="0-5">0-5 Years</option>
-        <option value="5-10">5-10 Years</option>
-        <option value="10-20">10-20 Years</option>
-        <option value="20+">20+ Years</option>
-      </select>
-      {showError("propertyAge")}
-       <select
-        name="mode"
-        value={details.mode || ""}
-        onChange={handleChange}
-      >
+      <FieldWrapper error={errors.propertyAge}>
+        <select
+          name="propertyAge"
+          value={details.propertyAge || ""}
+          onChange={handleChange}
+        >
+          <option value="">Property Age</option>
+          <option value="0-5">0-5 Years</option>
+          <option value="5-10">5-10 Years</option>
+          <option value="10-20">10-20 Years</option>
+          <option value="20+">20+ Years</option>
+        </select>
+      </FieldWrapper>
+
+      <FieldWrapper error={errors.mode}>
+        <select
+          name="mode"
+          value={details.mode || ""}
+          onChange={handleChange}
+        >
           <option value="">Mode</option>
-        <option value="buy">Buy</option>
-        <option value="rent">Rent</option>
-      </select>
-      {showError("mode")}
+          <option value="buy">Buy</option>
+          <option value="rent">Rent</option>
+        </select>
+      </FieldWrapper>
 
-      <select
-        name="furnishing"
-        value={details.furnishing || ""}
-        onChange={handleChange}
-      >
-        <option value="">Furnishing</option>
-        <option value="Furnished">Furnished</option>
-        <option value="Unfurnished">Unfurnished</option>
-      </select>
-      {showError("furnishing")}
+      <FieldWrapper error={errors.furnishing}>
+        <select
+          name="furnishing"
+          value={details.furnishing || ""}
+          onChange={handleChange}
+        >
+          <option value="">Furnishing</option>
+          <option value="Furnished">Furnished</option>
+          <option value="Unfurnished">Unfurnished</option>
+        </select>
+      </FieldWrapper>
 
-      <input
-        type="text"
-        name="address"
-        placeholder="Address"
-        value={details.address || ""}
-        onChange={handleChange}
-      />
-      {showError("address")}
+      <FieldWrapper error={errors.address}>
+        <input
+          type="text"
+          name="address"
+          placeholder="Address"
+          value={details.address || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="floorNumber"
-        placeholder="Floor Number"
-        value={details.floorNumber || ""}
-        onChange={handleChange}
-      />
-      {showError("floorNumber")}
+      <FieldWrapper error={errors.landArea}>
+        <input
+          type="number"
+          name="landArea"
+          placeholder="Land Area (sqft)"
+          value={details.landArea || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="totalFloors"
-        placeholder="Total Floors"
-        value={details.totalFloors || ""}
-        onChange={handleChange}
-      />
-      {showError("totalFloors")}
+      <FieldWrapper error={errors.builtUpArea}>
+        <input
+          type="number"
+          name="builtUpArea"
+          placeholder="Built-up Area (sqft)"
+          value={details.builtUpArea || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="builtUpArea"
-        placeholder="Built-up Area"
-        value={details.builtUpArea || ""}
-        onChange={handleChange}
-      />
-      {showError("builtUpArea")}
+      <FieldWrapper error={errors.parkingCapacity}>
+        <input
+          type="number"
+          name="parkingCapacity"
+          placeholder="Parking Capacity"
+          value={details.parkingCapacity || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="balconies"
-        placeholder="Balconies"
-        value={details.balconies || ""}
-        onChange={handleChange}
-      />
-      {showError("balconies")}
+      <FieldWrapper error={errors.waterView}>
+        <select
+          name="waterView"
+          value={details.waterView || ""}
+          onChange={handleChange}
+        >
+          <option value="">Water View</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
 
-      <input
-        type="number"
-        name="maintenanceFee"
-        placeholder="Maintenance Fee"
-        value={details.maintenanceFee || ""}
-        onChange={handleChange}
-      />
-      {showError("maintenanceFee")}
+      <FieldWrapper error={errors.luxuryRating}>
+        <input
+          type="number"
+          name="luxuryRating"
+          placeholder="Luxury Rating (1-10)"
+          value={details.luxuryRating || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
 
-      <select name="liftAvailable" value={details.liftAvailable || ""} onChange={handleChange}>
-        <option value="">Lift Available</option>
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-      </select>
+      <FieldWrapper error={errors.privatePool}>
+        <select
+          name="privatePool"
+          value={details.privatePool || ""}
+          onChange={handleChange}
+        >
+          <option value="">Private Pool</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
 
-      <select name="gym" value={details.gym || ""} onChange={handleChange}>
-        <option value="">Gym</option>
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-      </select>
+      <FieldWrapper error={errors.privateGym}>
+        <select
+          name="privateGym"
+          value={details.privateGym || ""}
+          onChange={handleChange}
+        >
+          <option value="">Private Gym</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
 
-      <select name="swimmingPool" value={details.swimmingPool || ""} onChange={handleChange}>
-        <option value="">Swimming Pool</option>
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-      </select>
-      <input
-        type="text"
-        name="nearbySchools"
-        placeholder="Nearby Schools"
-        value={details.nearbySchools || ""}
-        onChange={handleChange}
-      />
-      {showError("nearbySchools")}
+      <FieldWrapper error={errors.homeTheater}>
+        <select
+          name="homeTheater"
+          value={details.homeTheater || ""}
+          onChange={handleChange}
+        >
+          <option value="">Home Theater</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
 
-      <input
-        type="text"
-        name="nearbyHospitals"
-        placeholder="Nearby Hospitals"
-        value={details.nearbyHospitals || ""}
-        onChange={handleChange}
-      />
-      {showError("nearbyHospitals")}
+      <FieldWrapper error={errors.smartHomeFeatures}>
+        <select
+          name="smartHomeFeatures"
+          value={details.smartHomeFeatures || ""}
+          onChange={handleChange}
+        >
+          <option value="">Smart Home Features</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
 
-      <select
-        name="metroConnectivity"
-        value={details.metroConnectivity || ""}
-        onChange={handleChange}
-      >
-        <option value="">Metro Connectivity</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-      {showError("metroConnectivity")}
+      <FieldWrapper error={errors.privateGarden}>
+        <select
+          name="privateGarden"
+          value={details.privateGarden || ""}
+          onChange={handleChange}
+        >
+          <option value="">Private Garden</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
 
-      <select
-        name="trafficCondition"
-        value={details.trafficCondition || ""}
-        onChange={handleChange}
-      >
-        <option value="">Traffic Condition</option>
-        <option value="Poor">Poor</option>
-        <option value="Good">Good</option>
-        <option value="Average">Average</option>
-      </select>
-      {showError("trafficCondition")}
+      <FieldWrapper error={errors.rooftopTerrace}>
+        <select
+          name="rooftopTerrace"
+          value={details.rooftopTerrace || ""}
+          onChange={handleChange}
+        >
+          <option value="">Rooftop Terrace</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
 
-      <select
-        name="propertyDemand"
-        value={details.propertyDemand || ""}
-        onChange={handleChange}
-      >
-        <option value="">Property Demand</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-      {showError("propertyDemand")}
+      <FieldWrapper error={errors.securitySystem}>
+        <select
+          name="securitySystem"
+          value={details.securitySystem || ""}
+          onChange={handleChange}
+        >
+          <option value="">Security System</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
+
+      <FieldWrapper error={errors.nearbySchools}>
+        <input
+          type="text"
+          name="nearbySchools"
+          placeholder="Nearby Schools"
+          value={details.nearbySchools || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
+
+      <FieldWrapper error={errors.nearbyHospitals}>
+        <input
+          type="text"
+          name="nearbyHospitals"
+          placeholder="Nearby Hospitals"
+          value={details.nearbyHospitals || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
+
+      <FieldWrapper error={errors.metroConnectivity}>
+        <select
+          name="metroConnectivity"
+          value={details.metroConnectivity || ""}
+          onChange={handleChange}
+        >
+          <option value="">Metro Connectivity</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </FieldWrapper>
+
+      <FieldWrapper error={errors.propertyDemand}>
+        <select
+          name="propertyDemand"
+          value={details.propertyDemand || ""}
+          onChange={handleChange}
+        >
+          <option value="">Property Demand</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </FieldWrapper>
+
+      <FieldWrapper error={errors.safetyScore}>
+        <input
+          type="number"
+          name="safetyScore"
+          placeholder="Safety Score (1-10)"
+          value={details.safetyScore || ""}
+          onChange={handleChange}
+        />
+      </FieldWrapper>
+
+      <FieldWrapper error={errors.investmentPotential}>
+        <select
+          name="investmentPotential"
+          value={details.investmentPotential || ""}
+          onChange={handleChange}
+        >
+          <option value="">Investment Potential</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </FieldWrapper>
     </>
   );
 }
 
-export default ApartmentFields;
+export default LuxuryFields;

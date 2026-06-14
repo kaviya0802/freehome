@@ -86,28 +86,28 @@ function HomeLoan() {
 
           <div className="hl-item">
             <h4>Loan Amount</h4>
-            <p>₹{loanAmount.toLocaleString()}</p>
+            <p>${loanAmount.toLocaleString()}</p>
           </div>
 
           <div className="hl-item">
             <h4>Monthly EMI</h4>
-            <p>₹{emi.toLocaleString()}</p>
+            <p>${emi.toLocaleString()}</p>
           </div>
 
           <div className="hl-item">
             <h4>Total Interest</h4>
-            <p>₹{totalInterest.toLocaleString()}</p>
+            <p>${totalInterest.toLocaleString()}</p>
           </div>
 
           <div className="hl-item">
             <h4>Remaining Income</h4>
-            <p>₹{remainingIncome.toLocaleString()}</p>
+            <p>${remainingIncome.toLocaleString()}</p>
           </div>
 
           <div className="hl-item">
             <h4>Max Affordable Property</h4>
             <p>
-              ₹
+              $
               {Math.round(
                 maxAffordableProperty
               ).toLocaleString()}
@@ -117,7 +117,7 @@ function HomeLoan() {
           <div className="hl-item">
             <h4>Max Safe EMI</h4>
             <p>
-              ₹
+              $
               {Math.round(
                 maxSafeEMI
               ).toLocaleString()}
@@ -127,7 +127,7 @@ function HomeLoan() {
           <div className="hl-item">
             <h4>Total Repayment</h4>
             <p>
-              ₹
+              $
               {totalRepayment.toLocaleString()}
             </p>
           </div>
@@ -141,7 +141,7 @@ function HomeLoan() {
 
         {/* RIGHT SIDE */}
         <div className="hl-form">
-          <label>Property Price (₹)</label>
+          <label>Property Price ($)</label>
           <input
   type="text"
   inputMode="numeric"
@@ -198,7 +198,7 @@ function HomeLoan() {
             <option value={30}>30 Years</option>
           </select>
 
-          <label>Monthly Income (₹)</label>
+          <label>Monthly Income ($)</label>
 
           <input
   type="text"

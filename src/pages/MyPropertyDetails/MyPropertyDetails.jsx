@@ -14,7 +14,7 @@ function MyPropertyDetails() {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({});
   const [imgIndex, setImgIndex] = useState(0);
-
+  const [toast, setToast] = useState("");
   const images =
   editing
     ? formData?.images || []
@@ -31,6 +31,13 @@ function MyPropertyDetails() {
       setFormData(found);
     }
   }, [id]);
+const showToast = (message) => {
+  setToast(message);
+
+  setTimeout(() => {
+    setToast("");
+  }, 3000); // disappears after 3s
+};
 
   if (!property) {
     return (
@@ -89,8 +96,7 @@ const saveChanges = () => {
 
   setProperty(formData);
   setEditing(false);
-
-  alert("Property updated successfully");
+  showToast("Property updated successfully");
 };
 // REPLACE CURRENT IMAGE
 const handleReplaceImage = (e) => {
@@ -123,7 +129,7 @@ const handleAddImage = (e) => {
   if (
     (formData.images?.length || 0) + files.length > 4
   ) {
-    alert("Maximum 4 images allowed");
+    showToast("Maximum 4 images allowed");
     return;
   }
 
@@ -379,7 +385,7 @@ const handleAddImage = (e) => {
   </button>
 </div>
       </div>
-
+       {toast && <div className="toast">{toast}</div>}
       <Footer />
     </>
   );

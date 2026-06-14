@@ -15,6 +15,7 @@ import PGFields from "../../components/PropertyFields/PGFields";
 import "./AddProperty.css";
 
 function AddProperty() {
+  console.log("AddProperty Render");
   const navigate = useNavigate();
 
   const [toast, setToast] = useState("");
@@ -124,7 +125,6 @@ function AddProperty() {
     "cabins",
     "conferenceRooms",
     "washrooms",
-    "nearbyMetro",
     "receptionArea",
     "pantry",
     "powerBackup",
@@ -223,18 +223,11 @@ function AddProperty() {
   const handlePropertyDetailsChange = (e) => {
   const { name, value } = e.target;
 
-  const parsedValue =
-    value === "true"
-      ? true
-      : value === "false"
-      ? false
-      : value;
-
   setProperty((prev) => ({
     ...prev,
     propertyDetails: {
       ...prev.propertyDetails,
-      [name]: parsedValue, // ✅ use parsedValue
+      [name]: value, // ✅ store "Yes" or "No" directly
     },
   }));
 };
@@ -340,164 +333,211 @@ const convertFilesToBase64 = async (files) => {
     navigate("/agent/listings");
   }, 1500);
 };
-  const showError = (key) =>
-    errors[key] ? <p className="error">{errors[key]}</p> : null;
+  const showError = (field) =>
+  errors[field] ? (
+    <span className="addprop-error">
+      {errors[field]}
+    </span>
+  ) : null;
 
   return (
     <>
       <Navbar />
 
-      <div className="add-property-container">
-        <h1>Add Property</h1>
-
-        <form onSubmit={handleSubmit}>
-          {/* TITLE */}
-          <input
-            name="title"
-            placeholder="Property Title"
-            value={property.title}
-            onChange={handleChange}
-          />
-          {showError("title")}
-
-          {/* TYPE */}
-          <select
-            name="type"
-            value={property.type}
-            onChange={handleChange}
-          >
-            <option value="">Select Property Type</option>
-            <option>Apartment</option>
-            <option>Villa</option>
-            <option>Townhouse</option>
-            <option>Commercial</option>
-            <option>Luxury</option>
-            <option>Land</option>
-            <option>PG Hostel</option>
-          </select>
-          {showError("type")}
-
-          {/* LOCATION */}
-          <select
-            name="location"
-            value={property.location}
-            onChange={handleChange}
-          >
-            <option value="">Select Location</option>
-             <option>Sydney</option>
-              <option>Melbourne</option>
-              <option>Brisbane</option>
-              <option>Perth</option>
-              <option>Adelaide</option>
-              <option>Canberra</option>
-              <option>Gold Coast</option>
-              <option>Hobart</option>
-              <option>Darwin</option>
-              <option>New South Wales</option>
-              <option>Victoria</option>
-              <option>Queensland</option>
-              <option>Western Australia</option>
-              <option>South Australia</option>
-              <option>Tasmania</option>
-              <option>Northern Territory</option>
-          </select>
-          {showError("location")}
-          {/* PRICE */}
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={property.price}
-            onChange={handleChange}
-          />
-          {showError("price")}
-
-          {/* IMAGES (MAX 4) */}
-           <input
-  type="file"
-  accept="image/*"
-  multiple
-  onChange={handleImages}
-/>
-         {errors.images && <p className="error">{errors.images}</p>}
-
-<div className="file-list">
-  {property.images.map((file, index) => (
-    <p key={index}>
-      📄 {file.name ? file.name : `Image ${index + 1}`}
-    </p>
-  ))}
+      <div className="addprop-page">
+    <div className="addprop-hero">
+  <h1>Add Property</h1>
+  <p >
+    ENTER PROPERTY INFORMATION AND PUBLISH YOUR LISTING IN JUST A FEW STEPS
+  </p>
 </div>
+  <div className="addprop-card">
 
-          {/* DESCRIPTION */}
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={property.description}
-            onChange={handleChange}
-          />
-          {showError("description")}
+    <div className="addprop-grid">
 
-          {/* DYNAMIC FIELDS */}
-{property.type === "Apartment" && (
-  <ApartmentFields
-    details={property.propertyDetails}
-    handleChange={handlePropertyDetailsChange}
-    errors={errors.propertyDetails || {}}
-  />
-)}
-
-{property.type === "Villa" && (
-  <VillaFields
-    details={property.propertyDetails}
-    handleChange={handlePropertyDetailsChange}
-    errors={errors.propertyDetails || {}}
-  />
-)}
-
-{property.type === "Townhouse" && (
-  <TownhouseFields
-    details={property.propertyDetails}
-    handleChange={handlePropertyDetailsChange}
-    errors={errors.propertyDetails || {}}
-  />
-)}
-
-{property.type === "Commercial" && (
-  <CommercialFields
-    details={property.propertyDetails}
-    handleChange={handlePropertyDetailsChange}
-    errors={errors.propertyDetails || {}}
-  />
-)}
-
-{property.type === "Luxury" && (
-  <LuxuryFields
-    details={property.propertyDetails}
-    handleChange={handlePropertyDetailsChange}
-    errors={errors.propertyDetails || {}}
-  />
-)}
-
-{property.type === "Land" && (
-  <LandFields
-    details={property.propertyDetails}
-    handleChange={handlePropertyDetailsChange}
-    errors={errors.propertyDetails || {}}
-  />
-)}
-
-{property.type === "PG Hostel" && (
-  <PGFields
-    details={property.propertyDetails}
-    handleChange={handlePropertyDetailsChange}
-    errors={errors.propertyDetails || {}}
-  />
-)}
-
-          <button type="submit">Add Property</button>
-        </form>
+      {/* TITLE */}
+      <div>
+        <input
+          name="title"
+          placeholder="Property Title"
+          value={property.title}
+          onChange={handleChange}
+        />
+        {showError("title")}
       </div>
+
+      {/* TYPE */}
+      <div>
+        <select
+          name="type"
+          value={property.type}
+          onChange={handleChange}
+        >
+          <option value="">Select Property Type</option>
+          <option>Apartment</option>
+          <option>Villa</option>
+          <option>Townhouse</option>
+          <option>Commercial</option>
+          <option>Luxury</option>
+          <option>Land</option>
+          <option>PG Hostel</option>
+        </select>
+        {showError("type")}
+      </div>
+
+      {/* LOCATION */}
+      <div>
+        <select
+          name="location"
+          value={property.location}
+          onChange={handleChange}
+        >
+          <option value="">Select Location</option>
+          <option>Sydney</option>
+          <option>Melbourne</option>
+          <option>Brisbane</option>
+          <option>Perth</option>
+          <option>Adelaide</option>
+          <option>Canberra</option>
+          <option>Gold Coast</option>
+          <option>Hobart</option>
+          <option>Darwin</option>
+          <option>New South Wales</option>
+          <option>Victoria</option>
+          <option>Queensland</option>
+          <option>Western Australia</option>
+          <option>South Australia</option>
+          <option>Tasmania</option>
+          <option>Northern Territory</option>
+        </select>
+        {showError("location")}
+      </div>
+
+      {/* PRICE */}
+      <div>
+        <input
+          type="number"
+          name="price"
+          placeholder="Price"
+          value={property.price}
+          onChange={handleChange}
+        />
+        {showError("price")}
+      </div>
+
+      {/* IMAGES */}
+      <div className="addprop-full">
+        
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          onChange={handleImages}
+        />
+
+        {errors.images && (
+          <span className="addprop-error">
+            {errors.images}
+          </span>
+        )}
+
+        <div className="addprop-file-list">
+          {property.images.map((file, index) => (
+            <p key={index}>
+              📄 {file.name || `Image ${index + 1}`}
+            </p>
+          ))}
+        </div>
+      </div>
+
+      {/* DESCRIPTION */}
+      <div className="addprop-full">
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={property.description}
+          onChange={handleChange}
+        />
+
+        {showError("description")}
+      </div>
+    {/* DYNAMIC FIELDS */}
+<div className="addprop-full">
+  <div className="dynamic-grid">
+
+    {property.type === "Apartment" && (
+      <ApartmentFields
+        details={property.propertyDetails}
+        handleChange={handlePropertyDetailsChange}
+        errors={errors.propertyDetails || {}}
+      />
+    )}
+
+    {property.type === "Villa" && (
+      <VillaFields
+        details={property.propertyDetails}
+        handleChange={handlePropertyDetailsChange}
+        errors={errors.propertyDetails || {}}
+      />
+    )}
+
+    {property.type === "Townhouse" && (
+      <TownhouseFields
+        details={property.propertyDetails}
+        handleChange={handlePropertyDetailsChange}
+        errors={errors.propertyDetails || {}}
+      />
+    )}
+
+    {property.type === "Commercial" && (
+      <CommercialFields
+        details={property.propertyDetails}
+        handleChange={handlePropertyDetailsChange}
+        errors={errors.propertyDetails || {}}
+      />
+    )}
+
+    {property.type === "Luxury" && (
+      <LuxuryFields
+        details={property.propertyDetails}
+        handleChange={handlePropertyDetailsChange}
+        errors={errors.propertyDetails || {}}
+      />
+    )}
+
+    {property.type === "Land" && (
+      <LandFields
+        details={property.propertyDetails}
+        handleChange={handlePropertyDetailsChange}
+        errors={errors.propertyDetails || {}}
+      />
+    )}
+
+    {property.type === "PG Hostel" && (
+      <PGFields
+        details={property.propertyDetails}
+        handleChange={handlePropertyDetailsChange}
+        errors={errors.propertyDetails || {}}
+      />
+    )}
+
+  </div>
+</div>
+    
+      
+
+    </div>
+
+    <button
+      className="addprop-btn"
+      onClick={handleSubmit}
+    >
+      Add Property
+    </button>
+
+  </div>
+
+</div>
 
       {/* TOAST */}
       {toast && <div className="toast">{toast}</div>}

@@ -69,3 +69,86 @@
 .single-card .mylisting-image {
   height: 450px;
 }
+/* BASE TOAST */
+.list-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 13px;
+  z-index: 9999;
+  min-width: 260px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* SUCCESS TOAST (auto fade) */
+.list-toast-success {
+  animation: fadeToast 3s ease forwards;
+}
+
+/* CONFIRM TOAST (NO FADE, STABLE MODAL-LIKE TOAST) */
+.list-toast-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  animation: none;
+}
+
+/* FADE ANIMATION ONLY FOR SUCCESS */
+@keyframes fadeToast {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+}
+
+/* ACTION BUTTONS (CONFIRM TOAST) */
+.list-toast-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.list-toast-actions button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family:inherit;
+  transition: 0.2s ease;
+}
+
+.list-toast-actions button:first-child {
+  background: #e74c3c;
+  color: white;
+}
+
+.list-toast-actions button:first-child:hover {
+  background: #c0392b;
+}
+
+.list-toast-actions button:last-child {
+  background: #444;
+  color: white;
+}
+
+.list-toast-actions button:last-child:hover {
+  background: #666;
+}

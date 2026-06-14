@@ -127,7 +127,7 @@ const handleSubmit = (e) => {
           </div>
 
           <div className="pc-price">
-            ₹ {property.price.toLocaleString()}
+            $ {property.price.toLocaleString()}
           </div>
         </div>
 

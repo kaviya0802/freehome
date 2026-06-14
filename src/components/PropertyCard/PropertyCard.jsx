@@ -138,7 +138,7 @@ function PropertyCard({ property }) {
       <div className="property-info">
         <h3>{property.title}</h3>
         <p>{property.location}</p>
-        <span>₹{property.price.toLocaleString()}</span>
+        <span>${property.price.toLocaleString()}</span>
       </div>
 
       {/* 🔔 TOAST */}

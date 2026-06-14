@@ -1,25 +1,223 @@
-.error {
-  color: red;
-  font-size: 12px;
-  margin-top: 4px;
+/* ===== PAGE ===== */
+
+.addprop-page {
+  min-height: 100vh;
+  background: #f9f9f9;
+  padding: 30px;
+  font-family: inherit;
 }
+.addprop-hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.addprop-hero h1 {
+  font-size: 34px;
+  color: #111;
+  font-weight: 700;
+}
+
+.addprop-hero p {
+  color: #3b82f6;
+  margin-top: 6px;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+/* ===== CARD ===== */
+
+.addprop-card {
+  background: #f9f9f9;
+  border-radius: 20px;
+  padding: 30px;
+ 
+
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* ===== TITLE ===== */
+
+.addprop-title {
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: #0f172a;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* ===== MAIN GRID ===== */
+
+.addprop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+}
+
+.addprop-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.addprop-full {
+  grid-column: 1 / -1;
+}
+
+
+/* ===== DYNAMIC FIELDS ===== */
+
+.dynamic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+  width: 100%;
+}
+
+.addprop-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ===== INPUTS ===== */
+
+.addprop-grid input,
+.addprop-grid select,
+.addprop-grid textarea,
+.dynamic-grid input,
+.dynamic-grid select,
+.dynamic-grid textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dbe3ee;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.addprop-grid input:focus,
+.addprop-grid select:focus,
+.addprop-grid textarea:focus,
+.dynamic-grid input:focus,
+.dynamic-grid select:focus,
+.dynamic-grid textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.addprop-grid textarea,
+.dynamic-grid textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ===== ERRORS ===== */
+
+.addprop-error,
+.error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+/* ===== FILE LIST ===== */
+
+.addprop-file-list {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #dbe3ee;
+}
+
+.addprop-file-list p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #334155;
+}
+
+/* ===== BUTTON ===== */
+
+.addprop-btn {
+  width: 220px;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 10px;
+
+  padding: 12px 20px;
+
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  display: block;
+  margin: 25px auto 0;
+}
+
+.addprop-btn:hover {
+  background: #3b82f6;
+}
+
+/* ===== TOAST ===== */
 
 .toast {
   position: fixed;
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
+
   background: #111;
   color: #fff;
+
   padding: 10px 16px;
   border-radius: 25px;
+
   font-size: 13px;
   z-index: 9999;
+
   animation: fadeToast 5s ease;
 }
 
 @keyframes fadeToast {
-  0% { opacity: 0; transform: translate(-50%, 10px); }
-  10% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, 10px); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .addprop-page {
+    padding: 20px;
+  }
+
+  .addprop-card {
+    padding: 20px;
+  }
+
+  .addprop-grid,
+  .dynamic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .addprop-btn {
+    width: 100%;
+  }
 }

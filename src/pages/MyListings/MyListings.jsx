@@ -8,6 +8,11 @@ import "./MyListings.css";
 function MyListings() {
   const [properties, setProperties] = useState([]);
 
+  // TOAST STATES
+  const [toast, setToast] = useState("");
+  const [confirmToast, setConfirmToast] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
   useEffect(() => {
     loadProperties();
   }, []);
@@ -19,23 +24,40 @@ function MyListings() {
     setProperties(storedProperties);
   };
 
-  const deleteProperty = (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this property?"
-    );
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => setToast(""), 5000);
+  };
 
-    if (!confirmDelete) return;
+  // STEP 1: open confirm toast
+  const requestDelete = (id) => {
+    setDeleteId(id);
+    setConfirmToast(true);
+  };
 
-    const updatedProperties = properties.filter(
-      (property) => property.id !== id
+  // STEP 2: YES → delete
+  const confirmDelete = () => {
+    const updated = properties.filter(
+      (p) => p.id !== deleteId
     );
 
     localStorage.setItem(
       "agentProperties",
-      JSON.stringify(updatedProperties)
+      JSON.stringify(updated)
     );
 
-    setProperties(updatedProperties);
+    setProperties(updated);
+
+    setConfirmToast(false);
+    setDeleteId(null);
+
+    showToast("Property deleted successfully ");
+  };
+
+  // STEP 3: NO → close only
+  const cancelDelete = () => {
+    setConfirmToast(false);
+    setDeleteId(null);
   };
 
   return (
@@ -55,20 +77,35 @@ function MyListings() {
           </div>
         ) : (
           <div
-  className={`property-grid ${
-    properties.length === 1 ? "single-card" : ""
-  }`}
->
+            className={`property-grid ${
+              properties.length === 1 ? "single-card" : ""
+            }`}
+          >
             {properties.map((property) => (
               <MyListingCard
                 key={property.id}
                 property={property}
-                onDelete={deleteProperty}
+                onDelete={requestDelete}   // 👈 IMPORTANT CHANGE
               />
             ))}
           </div>
         )}
       </div>
+
+      {/* SUCCESS TOAST */}
+      {toast && <div className="list-toast list-toast-success">{toast}</div>}
+
+      {/* CONFIRM TOAST */}
+      {confirmToast && (
+        <div className="list-toast list-toast-confirm">
+          <p>Are you sure you want to delete this property?</p>
+
+          <div className="list-toast-actions">
+            <button onClick={confirmDelete}>Yes</button>
+            <button onClick={cancelDelete}>No</button>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </>
