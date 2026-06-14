@@ -259,9 +259,11 @@ if (!user.specialization) {
     newPassword: ""
   }));
 };
-
-   const handleLogout = () => {
+    const handleLogout = () => {
   localStorage.removeItem("currentUser");
+
+  // 🔥 ADD THIS
+  window.dispatchEvent(new Event("storage"));
 
   showSuccess("Logged out successfully");
 
@@ -269,6 +271,7 @@ if (!user.specialization) {
     navigate("/");
   }, 1200);
 };
+   
 return (
    <>
     <Navbar />

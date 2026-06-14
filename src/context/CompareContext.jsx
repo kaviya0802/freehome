@@ -3,25 +3,52 @@ import { createContext, useContext, useEffect, useState } from "react";
 const CompareContext = createContext();
 
 export function CompareProvider({ children }) {
+  // ✅ reactive user state
+  const [currentUser, setCurrentUser] = useState(() =>
+    JSON.parse(localStorage.getItem("currentUser"))
+  );
 
-  const [selected, setSelected] = useState(() => {
-    const saved = localStorage.getItem("compareProperties");
+  const COMPARE_KEY = currentUser?.id
+    ? `compareProperties_${currentUser.id}`
+    : null;
 
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [selected, setSelected] = useState([]);
 
+  // 🔥 1. Load compare list whenever user changes
   useEffect(() => {
-    localStorage.setItem(
-      "compareProperties",
-      JSON.stringify(selected)
-    );
-  }, [selected]);
+    if (!COMPARE_KEY) {
+      setSelected([]);
+      return;
+    }
 
+    const saved = localStorage.getItem(COMPARE_KEY);
+    setSelected(saved ? JSON.parse(saved) : []);
+  }, [COMPARE_KEY]);
+
+  // 🔥 2. Listen for login/logout changes (same tab + other tabs)
+  useEffect(() => {
+    const syncUser = () => {
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      setCurrentUser(user);
+    };
+
+    window.addEventListener("storage", syncUser);
+
+    return () => {
+      window.removeEventListener("storage", syncUser);
+    };
+  }, []);
+
+  // 🔥 3. Save compare list per user
+  useEffect(() => {
+    if (!COMPARE_KEY) return;
+
+    localStorage.setItem(COMPARE_KEY, JSON.stringify(selected));
+  }, [selected, COMPARE_KEY]);
+
+  // 🔥 4. Toggle property
   const toggleProperty = (property) => {
-
-    const exists = selected.find(
-      (p) => p.id === property.id
-    );
+    const exists = selected.find((p) => p.id === property.id);
 
     if (exists) {
       setSelected((prev) =>
@@ -30,18 +57,19 @@ export function CompareProvider({ children }) {
       return true;
     }
 
-    if (selected.length >= 3) {
-      return false;
-    }
+    if (selected.length >= 3) return false;
 
     setSelected((prev) => [...prev, property]);
-
     return true;
   };
 
+  // 🔥 5. Clear compare (safe per user)
   const clearCompare = () => {
     setSelected([]);
-    localStorage.removeItem("compareProperties");
+
+    if (COMPARE_KEY) {
+      localStorage.removeItem(COMPARE_KEY);
+    }
   };
 
   return (
@@ -57,5 +85,4 @@ export function CompareProvider({ children }) {
   );
 }
 
-export const useCompare = () =>
-  useContext(CompareContext);
+export const useCompare = () => useContext(CompareContext);

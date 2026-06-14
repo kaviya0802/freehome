@@ -1,8 +1,15 @@
-const WISHLIST_KEY = "freehome_wishlist";
+const getWishlistKey = () => {
+  const currentUser =
+    JSON.parse(localStorage.getItem("currentUser"));
+
+  return `freehome_wishlist_${currentUser.id}`;
+};
 
 // Get wishlist
 export const getWishlist = () => {
-  return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+  return JSON.parse(
+  localStorage.getItem(getWishlistKey())
+) || [];
 };
 
 // Add property
@@ -13,7 +20,10 @@ export const addToWishlist = (property) => {
   if (exists) return list;
 
   const updated = [...list, property];
-  localStorage.setItem(WISHLIST_KEY, JSON.stringify(updated));
+  localStorage.setItem(
+  getWishlistKey(),
+  JSON.stringify(updated)
+);
   return updated;
 };
 
@@ -21,7 +31,10 @@ export const addToWishlist = (property) => {
 export const removeFromWishlist = (id) => {
   const list = getWishlist();
   const updated = list.filter((item) => item.id !== id);
-  localStorage.setItem(WISHLIST_KEY, JSON.stringify(updated));
+  localStorage.setItem(
+  getWishlistKey(),
+  JSON.stringify(updated)
+);
   return updated;
 };
 

@@ -64,7 +64,8 @@
    NO RESULTS
 ========================= */
 
-.no-results {
+.wishlist-no-results {
+  margin-top:100px;
   text-align: center;
   grid-column: 1 / -1;
 }

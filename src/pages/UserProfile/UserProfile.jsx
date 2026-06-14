@@ -259,8 +259,11 @@ if (user.state && !/^[A-Za-z\s]+$/.test(user.state))
     }));
   };
 
-  const handleLogout = () => {
+   const handleLogout = () => {
   localStorage.removeItem("currentUser");
+
+  // 🔥 ADD THIS
+  window.dispatchEvent(new Event("storage"));
 
   showSuccess("Logged out successfully");
 

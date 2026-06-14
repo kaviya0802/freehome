@@ -61,6 +61,7 @@ function Login() {
 
   // SUCCESS LOGIN
   localStorage.setItem("currentUser", JSON.stringify(user));
+  window.dispatchEvent(new Event("storage"));
 
   if (user.role === "buyer") {
     navigate("/home");

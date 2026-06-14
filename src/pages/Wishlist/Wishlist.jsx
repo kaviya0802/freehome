@@ -33,7 +33,7 @@ function Wishlist() {
               <PropertyCard key={property.id} property={property} />
             ))
           ) : (
-            <div className="no-results">
+            <div className="wishlist-no-results">
               <h2>No Wishlist Properties Yet</h2>
             </div>
           )}

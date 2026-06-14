@@ -12,18 +12,28 @@ function MyListings() {
   const [toast, setToast] = useState("");
   const [confirmToast, setConfirmToast] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [currentUser, setCurrentUser] = useState(() =>
+  JSON.parse(localStorage.getItem("currentUser"))
+);
+useEffect(() => {
+  loadProperties();
+}, []);
+const loadProperties = () => {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const all = JSON.parse(localStorage.getItem("agentProperties")) || [];
 
-  useEffect(() => {
-    loadProperties();
-  }, []);
+  console.log("CURRENT USER:", user);
+  console.log("ALL PROPERTIES:", all);
 
-  const loadProperties = () => {
-    const storedProperties =
-      JSON.parse(localStorage.getItem("agentProperties")) || [];
+  const my = all.filter((p) => {
+    console.log("CHECK:", p.agentId, user?.id);
+    return String(p.agentId) === String(user?.id);
+  });
 
-    setProperties(storedProperties);
-  };
+  console.log("MY PROPERTIES:", my);
 
+  setProperties(my);
+};
   const showToast = (message) => {
     setToast(message);
     setTimeout(() => setToast(""), 5000);
@@ -36,24 +46,26 @@ function MyListings() {
   };
 
   // STEP 2: YES → delete
-  const confirmDelete = () => {
-    const updated = properties.filter(
-      (p) => p.id !== deleteId
-    );
+   const confirmDelete = () => {
+  const all = JSON.parse(localStorage.getItem("agentProperties")) || [];
 
-    localStorage.setItem(
-      "agentProperties",
-      JSON.stringify(updated)
-    );
+  const updated = all.filter((p) => p.id !== deleteId);
 
-    setProperties(updated);
+  localStorage.setItem("agentProperties", JSON.stringify(updated));
 
-    setConfirmToast(false);
-    setDeleteId(null);
+  const user = JSON.parse(localStorage.getItem("currentUser"));
 
-    showToast("Property deleted successfully ");
-  };
+  const myProperties = updated.filter(
+    (p) => String(p.agentId) === String(user.id)
+  );
 
+  setProperties(myProperties);
+
+  setConfirmToast(false);
+  setDeleteId(null);
+
+  showToast("Property deleted successfully ");
+};
   // STEP 3: NO → close only
   const cancelDelete = () => {
     setConfirmToast(false);

@@ -310,11 +310,13 @@ const convertFilesToBase64 = async (files) => {
   if (!validate()) return;
 
   const imageBase64 = await convertFilesToBase64(property.images);
-
+  const currentUser =
+  JSON.parse(localStorage.getItem("currentUser"));
   const newProperty = {
   ...property,
   id: Date.now(),
   source: "agent",
+  agentId: String(currentUser.id), // important
   images: imageBase64,
 };
 

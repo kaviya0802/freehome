@@ -132,6 +132,7 @@ if (Object.keys(newErrors).length > 0) {
       "currentUser",
       JSON.stringify(newUser)
     );
+    window.dispatchEvent(new Event("storage"));
 
     setSuccess("Registration successful!");
 
