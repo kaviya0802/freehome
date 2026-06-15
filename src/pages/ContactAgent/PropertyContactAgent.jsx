@@ -9,15 +9,25 @@ function PropertyContactAgent() {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
 
-useEffect(() => {
+ useEffect(() => {
   const allProperties =
     JSON.parse(localStorage.getItem("agentProperties")) || [];
 
   const found = allProperties.find(
     (p) => String(p.id) === String(id)
   );
+  
+  console.log("FOUND PROPERTY:", found);
+  console.log("property.mode =", found?.mode);
+  console.log("propertyDetails.mode =", found?.propertyDetails?.mode);
 
-  setProperty(found);
+  if (found) {
+    // 🔥 FORCE CORRECT MODE HERE
+    setProperty({
+      ...found,
+      mode: found.mode || "buy", // fallback only for broken old data
+    });
+  }
 }, [id]);
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
@@ -80,7 +90,38 @@ const handleSubmit = (e) => {
   if (Object.keys(validationErrors).length > 0) return;
 
   setErrors({});
+  const lead = {
+  id: Date.now(),
 
+  // Property Info
+  propertyId: property.id,
+  propertyTitle: property.title,
+  propertyType: property.type,
+  propertyMode: property.propertyDetails?.mode,
+  propertyLocation: property.location,
+  propertyPrice: property.price,
+  propertyImage: property.images?.[0] || "",
+
+  // Agent Info
+  agentId: property.agentId,
+
+  // Buyer Info
+  name: form.name,
+  email: form.email,
+  phone: form.phone,
+  contactMode: form.contactMode,
+  visitDate: form.visitDate,
+  message: form.message,
+
+  createdAt: new Date().toLocaleString(),
+};
+  const existingLeads =
+  JSON.parse(localStorage.getItem("agentLeads")) || [];
+
+localStorage.setItem(
+  "agentLeads",
+  JSON.stringify([...existingLeads, lead])
+);
   // ✅ Toast instead of alert
   triggerToast("Booking Confirmed! Our agent will contact you soon.");
 
@@ -93,6 +134,7 @@ const handleSubmit = (e) => {
     message: ""
   });
 };
+  
   const triggerToast = (message) => {
   setToastMessage(message);
   setShowToast(true);
@@ -119,9 +161,20 @@ const handleSubmit = (e) => {
           <div>
             <h2>
               {property.title}
-              <span className={`pc-badge ${property.mode}`}>
-                {property.mode === "rent" ? "For Rent" : "For Buy"}
-              </span>
+              <span className="pc-type-badge">
+    {property.type}
+  </span>
+              <span
+  className={`pc-badge ${
+    property.propertyDetails?.mode?.toLowerCase()
+  }`}
+>
+  {property.propertyDetails?.mode === "Rent"
+    ? "For Rent"
+    : "For Buy"}
+</span>
+         
+               
             </h2>
             <p>{property.location}</p>
           </div>

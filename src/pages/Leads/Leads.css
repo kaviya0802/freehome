@@ -1,0 +1,319 @@
+/* =========================
+   AGENT LEADS PAGE
+========================= */
+
+.agent-lead-page {
+  background: #f9f9f9;
+  max-width: 1400px;
+  margin: auto;
+  padding: 40px 20px;
+  font-family: inherit;
+   min-height: calc(100vh - 180px);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.agent-lead-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.agent-lead-header h1 {
+  font-size: 32px;
+  color: #111;
+  font-weight: 700;
+}
+
+.agent-lead-header p {
+  color: #3b82f6;
+  margin-top: 6px;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+.agent-lead-image-wrapper {
+  position: relative;
+}
+
+.agent-lead-delete-btn {
+    position: absolute;
+  top: 12px;
+  right: 12px;
+
+  border: none;
+  border-radius: 30px;
+
+  padding: 8px 14px;
+
+  background: black;
+  color: #d32f2f;
+
+  font-size: 13px;
+  font-weight: 600;
+  font-family:inherit;
+
+  cursor: pointer;
+  z-index: 5;
+
+  transition: 0.2s ease;
+}
+
+.agent-lead-delete-btn:hover {
+     background: #d32f2f;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.agent-lead-empty {
+  background: #f9f9f9;
+  padding: 50px;
+  text-align: center;
+  border-radius: 14px;
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+  margin-top: 100px;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.agent-lead-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.agent-lead-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #ececec;
+  transition: 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-lead-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+/* SINGLE LEAD CARD */
+.agent-lead-single {
+  display: flex;
+  justify-content: center;
+}
+
+.agent-lead-single .agent-lead-card {
+  width: 1200px;
+  max-width: 100%;
+}
+
+.agent-lead-single .agent-lead-image {
+  height: 450px;
+}
+/* =========================
+   IMAGE
+========================= */
+
+.agent-lead-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.agent-lead-content {
+  padding: 18px;
+}
+
+.agent-lead-content h2 {
+  font-size: 22px;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.agent-lead-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.agent-lead-type {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.agent-lead-mode {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.agent-lead-mode.rent {
+  background: #444;
+}
+
+.agent-lead-mode.buy {
+  background: #111;
+}
+
+/* =========================
+   LOCATION
+========================= */
+
+.agent-lead-location {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   PRICE
+========================= */
+
+.agent-lead-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #16a34a;
+  margin-bottom: 18px;
+}
+
+/* =========================
+   DETAILS
+========================= */
+
+.agent-lead-details {
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+}
+
+.agent-lead-details p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.agent-lead-details strong {
+  color: #111;
+}
+
+/* =========================
+   LEADS TOAST
+========================= */
+
+.lead-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 13px;
+  z-index: 9999;
+  min-width: 260px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* SUCCESS TOAST (auto fade) */
+.lead-toast-success {
+  min-width: 180px;
+  border-radius: 25px;
+  animation: fadeToast 3s ease forwards;
+}
+
+/* CONFIRM TOAST (NO FADE, STABLE MODAL-LIKE TOAST) */
+.lead-toast-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  animation: none;
+}
+
+/* FADE ANIMATION ONLY FOR SUCCESS */
+@keyframes fadeToast {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+}
+
+/* ACTION BUTTONS (CONFIRM TOAST) */
+.lead-toast-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.lead-toast-actions button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family:inherit;
+  transition: 0.2s ease;
+}
+
+.lead-toast-actions button:first-child {
+  background: #e74c3c;
+  color: white;
+}
+
+.lead-toast-actions button:first-child:hover {
+  background: #c0392b;
+}
+
+.lead-toast-actions button:last-child {
+  background: #444;
+  color: white;
+}
+
+.lead-toast-actions button:last-child:hover {
+  background: #666;
+}

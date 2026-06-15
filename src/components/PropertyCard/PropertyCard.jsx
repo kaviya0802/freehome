@@ -11,7 +11,7 @@ import {
 
 import { useCompare } from "../../context/CompareContext";
 
-function PropertyCard({ property }) {
+function PropertyCard({ property, onWishlistRemove }) {
   const navigate = useNavigate();
 
   const { selected, toggleProperty } = useCompare();
@@ -32,10 +32,16 @@ function PropertyCard({ property }) {
   // ❤️ WISHLIST TOGGLE
   const triggerWishlist = () => {
     if (liked) {
-      removeFromWishlist(property.id);
-      setLiked(false);
-      setToast("Removed from wishlist");
-    } else {
+  removeFromWishlist(property.id);
+  setLiked(false);
+
+  if (onWishlistRemove) {
+    onWishlistRemove(property.id);
+  }
+
+  setToast("Removed from wishlist");
+}
+    else {
       addToWishlist(property);
       setLiked(true);
       setAnimate(true);

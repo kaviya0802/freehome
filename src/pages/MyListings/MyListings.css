@@ -87,6 +87,8 @@
 
 /* SUCCESS TOAST (auto fade) */
 .list-toast-success {
+   min-width: 180px;
+  border-radius: 25px;
   animation: fadeToast 3s ease forwards;
 }
 

@@ -7,7 +7,11 @@ import "./Wishlist.css";
 
 function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
-
+  const handleWishlistRemove = (propertyId) => {
+  setWishlist((prev) =>
+    prev.filter((item) => item.id !== propertyId)
+  );
+};
   useEffect(() => {
     setWishlist(getWishlist());
   }, []);
@@ -29,9 +33,13 @@ function Wishlist() {
           }`}
         >
           {wishlist.length > 0 ? (
-            wishlist.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))
+           wishlist.map((property) => (
+  <PropertyCard
+    key={property.id}
+    property={property}
+    onWishlistRemove={handleWishlistRemove}
+  />
+))
           ) : (
             <div className="wishlist-no-results">
               <h2>No Wishlist Properties Yet</h2>

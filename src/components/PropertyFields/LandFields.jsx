@@ -68,8 +68,8 @@ function LandFields({ details, handleChange, errors = {} }) {
           onChange={handleChange}
         >
           <option value="">Mode</option>
-          <option value="buy">Buy</option>
-          <option value="rent">Rent</option>
+          <option value="Buy">Buy</option>
+          <option value="Rent">Rent</option>
         </select>
       </FieldWrapper>
 

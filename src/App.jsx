@@ -24,6 +24,7 @@ import MatchedAgents from "./pages/matchedagents/MatchedAgents";
 import MyListings from "./pages/MyListings/MyListings";
 import AddProperty from "./pages/AddProperty/AddProperty";
 import MyPropertyDetails from "./pages/MyPropertyDetails/MyPropertyDetails";
+import Leads from "./pages/Leads/Leads";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <Route path="/agent/listings" element={<MyListings />} />
         <Route path="/agent/add-property" element={<AddProperty />} />
         <Route path="/my-property/:id" element={<MyPropertyDetails />}/>
+        <Route path="/agent/leads" element={<Leads />}/>
       </Routes>
     </CompareProvider>
   );

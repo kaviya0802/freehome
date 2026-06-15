@@ -50,14 +50,28 @@
 /* BADGE */
 .pc-badge {
   margin-left: 10px;
-  padding: 4px 10px;
+  padding: 6px 12px;
   font-size: 12px;
   border-radius: 20px;
   color: white;
+  vertical-align: middle;
 }
 
 .pc-badge.rent { background: #444; }
 .pc-badge.buy { background: #111; }
+
+.pc-type-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #eef2ff;
+  color: #4338ca;
+  vertical-align: middle;
+}
+
 
 /* PRICE */
 .pc-price {
