@@ -103,34 +103,26 @@ function Properties() {
     const matchBedrooms =
       !filters.bedrooms ||
       (filters.bedrooms === "4+"
-        ? Number(property.bedrooms) >= 4
-        : Number(property.bedrooms) === Number(filters.bedrooms));
+        ? Number(property.propertyDetails?.bedrooms) >= 4
+        : Number(property.propertyDetails?.bedrooms)=== Number(filters.bedrooms));
 
     const matchBathrooms =
       !filters.bathrooms ||
       (filters.bathrooms === "3+"
-        ? Number(property.bathrooms) >= 3
-        : Number(property.bathrooms) === Number(filters.bathrooms));
-
-    const age =
-      new Date().getFullYear() -
-      (property.yearBuilt || new Date().getFullYear());
+        ? Number(property.propertyDetails?.bathrooms) >= 3
+        : Number(property.propertyDetails?.bathrooms) === Number(filters.bathrooms));
 
     const matchPropertyAge =
-      !filters.propertyAge ||
-      (filters.propertyAge === "0-5" && age <= 5) ||
-      (filters.propertyAge === "5-10" && age > 5 && age <= 10) ||
-      (filters.propertyAge === "10-20" && age > 10 && age <= 20) ||
-      (filters.propertyAge === "20+" && age > 20);
-
+  !filters.propertyAge ||
+  property.propertyDetails?.propertyAge === filters.propertyAge;
     const matchFurnishing =
       !filters.furnishing ||
-      property.furnishing?.toLowerCase() === filters.furnishing.toLowerCase();
+      property.propertyDetails?.furnishing?.toLowerCase() === filters.furnishing.toLowerCase();
 
     const matchParking =
       !filters.parking ||
       (() => {
-        const p = Number(property.parking);
+        const p = Number(property.propertyDetails?.parking);
 
         if (filters.parking === "3+") return p >= 3;
         if (filters.parking === "3") return p === 3;
@@ -141,22 +133,29 @@ function Properties() {
       })();
 
     const price = Number(property.price);
+     const matchBudget =
+  !filters.budget ||
+  (() => {
+    if (filters.budget === "pg1")
+      return price >= 0 && price <= 5000;
 
-    const matchBudget =
-      !filters.budget ||
-      (() => {
-        if (filters.budget === "200k")
-          return price >= 200000 && price <= 500000;
+    if (filters.budget === "pg2")
+      return price > 5000 && price <= 10000;
 
-        if (filters.budget === "500k")
-          return price > 500000 && price <= 1000000;
+    if (filters.budget === "pg3")
+      return price > 10000;
 
-        if (filters.budget === "1m")
-          return price > 1000000;
+    if (filters.budget === "200k")
+      return price >= 200000 && price <= 500000;
 
-        return true;
-      })();
+    if (filters.budget === "500k")
+      return price > 500000 && price <= 1000000;
 
+    if (filters.budget === "1m")
+      return price > 1000000;
+
+    return true;
+  })();
     return (
       matchType &&
       matchMode &&

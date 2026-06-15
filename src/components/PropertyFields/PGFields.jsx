@@ -27,8 +27,8 @@ function PGFields({ details, handleChange, errors = {} }) {
           onChange={handleChange}
         >
           <option value="">WiFi</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
       </FieldWrapper>
 
