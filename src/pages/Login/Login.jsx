@@ -90,10 +90,10 @@ function Login() {
           </p>
 
           <div className="rg-features">
-            <div>Buyers: Save & compare properties</div>
-            <div>Buyers: Track shortlisted homes</div>
-            <div>Agents: Manage listings</div>
-            <div>Agents: Handle enquiries</div>
+            <div>Save & compare properties</div>
+            <div>Track shortlisted homes</div>
+            <div>Manage listings</div>
+            <div>Handle enquiries</div>
           </div>
 
           <div className="rg-status">

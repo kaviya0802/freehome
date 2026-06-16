@@ -12,7 +12,7 @@ function About() {
         <div className="about-hero">
           <h1>About FreeHome</h1>
           <p>
-            A MODERN REAL ESTATE PLATFORM HELPING PEOPLE TO FIND HOME ACROSS AUSTRALIA WITH TRUST AND SIMPLICITY
+            A MODERN REAL ESTATE PLATFORM HELPING PEOPLE TO FIND HOME ACROSS AUSTRALIA
           </p>
         </div>
 

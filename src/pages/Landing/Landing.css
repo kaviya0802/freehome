@@ -344,4 +344,252 @@
 .lp-wrapper footer {
   margin-top: 40px;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
 
+  .lp-topbar {
+    padding: 12px 24px;
+    gap: 30px;
+  }
+
+  .lp-hero {
+    min-height: 80vh;
+    padding: 50px 24px;
+  }
+
+  .lp-hero-content h1 {
+    font-size: 48px;
+  }
+
+  .lp-hero-content h2 {
+    font-size: 18px;
+    max-width: 650px;
+  }
+
+  .lp-stats {
+    gap: 50px;
+  }
+
+  .lp-stats h2 {
+    font-size: 34px;
+  }
+
+  .lp-info,
+  .lp-features,
+  .lp-role {
+    padding: 70px 6%;
+  }
+
+  .lp-info h2,
+  .lp-features h2,
+  .lp-role h2 {
+    font-size: 34px;
+  }
+
+  .lp-grid,
+  .lp-role-grid {
+    gap: 20px;
+  }
+}
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .lp-topbar {
+    padding: 12px 18px;
+  }
+
+  .lp-topbar-tagline {
+    display: none;
+  }
+
+  .lp-logo-text .brand-name {
+    font-size: 16px;
+  }
+
+  .lp-logo-text .brand-tag {
+    font-size: 10px;
+  }
+
+  .lp-hero {
+    min-height: auto;
+    padding: 60px 20px;
+  }
+
+  .lp-badge {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+
+  .lp-hero-content h1 {
+    font-size: 36px;
+    line-height: 1.2;
+  }
+
+  .lp-hero-content h2 {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .lp-register-btn {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .lp-stats {
+    margin-top: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .lp-stats > div {
+    min-width: 140px;
+  }
+
+  .lp-stats h2 {
+    font-size: 28px;
+  }
+
+  .lp-info,
+  .lp-features,
+  .lp-role {
+    padding: 60px 20px;
+  }
+
+  .lp-info h2,
+  .lp-features h2,
+  .lp-role h2 {
+    font-size: 28px;
+  }
+
+  .lp-info p {
+    font-size: 15px;
+  }
+
+  .lp-grid,
+  .lp-role-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .lp-box,
+  .lp-role-card {
+    padding: 22px;
+  }
+
+  .lp-tags span {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .lp-topbar {
+    padding: 10px 12px;
+  }
+
+  .lp-topbar-tagline {
+    display: none;
+  }
+
+  .lp-logo-icon {
+    font-size: 16px;
+    padding: 7px;
+  }
+
+  .lp-logo-text .brand-name {
+    font-size: 15px;
+  }
+
+  .lp-logo-text .brand-tag {
+    font-size: 9px;
+  }
+
+  .lp-hero {
+    min-height: auto;
+    padding: 50px 15px;
+  }
+
+  .lp-badge {
+    font-size: 11px;
+    padding: 7px 12px;
+  }
+
+  .lp-hero-content h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .lp-hero-content h2 {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .lp-register-btn {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  .lp-stats {
+    margin-top: 30px;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .lp-stats > div {
+    min-width: 120px;
+  }
+
+  .lp-stats h2 {
+    font-size: 24px;
+  }
+
+  .lp-stats p {
+    font-size: 13px;
+  }
+
+  .lp-info,
+  .lp-features,
+  .lp-role {
+    padding: 50px 15px;
+  }
+
+  .lp-info h2,
+  .lp-features h2,
+  .lp-role h2 {
+    font-size: 24px;
+  }
+
+  .lp-info p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .lp-grid,
+  .lp-role-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .lp-box,
+  .lp-role-card {
+    padding: 18px;
+  }
+
+  .lp-tags {
+    gap: 8px;
+  }
+
+  .lp-tags span {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}

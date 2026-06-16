@@ -86,3 +86,149 @@
 .wishlist-grid .property-card {
   justify-self: center;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (max-width: 1024px) {
+
+  .wishlist-container {
+    padding: 30px 20px;
+  }
+
+  .wishlist-header h1 {
+    font-size: 30px;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .wishlist-grid .property-card {
+    width: 100%;
+  }
+
+    .wishlist-no-results {
+    margin-top: 80px;
+    padding: 0 30px;
+  }
+
+  .wishlist-no-results h2
+   {
+    font-size: 24px;
+  }
+
+  
+}
+
+
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (max-width: 768px) {
+
+  .wishlist-container {
+    padding: 25px 15px;
+  }
+
+  .wishlist-header {
+    margin-bottom: 25px;
+  }
+
+  .wishlist-header h1 {
+    font-size: 28px;
+  }
+
+  .wishlist-h2 {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .wishlist-header p {
+    font-size: 14px;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .wishlist-grid .property-card {
+    width: 100%;
+  }
+
+  .wishlist-grid .property-card img {
+    height: 180px;
+  }
+
+  .wishlist-no-results {
+    margin-top: 60px;
+    padding: 0 20px;
+  }
+
+  .wishlist-no-results h2{
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  
+}
+
+
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .wishlist-container {
+    padding: 20px 12px;
+  }
+
+  .wishlist-header {
+    margin-bottom: 20px;
+  }
+
+  .wishlist-header h1 {
+    font-size: 24px;
+  }
+
+  .wishlist-h2 {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .wishlist-header p {
+    font-size: 13px;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .wishlist-grid .property-card {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .wishlist-grid .property-card img {
+    height: 200px;
+  }
+
+  .wishlist-grid.single-card .property-card img {
+    height: 220px;
+  }
+
+  .wishlist-no-results {
+    margin-top: 50px;
+    padding: 0 12px;
+  }
+
+  .wishlist-no-results h2,
+  .wishlist-no-results h1 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  
+}

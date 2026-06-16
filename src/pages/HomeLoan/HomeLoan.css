@@ -169,4 +169,175 @@
   -moz-appearance: textfield;
   appearance: textfield;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (max-width: 1024px) {
 
+  .hl-container {
+    padding: 40px 20px;
+  }
+
+  .hl-heading {
+    font-size: 30px;
+  }
+
+  .hl-span {
+    margin-left: 0;
+    display: block;
+    text-align: center;
+  }
+
+  .hl-shell {
+    gap: 20px;
+  }
+
+  .hl-left h2 {
+    font-size: 28px;
+  }
+
+  .hl-intro {
+    font-size: 14px;
+  }
+
+  .hl-form {
+    margin-top: 25px;
+  }
+
+  .hl-form h3 {
+    font-size: 22px;
+  }
+}
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (max-width: 768px) {
+
+  .hl-container {
+    padding: 35px 16px;
+  }
+
+  .hl-heading {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .hl-span {
+    margin-left: 0;
+    display: block;
+    text-align: center;
+  }
+
+  .hl-shell {
+    margin-top:10px;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .hl-left {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .hl-left h2 {
+    font-size: 26px;
+  }
+
+  .hl-intro {
+    font-size: 14px;
+  }
+
+  .hl-item h4 {
+    font-size: 15px;
+  }
+
+  .hl-item p {
+    font-size: 13px;
+  }
+
+  .hl-form {
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .hl-form h3 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .hl-form input,
+  .hl-form select {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}
+/* ==========================================
+   MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .hl-container {
+    padding: 25px 12px;
+  }
+
+  .hl-heading {
+    font-size: 24px;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .hl-span {
+    margin-left: 0;
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .hl-shell {
+    margin-top:10px;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .hl-left {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .hl-left h2 {
+    font-size: 22px;
+  }
+
+  .hl-intro {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .hl-item h4 {
+    font-size: 14px;
+  }
+
+  .hl-item p {
+    font-size: 12px;
+  }
+
+  .hl-form {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .hl-form h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .hl-form input,
+  .hl-form select {
+    font-size: 12px;
+    padding: 9px 10px;
+  }
+}

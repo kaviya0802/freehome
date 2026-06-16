@@ -14,7 +14,7 @@ function Navbar() {
 
   // ✅ single role state
   const [role, setRole] = useState("guest");
-
+  const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
   // ✅ update role on every route change (IMPORTANT FIX)
@@ -64,7 +64,6 @@ function Navbar() {
                   <Link to="/properties">All Properties</Link>
                   <Link to="/properties?mode=buy">For Sale</Link>
                   <Link to="/properties?mode=rent">For Rent</Link>
-                  <Link to="/properties?type=PG Hostel">PG Hostel</Link>
                 </div>
               </li>
 
@@ -128,8 +127,55 @@ function Navbar() {
             {role === "agent" ? "Profile" : "Profile"}
           </span>
         </Link>
+      <button
+  className="mobile-menu-btn"
+  onClick={() => setMobileOpen(!mobileOpen)}
+>
+  ☰
+</button>
 
       </div>
+{mobileOpen && (
+  <div className="mobile-menu">
+
+    <Link to={role === "agent" ? "/agent-dashboard" : "/home"}>
+  Home
+</Link>
+    {(role === "buyer" || role === "guest") && (
+      <>
+        <Link to="/properties">All Properties</Link>
+         <Link to="/properties?mode=buy">For Sale</Link>
+         <Link to="/properties?mode=rent">For Rent</Link>
+        <Link to="/contact-agent">Find Agent</Link>
+        <Link to="/home-loan">Home Loan Help</Link>
+        <Link to="/compare">Compare</Link>
+
+        <Link to="/wishlist">Wishlist</Link>
+      </>
+    )}
+
+    {role === "agent" && (
+      <>
+        <Link to="/agent/listings">My Listings</Link>
+        <Link to="/agent/add-property">Add Property</Link>
+        <Link to="/agent/leads">Leads</Link>
+      </>
+    )}
+
+    <Link to="/about">About Us</Link>
+    <Link to="/contact">Contact Us</Link>
+    <Link to="/faq">FAQ</Link>
+    <Link
+  to={
+    role === "agent"
+      ? "/agent-profile"
+      : "/user-profile"
+  }
+>
+  Profile
+</Link>
+  </div>
+)}
 
     </header>
   );

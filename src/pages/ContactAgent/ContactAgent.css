@@ -151,4 +151,167 @@
   font-size: 12px;
   margin-top: -6px;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (max-width: 1024px) {
 
+  .ac-page {
+    padding: 40px 20px;
+  }
+
+  .ac-shell {
+    gap: 24px;
+  }
+
+  .ac-hero h1 {
+    font-size: 34px;
+  }
+
+  .ac-left h2 {
+    font-size: 26px;
+  }
+
+  .ac-right {
+    margin-top: 20px;
+  }
+  .ac-right {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.ac-right input,
+.ac-right select,
+.ac-right textarea,
+.ac-right button {
+  width: 100%;
+}
+}
+
+
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (max-width: 768px) {
+
+  .ac-page {
+    padding: 35px 16px;
+  }
+
+  .ac-shell {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .ac-hero {
+    margin-bottom: 25px;
+  }
+
+  .ac-hero h1 {
+    font-size: 30px;
+  }
+
+  .ac-hero p {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .ac-left {
+    padding: 0;
+    text-align: center;
+  }
+
+  .ac-left h2 {
+    font-size: 24px;
+  }
+
+  .ac-left p {
+    font-size: 14px;
+  }
+
+  .ac-list {
+    gap: 8px;
+  }
+
+  .ac-right {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.ac-right input,
+.ac-right select,
+.ac-right textarea,
+.ac-right button {
+  width: 100%;
+}
+
+}
+/* ==========================================
+   MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .ac-page {
+    padding: 25px 12px;
+  }
+
+  .ac-shell {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .ac-hero {
+    margin-bottom: 20px;
+  }
+
+  .ac-hero h1 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .ac-hero p {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .ac-left {
+    padding: 0;
+    text-align: center;
+  }
+
+  .ac-left h2 {
+    font-size: 22px;
+  }
+
+  .ac-left p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .ac-list div {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+
+  .ac-status {
+    font-size: 12px;
+  }
+  .ac-right {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.ac-right input,
+.ac-right select,
+.ac-right textarea,
+.ac-right button {
+  width: 100%;
+}
+  .ac-right button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

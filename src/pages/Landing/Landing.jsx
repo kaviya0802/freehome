@@ -106,15 +106,6 @@ function LandingPage() {
               and grow visibility through verified listings.
             </p>
           </div>
-
-          <div className="lp-box">
-            <h3>Smart Features</h3>
-            <p>
-              Home loan support, property alerts, wishlist system,
-              and intelligent recommendations for better decisions.
-            </p>
-          </div>
-
         </div>
 
       </section>

@@ -5,3 +5,39 @@
   padding: 40px;
   margin-top: 0px;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (max-width: 1024px) {
+
+  .footer {
+    padding: 30px 20px;
+    font-size: 14px;
+  }
+}
+
+
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (max-width: 768px) {
+
+  .footer {
+    padding: 25px 15px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .footer {
+    padding: 20px 12px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}

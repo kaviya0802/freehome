@@ -162,10 +162,7 @@ function Home() {
             <p>Work with experienced real-estate professionals.</p>
           </div>
 
-          <div className="why-card">
-            <h3>Best Prices</h3>
-            <p>Competitive pricing across Australia.</p>
-          </div>
+         
         </div>
       </section>
 
@@ -189,12 +186,7 @@ function Home() {
             <span>Property Investor</span>
           </div>
 
-          <div className="testimonial-card">
-            <div className="stars">★★★★★</div>
-            <p>Great platform for first-time buyers in Australia.</p>
-            <h4>Emma Wilson</h4>
-            <span>First-Time Buyer</span>
-          </div>
+          
 
         </div>
       </section>

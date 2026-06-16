@@ -475,30 +475,328 @@
   flex-direction: column;
   align-items: flex-start;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (max-width: 1024px) {
 
-/* =========================
-   MOBILE
-========================= */
+  .hero {
+    min-height: 80vh;
+    padding: 50px 25px;
+  }
 
-@media (max-width: 768px) {
   .hero h1 {
-    font-size: 42px;
+    font-size: 50px;
+  }
+
+  .hero p {
+    font-size: 18px;
   }
 
   .stats {
-    flex-direction: column;
-    gap: 25px;
+    gap: 50px;
   }
 
-  .category-grid {
-    grid-template-columns: 1fr; /* mobile fix */
+  .stats h2 {
+    font-size: 34px;
+  }
+
+  .featured,
+  .categories,
+  .why-us,
+  .testimonials,
+  .newsletter {
+    padding: 60px 6%;
+  }
+
+  .featured h2,
+  .categories h2,
+  .why-us h2,
+  .testimonials h2,
+  .newsletter h2 {
+    font-size: 34px;
+  }
+
+  /* Circle Categories Smaller */
+  .circle-categories {
+    width: 600px;
+    height: 600px;
+  }
+
+  .center-circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .center-circle h2 {
+    font-size: 26px;
+  }
+
+  .category-card {
+    width: 130px;
+    height: 130px;
+    font-size: 14px;
+  }
+
+  .card2,
+  .card7 {
+    top: 90px;
+  }
+
+  .card3,
+  .card6 {
+    top: 280px;
+  }
+
+  .card4,
+  .card5 {
+    bottom: 10px;
+  }
+  .card4 {
+  left: 140px;
+}
+  .card2 {
+    right: 40px;
+  }
+
+  .card3 {
+    right: 20px;
+  }
+
+  .card6 {
+    left: 20px;
+  }
+
+  .card7 {
+    left: 40px;
   }
 
   .newsletter-card {
-    padding: 35px;
+    padding: 45px;
+  }
+}
+/* Small tablets / large phones */
+@media (max-width: 640px) {
+
+  .circle-categories {
+    grid-template-columns: 1fr;
   }
 
-  .newsletter-form input {
+  .category-card {
+    height: 180px;
+  }
+}
+
+/* ==========================================
+   MOBILE (768px and below)
+========================================== */
+@media (max-width: 768px) {
+
+  .hero {
+    min-height: auto;
+    padding: 60px 20px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .hero-badge {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+
+  .explore-btn {
+    width: auto;
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  /* Stats stay horizontal */
+  .stats {
+    margin-top: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .stats > div {
+    min-width: 110px;
+  }
+
+  .stats h2 {
+    font-size: 26px;
+  }
+
+  .featured,
+  .categories,
+  .why-us,
+  .testimonials,
+  .newsletter {
+    padding: 50px 20px;
+  }
+
+  .featured h2,
+  .categories h2,
+  .why-us h2,
+  .testimonials h2,
+  .newsletter h2 {
+    font-size: 28px;
+    margin-bottom: 35px;
+  }
+
+  /* Property cards */
+  .property-grid,
+  .why-grid,
+  .testimonial-grid {
+    gap: 18px;
+  }
+
+  /* Replace circle layout with grid */
+  .circle-categories {
+    width: 100%;
+    height: auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+
+    position: static;
+  }
+
+  .center-circle {
+    position: static;
+    transform: none;
+
+    width: 100%;
+    height: 140px;
+
+    border-radius: 20px;
+
+    grid-column: 1 / -1;
+  }
+
+  .category-card {
+    position: static;
+    width: 100%;
+    height: 150px;
+
+    border-radius: 20px;
+    transform: none !important;
+  }
+
+  .card1,
+  .card2,
+  .card3,
+  .card4,
+  .card5,
+  .card6,
+  .card7 {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  .newsletter-card {
+    padding: 30px 20px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
     width: 100%;
   }
 }
+/* Large Mobile */
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .circle-categories {
+    width: 100%;
+    height: auto;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    position: static;
+  }
+
+  .center-circle {
+    position: static;
+    transform: none;
+
+    width: 100%;
+    height: 160px;
+
+    border-radius: 20px;
+    grid-column: auto;
+  }
+
+  .category-card {
+    position: static;
+    width: 100%;
+    height: 220px;
+
+    border-radius: 20px;
+    transform: none !important;
+  }
+
+  .card1,
+  .card2,
+  .card3,
+  .card4,
+  .card5,
+  .card6,
+  .card7 {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .stats h2 {
+    font-size: 22px;
+  }
+
+  .featured h2,
+  .categories h2,
+  .why-us h2,
+  .testimonials h2,
+  .newsletter h2 {
+    font-size: 24px;
+  }
+
+  .circle-categories {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    height: 170px;
+  }
+}
+
+

@@ -72,3 +72,138 @@
 .about-stats div:hover {
   transform: scale(1.05);
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .about-container {
+    padding: 35px 25px;
+  }
+
+  .about-hero h1 {
+    font-size: 32px;
+  }
+
+  /* KEEP 3 CARDS IN SINGLE ROW */
+  .about-section {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .about-card {
+    padding: 16px;
+  }
+
+  .about-card h2 {
+    font-size: 20px;
+  }
+
+  .about-card p {
+    font-size: 14px;
+  }
+
+  .about-stats {
+    gap: 20px;
+  }
+
+  .about-stats h3 {
+    font-size: 24px;
+  }
+}
+
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .about-container {
+    padding: 30px 18px;
+  }
+
+  .about-hero h1 {
+    font-size: 30px;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* STATS IN ONE ROW */
+  .about-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .about-stats div {
+    flex: 1;
+  }
+
+  .about-stats h3 {
+    font-size: 22px;
+  }
+
+  .about-stats p {
+    font-size: 12px;
+  }
+}
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .about-container {
+    padding: 25px 12px;
+  }
+
+  .about-hero h1 {
+    font-size: 26px;
+  }
+
+  .about-hero p {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .about-card {
+    padding: 16px;
+  }
+
+  .about-card h2 {
+    font-size: 20px;
+  }
+
+  .about-card p {
+    font-size: 13px;
+  }
+
+  /* STATS REMAIN HORIZONTAL */
+  .about-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 25px;
+  }
+
+  .about-stats div {
+    flex: 1;
+  }
+
+  .about-stats h3 {
+    font-size: 18px;
+  }
+
+  .about-stats p {
+    font-size: 11px;
+  }
+}

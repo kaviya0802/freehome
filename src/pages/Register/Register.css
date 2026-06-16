@@ -177,3 +177,144 @@
   font-size: 12px;
   margin-top: -6px;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .rg-page {
+    padding: 40px 24px;
+  }
+
+  .rg-shell {
+    gap: 24px;
+  }
+
+  .rg-hero h1 {
+    font-size: 34px;
+  }
+
+  .rg-left h2 {
+    font-size: 26px;
+  }
+
+  .rg-left p {
+    font-size: 15px;
+  }
+
+  .rg-form {
+    margin-top: 20px;
+  }
+
+  .rg-features {
+    margin-top: 20px;
+  }
+}
+
+/* ==========================================
+   MOBILE (768px and below)
+========================================== */
+@media (max-width: 768px) {
+
+  .rg-page {
+    padding: 30px 16px;
+  }
+
+  .rg-shell {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .rg-hero {
+    margin-bottom: 20px;
+  }
+
+  .rg-hero h1 {
+    font-size: 30px;
+  }
+
+  .rg-hero span {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .rg-left {
+    padding: 0;
+    text-align: center;
+  }
+
+  .rg-left h2 {
+    font-size: 24px;
+  }
+
+  .rg-left p {
+    font-size: 15px;
+  }
+
+  .rg-features {
+    margin-top: 20px;
+  }
+
+  .rg-features div {
+    text-align: left;
+  }
+
+  .rg-form {
+    margin-top: 0;
+    gap: 10px;
+  }
+
+  .rg-form input {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .rg-role {
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .rg-btn {
+    padding: 13px;
+  }
+}
+
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .rg-page {
+    padding: 24px 12px;
+  }
+
+  .rg-hero h1 {
+    font-size: 26px;
+  }
+
+  .rg-left h2 {
+    font-size: 22px;
+  }
+
+  .rg-left p {
+    font-size: 14px;
+  }
+
+  .rg-role {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .rg-role label {
+    font-size: 13px;
+  }
+
+  .rg-form input {
+    font-size: 13px;
+  }
+
+  .rg-btn {
+    font-size: 14px;
+  }
+}

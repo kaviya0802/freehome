@@ -66,16 +66,13 @@ function HomeLoan() {
     
     <div className="hl-container">
       <h1 className="hl-heading">Home Loan Support</h1>
-     <span className="hl-span">GET REAL-TIME EMI CALCULATIONS, AFFORDABILITY INSIGHTS AND PERSONALIZED LOAN RECOMMENDATIONS</span>
+     <span className="hl-span">GET REAL-TIME EMI CALCULATIONS AND PERSONALIZED LOAN RECOMMENDATIONS</span>
       
       <div className="hl-shell">
         {/* LEFT SIDE */}
         <div className="hl-left">
 
-          <p className="hl-kicker">
-            LOAN ASSISTANCE CENTER
-          </p>
-
+        
           <h2>Smart Loan Analysis</h2>
 
           <p className="hl-intro">
