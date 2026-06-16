@@ -159,7 +159,7 @@ localStorage.setItem(
 
         <div className="pc-box">
           <div>
-            <h2>
+            <h2 className="prop-con-h2">
               {property.title}
               <span className="pc-type-badge">
     {property.type}

@@ -154,3 +154,168 @@
 .list-toast-actions button:last-child:hover {
   background: #666;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .mylistings-container {
+    padding: 30px 20px;
+  }
+
+  .mylistings-header h1 {
+    font-size: 28px;
+  }
+
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .single-card .mylisting-card {
+    width: 100%;
+  }
+
+  .single-card .mylisting-image {
+    height: 350px;
+  }
+
+  .empty-listing {
+    margin-top: 80px;
+    padding: 0 20px;
+  }
+
+  .empty-listing h2 {
+    font-size: 28px;
+  }
+}
+
+
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .mylistings-container {
+    padding: 25px 15px;
+  }
+
+  .mylistings-header {
+    margin-bottom: 25px;
+  }
+
+  .mylistings-header h1 {
+    font-size: 26px;
+  }
+
+  .mylistings-header p {
+    font-size: 14px;
+  }
+
+  .property-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .listing-card-wrapper {
+    gap: 10px;
+  }
+
+  .delete-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .single-card .mylisting-image {
+    height: 280px;
+  }
+
+  .list-toast {
+    width: 90%;
+    min-width: auto;
+  }
+
+  .empty-listing {
+    margin-top: 70px;
+    padding: 0 15px;
+  }
+
+  .empty-listing h2 {
+    font-size: 24px;
+  }
+
+  .empty-listing p {
+    font-size: 14px;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .mylistings-container {
+    padding: 20px 12px;
+  }
+
+  .mylistings-header {
+    margin-bottom: 20px;
+  }
+
+  .mylistings-header h1 {
+    font-size: 22px;
+  }
+
+  .mylistings-header p {
+    font-size: 13px;
+  }
+
+  .property-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .listing-card-wrapper {
+    gap: 8px;
+  }
+
+  .delete-btn {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .single-card .mylisting-image {
+    height: 220px;
+  }
+
+  .list-toast {
+    width: 92%;
+    min-width: auto;
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+
+  .list-toast-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .list-toast-actions button {
+    width: 100%;
+  }
+
+  .empty-listing {
+    margin-top: 60px;
+    padding: 0 10px;
+  }
+
+  .empty-listing h2 {
+    font-size: 22px;
+  }
+
+  .empty-listing p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}

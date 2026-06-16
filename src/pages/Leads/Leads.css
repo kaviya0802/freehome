@@ -317,3 +317,200 @@
 .lead-toast-actions button:last-child:hover {
   background: #666;
 }
+@media (max-width: 1024px) {
+
+  .agent-lead-page {
+    padding: 30px 18px;
+  }
+
+  .agent-lead-header h1 {
+    font-size: 28px;
+  }
+
+  .agent-lead-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .agent-lead-card {
+    border-radius: 14px;
+  }
+
+  .agent-lead-image {
+    height: 220px;
+  }
+
+  .agent-lead-content {
+    padding: 16px;
+  }
+
+  .agent-lead-content h2 {
+    font-size: 20px;
+  }
+
+  .agent-lead-price {
+    font-size: 22px;
+  }
+
+  .agent-lead-single .agent-lead-card {
+    width: 100%;
+  }
+
+  .agent-lead-single .agent-lead-image {
+    height: 380px;
+  }
+}
+@media (max-width: 768px) {
+
+  .agent-lead-page {
+    padding: 25px 15px;
+  }
+
+  .agent-lead-header h1 {
+    font-size: 24px;
+  }
+
+  .agent-lead-header p {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .agent-lead-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .agent-lead-card {
+    border-radius: 14px;
+  }
+
+  .agent-lead-image {
+    height: 200px;
+  }
+
+  .agent-lead-content {
+    padding: 14px;
+  }
+
+  .agent-lead-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .agent-lead-location {
+    font-size: 13px;
+  }
+
+  .agent-lead-price {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .agent-lead-details p {
+    font-size: 14px;
+  }
+
+  .agent-lead-type,
+  .agent-lead-mode {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .agent-lead-delete-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .agent-lead-single .agent-lead-image {
+    height: 280px;
+  }
+
+  .lead-toast {
+    min-width: 220px;
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+}
+@media (max-width: 480px) {
+
+  .agent-lead-page {
+    padding: 20px 12px;
+  }
+
+  .agent-lead-header h1 {
+    font-size: 20px;
+  }
+
+  .agent-lead-header p {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .agent-lead-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .agent-lead-card {
+    border-radius: 12px;
+  }
+
+  .agent-lead-image {
+    height: 180px;
+  }
+
+  .agent-lead-content {
+    padding: 12px;
+  }
+
+  .agent-lead-content h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .agent-lead-location {
+    font-size: 12px;
+  }
+
+  .agent-lead-price {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .agent-lead-details p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .agent-lead-type,
+  .agent-lead-mode {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .agent-lead-delete-btn {
+    top: 8px;
+    right: 8px;
+    font-size: 10px;
+    padding: 5px 9px;
+  }
+
+  .agent-lead-empty {
+    padding: 30px 20px;
+    font-size: 16px;
+    margin-top: 60px;
+  }
+
+  .lead-toast {
+    min-width: 200px;
+    font-size: 11px;
+    padding: 10px 12px;
+  }
+
+  .lead-toast-actions button {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}

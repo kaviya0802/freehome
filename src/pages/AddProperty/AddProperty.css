@@ -200,24 +200,154 @@
     transform: translate(-50%, 10px);
   }
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
 
-/* ===== MOBILE ===== */
+  .addprop-page {
+    padding: 25px;
+  }
 
-@media (max-width: 768px) {
+  .addprop-card {
+    max-width: 950px;
+    padding: 25px;
+  }
+
+  .addprop-hero h1 {
+    font-size: 30px;
+  }
+
+  .addprop-title {
+    font-size: 26px;
+  }
+
+  .addprop-grid,
+  .dynamic-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .addprop-btn {
+    width: 220px;
+  }
+}
+
+
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+
   .addprop-page {
     padding: 20px;
   }
 
   .addprop-card {
-    padding: 20px;
+    padding: 22px;
+  }
+
+  .addprop-hero h1 {
+    font-size: 30px;
+  }
+
+  .addprop-title {
+    font-size: 24px;
+  }
+
+.addprop-grid,
+.dynamic-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+  .addprop-grid input,
+  .addprop-grid select,
+  .addprop-grid textarea,
+  .dynamic-grid input,
+  .dynamic-grid select,
+  .dynamic-grid textarea {
+    font-size: 14px;
+  }
+
+  .addprop-btn {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .toast {
+    width: auto;
+    max-width: 90%;
+    text-align: center;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .addprop-page {
+    padding: 15px;
+  }
+
+  .addprop-card {
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+  .addprop-hero {
+    margin-bottom: 20px;
+  }
+
+  .addprop-hero h1 {
+    font-size: 26px;
+  }
+
+  .addprop-hero p {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .addprop-title {
+    font-size: 22px;
+    margin-bottom: 20px;
   }
 
   .addprop-grid,
   .dynamic-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .addprop-grid input,
+  .addprop-grid select,
+  .addprop-grid textarea,
+  .dynamic-grid input,
+  .dynamic-grid select,
+  .dynamic-grid textarea {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .addprop-grid textarea,
+  .dynamic-grid textarea {
+    min-height: 100px;
+  }
+
+  .addprop-file-list {
+    padding: 10px;
   }
 
   .addprop-btn {
     width: 100%;
+    font-size: 14px;
+  }
+
+  .toast {
+    width: 90%;
+    text-align: center;
+    font-size: 12px;
   }
 }

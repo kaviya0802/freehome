@@ -86,3 +86,120 @@
   color: #fff;
   transform: scale(1.05);
 }
+@media (max-width: 1024px) {
+
+  .mylistings-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .mylisting-image {
+    height: 200px;
+  }
+
+  .mylisting-info {
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .mylisting-info h3 {
+    font-size: 18px;
+    min-height: 50px;
+  }
+
+  .mylisting-info p {
+    font-size: 14px;
+  }
+
+  .mylisting-info span {
+    font-size: 20px;
+  }
+
+  .mylisting-delete-btn {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px){
+
+  .mylistings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mylisting-card {
+    border-radius: 14px;
+  }
+
+  .mylisting-image {
+    height: 170px;
+  }
+
+  .mylisting-info {
+    padding: 14px;
+    gap: 8px;
+  }
+
+  .mylisting-info h3 {
+    font-size: 16px;
+    min-height: auto;
+  }
+
+  .mylisting-info p {
+    font-size: 13px;
+  }
+
+  .mylisting-info span {
+    font-size: 18px;
+  }
+
+  .mylisting-delete-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
+@media (max-width: 480px) {
+
+  .mylistings-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .mylisting-card {
+    max-width: 340px;
+    margin: 0 auto;
+    border-radius: 12px;
+  }
+
+  .mylisting-image {
+    height: 180px;
+  }
+
+  .mylisting-info {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .mylisting-info h3 {
+    font-size: 15px;
+    line-height: 1.3;
+    min-height: auto;
+  }
+
+  .mylisting-info p {
+    font-size: 12px;
+  }
+
+  .mylisting-info span {
+    font-size: 17px;
+  }
+
+  .mylisting-delete-btn {
+    top: 8px;
+    right: 8px;
+    font-size: 10px;
+    padding: 5px 9px;
+  }
+}

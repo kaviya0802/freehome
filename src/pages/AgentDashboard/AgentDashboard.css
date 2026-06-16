@@ -83,3 +83,145 @@
   line-height: 1.6;
   font-size: 0.95rem;
 }
+/* ==========================================
+   TABLET (769px - 1024px)
+========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .agent-workflow {
+    padding: 70px 5%;
+  }
+
+  .agent-workflow h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  /* 3 cards in one row */
+  .workflow-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .workflow-card {
+    padding: 28px 18px;
+  }
+
+  .workflow-card h3 {
+    font-size: 18px;
+  }
+
+  .workflow-card p {
+    font-size: 14px;
+  }
+
+  /* Warning */
+  .profile-warning {
+    top: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+  }
+}
+
+/* ==========================================
+   LARGE MOBILE (481px - 768px)
+========================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+
+  .agent-workflow {
+    padding: 60px 20px;
+  }
+
+  .agent-workflow h2 {
+    font-size: 28px;
+    margin-bottom: 35px;
+  }
+
+  /* Single card per row */
+  .workflow-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .workflow-card {
+    padding: 30px 22px;
+  }
+
+  .workflow-card span {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+  }
+
+  .workflow-card h3 {
+    font-size: 20px;
+  }
+
+  .workflow-card p {
+    font-size: 18px;
+  }
+
+  /* Warning */
+  .profile-warning {
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    text-align: center;
+    max-width: 90%;
+  }
+}
+
+/* ==========================================
+   SMALL MOBILE (480px and below)
+========================================== */
+@media (max-width: 480px) {
+
+  .agent-workflow {
+    padding: 50px 15px;
+  }
+
+  .agent-workflow h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  /* Single card per row */
+  .workflow-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .workflow-card {
+    padding: 24px 18px;
+  }
+
+  .workflow-card span {
+    width: 55px;
+    height: 55px;
+    font-size: 16px;
+  }
+
+  .workflow-card h3 {
+    font-size: 18px;
+  }
+
+  .workflow-card p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Warning */
+  .profile-warning {
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    text-align: center;
+    max-width: 92%;
+    white-space: normal;
+  }
+}

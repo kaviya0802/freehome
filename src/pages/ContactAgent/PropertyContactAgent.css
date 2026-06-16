@@ -202,3 +202,162 @@ select:-webkit-autofill {
   color: #111;
 }
 
+@media (max-width: 1024px) {
+
+  .pc-page {
+    padding: 30px 18px;
+  }
+
+  .pc-header h1 {
+    font-size: 28px;
+  }
+
+  .pc-box {
+    padding: 16px;
+  }
+
+  .pc-price {
+    font-size: 18px;
+  }
+
+  .pc-badge,
+  .pc-type-badge {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .pc-form input,
+  .pc-form textarea,
+  .pc-form select {
+    font-size: 13px;
+    padding: 11px 12px;
+  }
+
+  .pc-form button {
+    padding: 11px;
+    font-size: 14px;
+  }
+  .prop-con-h2 {
+    font-size: 22px;
+  }
+}
+@media (max-width: 768px) {
+
+  .pc-page {
+    padding: 25px 15px;
+  }
+
+  .pc-header h1 {
+    font-size: 24px;
+  }
+
+  .pc-header p {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .pc-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .pc-price {
+    font-size: 18px;
+    align-self: flex-end;
+  }
+
+  .pc-badge,
+  .pc-type-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    margin-left: 0;
+  }
+
+  .pc-form {
+    gap: 12px;
+  }
+
+  .pc-form input,
+  .pc-form textarea,
+  .pc-form select {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .pc-form textarea {
+    min-height: 110px;
+  }
+
+  .pc-form button {
+    padding: 10px;
+    font-size: 13px;
+  }
+   .prop-con-h2 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 480px) {
+
+  .pc-page {
+    padding: 20px 12px;
+  }
+
+  .pc-header h1 {
+    font-size: 20px;
+  }
+
+  .pc-header p {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .pc-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .pc-price {
+    font-size: 16px;
+    align-self: flex-end;
+  }
+
+  .pc-badge,
+  .pc-type-badge {
+    font-size: 10px;
+    padding: 4px 7px;
+  }
+
+  .pc-form {
+    gap: 10px;
+  }
+
+  .pc-form input,
+  .pc-form textarea,
+  .pc-form select {
+    font-size: 12px;
+    padding: 9px 10px;
+    border-radius: 8px;
+  }
+
+  .pc-form textarea {
+    min-height: 100px;
+  }
+
+  .pc-error {
+    font-size: 11px;
+  }
+
+  .pc-form button {
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+   .prop-con-h2 {
+    font-size: 18px;
+  }
+}
