@@ -170,24 +170,8 @@ const d = property?.propertyDetails || {};
 
 <div
 className="mypd-image-section"
-
-onTouchEnd={()=>{
-
-const now=
-Date.now();
-
-if(
-now-
-lastTap.current
-<
-300
-){
+onDoubleClick={()=>{
 triggerWishlist();
-}
-
-lastTap.current=
-now;
-
 }}
 >
 
