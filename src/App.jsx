@@ -20,7 +20,7 @@ import { CompareProvider } from "./context/CompareContext";
 import Landing from "./pages/Landing/Landing";
 import AgentDashboard from "./pages/AgentDashboard/AgentDashboard";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-import MatchedAgents from "./pages/matchedagents/MatchedAgents";
+import MatchedAgents from "./pages/Matchedagents/MatchedAgents";
 import MyListings from "./pages/MyListings/MyListings";
 import AddProperty from "./pages/AddProperty/AddProperty";
 import MyPropertyDetails from "./pages/MyPropertyDetails/MyPropertyDetails";
