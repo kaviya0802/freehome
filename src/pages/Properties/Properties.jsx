@@ -236,7 +236,10 @@ function Properties() {
         >
           {finalResults.length > 0 ? (
             finalResults.map((property) => (
-              <PropertyCard key={property.id} property={property} />
+               <PropertyCard
+key={String(property?.id)}
+property={property}
+/>
             ))
           ) : (
             <div className="properties-no-results">

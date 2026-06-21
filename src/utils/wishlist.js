@@ -12,18 +12,27 @@ const getWishlistKey = () => {
 };
 
 // Get wishlist
-export const getWishlist = () => {
-  try {
-    return (
-      JSON.parse(
-        localStorage.getItem(
-          getWishlistKey()
-        )
-      ) || []
-    );
-  } catch {
-    return [];
-  }
+export const getWishlist =
+() => {
+try {
+
+const data =
+localStorage.getItem(
+getWishlistKey()
+);
+
+return data
+? JSON.parse(data)
+: [];
+
+} catch {
+
+localStorage.removeItem(
+getWishlistKey()
+);
+
+return [];
+}
 };
 
 // Add property

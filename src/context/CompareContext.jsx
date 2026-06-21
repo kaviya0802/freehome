@@ -16,16 +16,39 @@ export function CompareProvider({ children }) {
   const [selected, setSelected] = useState([]);
 
   // 🔥 1. Load compare list whenever user changes
-  useEffect(() => {
-    if (!COMPARE_KEY) {
-      setSelected([]);
-      return;
-    }
+ useEffect(() => {
+  if (!COMPARE_KEY) {
+    setSelected([]);
+    return;
+  }
 
-    const saved = localStorage.getItem(COMPARE_KEY);
-    setSelected(saved ? JSON.parse(saved) : []);
-  }, [COMPARE_KEY]);
+  try {
+    const saved =
+      localStorage.getItem(
+        COMPARE_KEY
+      );
 
+    setSelected(
+      saved
+        ? JSON.parse(saved)
+        : []
+    );
+
+  } catch (error) {
+
+    console.log(
+      "Compare load error",
+      error
+    );
+
+    setSelected([]);
+
+    localStorage.removeItem(
+      COMPARE_KEY
+    );
+  }
+
+}, [COMPARE_KEY]);
   // 🔥 2. Listen for login/logout changes (same tab + other tabs)
    useEffect(() => {
   const syncUser = () => {
@@ -75,39 +98,50 @@ export function CompareProvider({ children }) {
   }, [selected, COMPARE_KEY]);
 
   // 🔥 4. Toggle property
- const toggleProperty = (
-  property
-) => {
-  let result = true;
+ const toggleProperty = (property) => {
+  try {
+    let success = true;
 
-  setSelected((prev) => {
-    const exists =
-      prev.some(
-        (p) =>
-          String(p.id) ===
-          String(property.id)
-      );
+    setSelected((prev) => {
+      const safePrev = Array.isArray(prev)
+        ? prev
+        : [];
 
-    if (exists) {
-      return prev.filter(
-        (p) =>
-          String(p.id) !==
-          String(property.id)
-      );
-    }
+      const exists =
+        safePrev.some(
+          (p) =>
+            String(p.id) ===
+            String(property.id)
+        );
 
-    if (prev.length >= 3) {
-      result = false;
-      return prev;
-    }
+      if (exists) {
+        return safePrev.filter(
+          (p) =>
+            String(p.id) !==
+            String(property.id)
+        );
+      }
 
-    return [
-      ...prev,
-      property,
-    ];
-  });
+      if (safePrev.length >= 3) {
+        success = false;
+        return safePrev;
+      }
 
-  return result;
+      return [
+        ...safePrev,
+        {
+          ...property,
+          id: String(property.id),
+        },
+      ];
+    });
+
+    return success;
+
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 };
 
   // 🔥 5. Clear compare (safe per user)

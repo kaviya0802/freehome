@@ -15,7 +15,12 @@ function PropertyCard({ property, onWishlistRemove }) {
   const navigate = useNavigate();
 
   const { selected, toggleProperty } = useCompare();
-  const isSelected = selected.find((p) => p.id === property.id);
+  const isSelected =
+selected?.some(
+(p)=>
+String(p?.id)===
+String(property?.id)
+) || false;
 
   const [liked, setLiked] = useState(false);
   const [animate, setAnimate] = useState(false);
@@ -26,8 +31,21 @@ function PropertyCard({ property, onWishlistRemove }) {
   const lastClickTime = useRef(0);
 
   useEffect(() => {
-    setLiked(isWishlisted(property.id));
-  }, [property.id]);
+try {
+
+setLiked(
+isWishlisted(
+property?.id
+)
+);
+
+} catch {
+
+setLiked(false);
+
+}
+
+}, [property]);
 
   // ❤️ WISHLIST TOGGLE
  const triggerWishlist =
@@ -161,21 +179,25 @@ setToast(""),
 
       {/* 🏠 IMAGE */}
          <img
-        src={
-          property.images?.[0]
-            ? property.images[0]
-            : "https://source.unsplash.com/600x400/?house"
-        }
-        alt={property.title}
-        className="mylisting-image"
-      />
-
+src={
+property?.images?.length
+? property.images[0]
+: "/placeholder.jpg"
+}
+alt={property?.title || "Property"}
+className="mylisting-image"
+/>
 
       {/* 📄 INFO */}
       <div className="property-info">
         <h3>{property.title}</h3>
         <p>{property.location}</p>
-        <span>${property.price.toLocaleString()}</span>
+        <span>
+$
+{Number(
+property?.price || 0
+).toLocaleString()}
+</span>
       </div>
 
       {/* 🔔 TOAST */}

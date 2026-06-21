@@ -35,7 +35,7 @@ function Wishlist() {
           {wishlist.length > 0 ? (
            wishlist.map((property) => (
   <PropertyCard
-    key={property.id}
+    key={String(property?.id)}
     property={property}
     onWishlistRemove={handleWishlistRemove}
   />
