@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAgentProperties } from "../../utils/propertyStorage";
 
 function Home() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -10,6 +11,7 @@ function Home() {
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);;
   const navigate = useNavigate();
+  const allProperties = getAgentProperties();
 
   // EXPLORE BUTTON (ONLY NAVIGATION)
   const handleExplore = () => {
@@ -97,7 +99,7 @@ function Home() {
 
           {/* STATS */}
           <div className="stats">
-            <div><h2>1500+</h2><p>Properties</p></div>
+            <div><h2>{allProperties.length}+</h2><p>Properties</p></div>
             <div><h2>800+</h2><p>Clients</p></div>
             <div><h2>25+</h2><p>Cities</p></div>
           </div>

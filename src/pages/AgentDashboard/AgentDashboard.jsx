@@ -2,16 +2,46 @@ import "./AgentDashboard.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function AgentDashboard() {
 
   const navigate = useNavigate();
-
+  const [listingCount, setListingCount] = useState(0);
+  const [leadCount, setLeadCount] = useState(0);
   const goPage = (path) => {
     navigate(path);
   };
   const currentUser =
   JSON.parse(localStorage.getItem("currentUser"));
+  useEffect(() => {
+  const currentUser =
+    JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!currentUser) return;
+
+  // LISTINGS
+  const allProperties =
+    JSON.parse(localStorage.getItem("agentProperties")) || [];
+
+  const myListings = allProperties.filter(
+    (p) =>
+      String(p.agentId) === String(currentUser.id)
+  );
+
+  // LEADS
+  const allLeads =
+    JSON.parse(localStorage.getItem("agentLeads")) || [];
+
+  const myLeads = allLeads.filter(
+    (lead) =>
+      String(lead.agentId) === String(currentUser.id)
+  );
+
+  setListingCount(myListings.length);
+  setLeadCount(myLeads.length);
+
+}, []);
 
   return (
     <>
@@ -50,19 +80,18 @@ function AgentDashboard() {
           {/* STATS (Agent version) */}
           <div className="stats">
             <div>
-              <h2>12+</h2>
+              <h2>{listingCount}</h2>
               <p>My Listings</p>
             </div>
-
             <div>
-              <h2>8</h2>
-              <p>New Requests</p>
-            </div>
-
-            <div>
-              <h2>25</h2>
+              <h2>{leadCount}</h2>
               <p>Active Leads</p>
             </div>
+            <div>
+    <h2>25+</h2>
+    <p>Cities</p>
+  </div>
+
           </div>
 
         </div>

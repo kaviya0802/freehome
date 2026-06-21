@@ -2,9 +2,11 @@ import "./Landing.css";
 import Footer from "../../components/Footer/Footer";
 import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { getAgentProperties } from "../../utils/propertyStorage";
 
 function LandingPage() {
   const navigate = useNavigate();
+  const allProperties = getAgentProperties();
 
   return (
     <div className="lp-wrapper">
@@ -68,11 +70,22 @@ function LandingPage() {
 
           {/* ================= STATS ================= */}
             {/* STATS */}
-          <div className="lp-stats">
-            <div><h2>1500+</h2><p>Properties</p></div>
-            <div><h2>800+</h2><p>Clients</p></div>
-            <div><h2>25+</h2><p>Cities</p></div>
-          </div>
+            <div className="lp-stats">
+  <div>
+    <h2>{allProperties.length}+</h2>
+    <p>Properties</p>
+  </div>
+
+  <div>
+    <h2>800+</h2>
+    <p>Clients</p>
+  </div>
+
+  <div>
+    <h2>25+</h2>
+    <p>Cities</p>
+  </div>
+</div>
 
         </div>
 
