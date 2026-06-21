@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {useState,useEffect,useRef}from "react";
 import { useCompare } from "../../context/CompareContext";
 
 import {
@@ -20,11 +20,11 @@ function MyPropertyDetails() {
   
   const [imgIndex, setImgIndex] = useState(0);
   const [liked, setLiked] = useState(false);
-const [burst, setBurst] = useState(false);
-const [toast, setToast] = useState("");
-
-const { selected, toggleProperty } = useCompare();
-const isSelected =
+  const [burst, setBurst] = useState(false);
+  const [toast, setToast] = useState("");
+  const lastTap = useRef(0);
+  const { selected, toggleProperty } = useCompare();
+  const isSelected =
 selected.some(
 (p)=>
 String(p.id) ===
@@ -104,13 +104,9 @@ const handleClickHeart = (e) => {
   e.stopPropagation();
   triggerWishlist();
 };
-const handleCompare = (e) => {
-
-e.preventDefault();
+const handleCompare=(e)=>{
 
 e.stopPropagation();
-
-if (!property) return;
 
 const exists =
 selected.some(
@@ -119,36 +115,26 @@ String(p.id)===
 String(property.id)
 );
 
-const result =
+const result=
 toggleProperty(
 property
 );
 
-if (exists) {
-
 setToast(
-"Removed from compare List"
+
+exists
+? "Removed from compare List"
+
+: result===false
+
+? "Only 3 properties can be compared"
+
+: "Added to compare List"
+
 );
-
-} else if (
-result === false
-) {
-
-setToast(
-"Only 3 properties can be compared"
-);
-
-} else {
-
-setToast(
-"Added to compare List"
-);
-
-}
 
 setTimeout(
-() =>
-setToast(""),
+()=>setToast(""),
 2000
 );
 
@@ -181,10 +167,26 @@ const d = property?.propertyDetails || {};
 
       <div className="mypd-page">
 
-  <div
+<div
 className="mypd-image-section"
-onDoubleClick={()=>{
+
+onTouchEnd={()=>{
+
+const now=
+Date.now();
+
+if(
+now-
+lastTap.current
+<
+300
+){
 triggerWishlist();
+}
+
+lastTap.current=
+now;
+
 }}
 >
 

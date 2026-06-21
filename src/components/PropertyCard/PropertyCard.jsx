@@ -145,29 +145,13 @@ fromProperties:true
      <div
 className="property-card"
 onClick={handleClick}
-onTouchStart={(e)=>{
-
-if(
-e.target.closest(
-".wishlist-icon"
-) ||
-e.target.closest(
-".compare-btn"
-)
-){
-
-e.stopPropagation();
-
-}
-
-}}
 
       style={{
         border: isSelected ? "2px solid #00c853" : "1px solid #ddd",
       }}
     >
       {/* ❤️ WISHLIST BUTTON */}
-       <button
+      <button
 type="button"
 className={`wishlist-icon ${
 liked ? "active" : ""
@@ -176,11 +160,9 @@ animate ? "animate" : ""
 }`}
 
 onClick={(e)=>{
-e.preventDefault();
 e.stopPropagation();
 triggerWishlist();
 }}
-
 >
 {liked ? "❤️" : "🤍"}
 </button>
@@ -196,10 +178,9 @@ isSelected
 }`}
 
 onClick={(e)=>{
-e.preventDefault();
+e.stopPropagation();
 handleCompare(e);
 }}
-
 >
 {isSelected
 ? "✔ Compare"

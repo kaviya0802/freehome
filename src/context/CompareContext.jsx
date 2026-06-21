@@ -99,16 +99,21 @@ export function CompareProvider({ children }) {
 
   // 🔥 4. Toggle property
   const toggleProperty = (property) => {
-  const exists = selected.some(
-    (p) => p.id === property.id
-  );
+  const exists =
+selected.some(
+(p)=>
+String(p.id)===
+String(property.id)
+);
 
   if (exists) {
-    setSelected((prev) =>
-      prev.filter(
-        (p) => p.id !== property.id
-      )
-    );
+    setSelected((prev)=>
+prev.filter(
+(p)=>
+String(p.id)!==
+String(property.id)
+)
+);
 
     return true;
   }
