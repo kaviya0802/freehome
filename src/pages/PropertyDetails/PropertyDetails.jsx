@@ -122,6 +122,7 @@ const d = property?.propertyDetails || {};
   onDoubleClick={handleDoubleClick}
 >
   <button
+    type="button"
     className={`wishlist-icon ${liked ? "active" : ""}`}
     onClick={handleClickHeart}
   >
@@ -169,6 +170,7 @@ const d = property?.propertyDetails || {};
     </span>
 
     <button
+      type="button"
       className={`compare-img-btn ${
         isSelected ? "active" : ""
       }`}

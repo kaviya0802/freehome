@@ -106,6 +106,7 @@ function PropertyCard({ property, onWishlistRemove }) {
     >
       {/* ❤️ WISHLIST BUTTON */}
       <button
+        type="button"
         className={`wishlist-icon ${liked ? "active" : ""} ${
           animate ? "animate" : ""
         }`}
@@ -119,6 +120,7 @@ function PropertyCard({ property, onWishlistRemove }) {
 
       {/* 📊 COMPARE BUTTON */}
       <button
+        type="button"
         className={`compare-btn ${isSelected ? "active" : ""}`}
         onClick={handleCompare}
       >
