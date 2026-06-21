@@ -183,6 +183,9 @@ const d = property?.propertyDetails || {};
 
   <div
 className="mypd-image-section"
+onDoubleClick={()=>{
+triggerWishlist();
+}}
 >
 
   <button
@@ -190,10 +193,15 @@ type="button"
 className={`wishlist-icon ${
 liked ? "active" : ""
 }`}
-onClick={handleClickHeart}
+onClick={(e)=>{
+e.stopPropagation();
+handleClickHeart(e);
+}}
+
 onTouchStart={(e)=>{
 e.stopPropagation();
 }}
+
 >
     {liked ? "❤️" : "🤍"}
   </button>
@@ -243,7 +251,11 @@ type="button"
 className={`compare-img-btn ${
 isSelected ? "active" : ""
 }`}
-onClick={handleCompare}
+onClick={(e)=>{
+e.stopPropagation();
+handleCompare(e);
+}}
+
 onTouchStart={(e)=>{
 e.stopPropagation();
 }}

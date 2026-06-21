@@ -59,15 +59,6 @@ function Navbar() {
           {role === "buyer" || role === "guest" ? (
             <>
               <li className="dropdown">
-                <span>Properties <FaChevronDown /></span>
-                <div className="dropdown-menu">
-                  <Link to="/properties">All Properties</Link>
-                  <Link to="/properties?mode=buy">For Sale</Link>
-                  <Link to="/properties?mode=rent">For Rent</Link>
-                </div>
-              </li>
-
-              <li className="dropdown">
                 <span><FaTools /> Services <FaChevronDown /></span>
                 <div className="dropdown-menu">
                   <Link to="/contact-agent">Find Agent</Link>
@@ -143,9 +134,7 @@ function Navbar() {
 </Link>
     {(role === "buyer" || role === "guest") && (
       <>
-        <Link to="/properties">All Properties</Link>
-         <Link to="/properties?mode=buy">For Sale</Link>
-         <Link to="/properties?mode=rent">For Rent</Link>
+        
         <Link to="/contact-agent">Find Agent</Link>
         <Link to="/home-loan">Home Loan Help</Link>
         <Link to="/compare">Compare</Link>

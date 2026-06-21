@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import "./PropertyCard.css";
 
@@ -26,8 +26,7 @@ String(property.id)
   const [toast, setToast] = useState("");
   const [burst, setBurst] = useState(false);
 
-  const clickTimeout = useRef(null);
-  const lastClickTime = useRef(0);
+ 
 
   useEffect(() => {
 try {
@@ -102,25 +101,25 @@ setToast(""),
 };
 
   // 🖱 SINGLE + DOUBLE CLICK LOGIC
-  const handleClick = () => {
-    const now = Date.now();
-    const timeDiff = now - lastClickTime.current;
-    lastClickTime.current = now;
+  const handleClick = (e) => {
 
-    // DOUBLE CLICK → wishlist
-    if (timeDiff < 300) {
-      clearTimeout(clickTimeout.current);
-      triggerWishlist();
-      return;
-    }
+if (
+e.target.closest(".wishlist-icon") ||
+e.target.closest(".compare-btn")
+) {
+return;
+}
 
-    // SINGLE CLICK → navigate
-    clickTimeout.current = setTimeout(() => {
-      navigate(`/property/${property.id}`, {
-        state: { fromProperties: true },
-      });
-    }, 250);
-  };
+navigate(
+`/property/${property.id}`,
+{
+state:{
+fromProperties:true
+}
+}
+);
+
+};
 
   // 📊 COMPARE TOGGLE (LIMIT SAFE)
    const handleCompare = (e) => {
@@ -143,9 +142,25 @@ setToast(""),
 };
 
   return (
-    <div
+     <div
 className="property-card"
 onClick={handleClick}
+onTouchStart={(e)=>{
+
+if(
+e.target.closest(
+".wishlist-icon"
+) ||
+e.target.closest(
+".compare-btn"
+)
+){
+
+e.stopPropagation();
+
+}
+
+}}
 
       style={{
         border: isSelected ? "2px solid #00c853" : "1px solid #ddd",
