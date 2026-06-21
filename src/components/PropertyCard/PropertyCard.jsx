@@ -18,9 +18,9 @@ function PropertyCard({ property, onWishlistRemove }) {
   const isSelected =
 selected.some(
 (p)=>
-p.id===property.id
+String(p.id)===
+String(property.id)
 );
-
   const [liked, setLiked] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [toast, setToast] = useState("");
@@ -144,34 +144,52 @@ setToast(""),
 
   return (
     <div
-      className="property-card"
-      onClick={handleClick}
+className="property-card"
+onClick={handleClick}
+
       style={{
         border: isSelected ? "2px solid #00c853" : "1px solid #ddd",
       }}
     >
       {/* ❤️ WISHLIST BUTTON */}
-      <button
-        type="button"
-        className={`wishlist-icon ${liked ? "active" : ""} ${
-          animate ? "animate" : ""
-        }`}
-        onClick={(e) => {
-          e.stopPropagation();
-          triggerWishlist();
-        }}
-      >
-        {liked ? "❤️" : "🤍"}
-      </button>
+       <button
+type="button"
+className={`wishlist-icon ${
+liked ? "active" : ""
+} ${
+animate ? "animate" : ""
+}`}
+
+onClick={(e)=>{
+e.preventDefault();
+e.stopPropagation();
+triggerWishlist();
+}}
+
+>
+{liked ? "❤️" : "🤍"}
+</button>
 
       {/* 📊 COMPARE BUTTON */}
       <button
-        type="button"
-        className={`compare-btn ${isSelected ? "active" : ""}`}
-        onClick={handleCompare}
-      >
-        {isSelected ? "✔ Compare" : "+ Compare"}
-      </button>
+type="button"
+
+className={`compare-btn ${
+isSelected
+? "active"
+: ""
+}`}
+
+onClick={(e)=>{
+e.preventDefault();
+handleCompare(e);
+}}
+
+>
+{isSelected
+? "✔ Compare"
+: "+ Compare"}
+</button>
 
       {/* 💥 BURST ANIMATION */}
       {burst && <div className="heart-burst">❤️ ❤️ ❤️</div>}

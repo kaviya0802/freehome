@@ -27,7 +27,8 @@ const { selected, toggleProperty } = useCompare();
 const isSelected =
 selected.some(
 (p)=>
-p.id===property?.id
+String(p.id) ===
+String(property?.id)
 );
   const images = property?.images || [];
   useEffect(() => {
@@ -49,20 +50,52 @@ p.id===property?.id
   }
 }, [property]);
 const triggerWishlist = () => {
-  if (liked) {
-    removeFromWishlist(property.id);
-    setLiked(false);
-    setToast("Removed from wishlist");
-  } else {
-    addToWishlist(property);
-    setLiked(true);
-    setBurst(true);
-    setToast("Added to wishlist ❤️");
 
-    setTimeout(() => setBurst(false), 800);
-  }
+if (!property) return;
 
-  setTimeout(() => setToast(""), 2000);
+const exists =
+isWishlisted(property.id);
+
+if (exists) {
+
+removeFromWishlist(
+property.id
+);
+
+setLiked(false);
+
+setToast(
+"Removed from wishlist"
+);
+
+} else {
+
+addToWishlist(
+property
+);
+
+setLiked(true);
+
+setBurst(true);
+
+setToast(
+"Added to wishlist ❤️"
+);
+
+setTimeout(
+() =>
+setBurst(false),
+800
+);
+
+}
+
+setTimeout(
+() =>
+setToast(""),
+2000
+);
+
 };
 
 const handleDoubleClick = () => triggerWishlist();
@@ -72,42 +105,54 @@ const handleClickHeart = (e) => {
   triggerWishlist();
 };
 const handleCompare = (e) => {
-  e.stopPropagation();
 
-  const removed =
-    selected.some(
-      (p) =>
-        p.id === property.id
-    );
+e.preventDefault();
 
-  const result =
-    toggleProperty(property);
+e.stopPropagation();
 
-  if (removed) {
-    setToast(
-      "Removed from compare List"
-    );
+if (!property) return;
 
-  } else if (!result) {
+const exists =
+selected.some(
+(p)=>
+String(p.id)===
+String(property.id)
+);
 
-    setToast(
-      "Only 3 properties can be compared"
-    );
+const result =
+toggleProperty(
+property
+);
 
-  } else {
+if (exists) {
 
-    setToast(
-      "Added to compare List"
-    );
-  }
+setToast(
+"Removed from compare List"
+);
 
-  setTimeout(
-    () =>
-      setToast(""),
-    2000
-  );
+} else if (
+result === false
+) {
+
+setToast(
+"Only 3 properties can be compared"
+);
+
+} else {
+
+setToast(
+"Added to compare List"
+);
+
+}
+
+setTimeout(
+() =>
+setToast(""),
+2000
+);
+
 };
-
   if (!property) {
     return (
       <>
@@ -136,15 +181,20 @@ const d = property?.propertyDetails || {};
 
       <div className="mypd-page">
 
-      <div
-  className="mypd-image-section"
-  onDoubleClick={handleDoubleClick}
+  <div
+className="mypd-image-section"
 >
+
   <button
-    type="button"
-    className={`wishlist-icon ${liked ? "active" : ""}`}
-    onClick={handleClickHeart}
-  >
+type="button"
+className={`wishlist-icon ${
+liked ? "active" : ""
+}`}
+onClick={handleClickHeart}
+onTouchStart={(e)=>{
+e.stopPropagation();
+}}
+>
     {liked ? "❤️" : "🤍"}
   </button>
 
@@ -188,13 +238,16 @@ const d = property?.propertyDetails || {};
       {property.type}
     </span>
 
-    <button
-      type="button"
-      className={`compare-img-btn ${
-        isSelected ? "active" : ""
-      }`}
-      onClick={handleCompare}
-    >
+     <button
+type="button"
+className={`compare-img-btn ${
+isSelected ? "active" : ""
+}`}
+onClick={handleCompare}
+onTouchStart={(e)=>{
+e.stopPropagation();
+}}
+>
       {isSelected
         ? "✔ Compare"
         : "+ Compare"}
