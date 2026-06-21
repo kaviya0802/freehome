@@ -8,9 +8,10 @@ export function CompareProvider({ children }) {
     JSON.parse(localStorage.getItem("currentUser"))
   );
 
-  const COMPARE_KEY = currentUser?.id
+ const COMPARE_KEY =
+  currentUser?.id
     ? `compareProperties_${currentUser.id}`
-    : null;
+    : "compare_guest";
 
   const [selected, setSelected] = useState([]);
 
@@ -26,19 +27,46 @@ export function CompareProvider({ children }) {
   }, [COMPARE_KEY]);
 
   // 🔥 2. Listen for login/logout changes (same tab + other tabs)
-  useEffect(() => {
-    const syncUser = () => {
-      const user = JSON.parse(localStorage.getItem("currentUser"));
-      setCurrentUser(user);
-    };
+   useEffect(() => {
+  const syncUser = () => {
+    try {
+      const user = JSON.parse(
+        localStorage.getItem(
+          "currentUser"
+        )
+      );
 
-    window.addEventListener("storage", syncUser);
+      setCurrentUser(user || null);
 
-    return () => {
-      window.removeEventListener("storage", syncUser);
-    };
-  }, []);
+    } catch {
+      setCurrentUser(null);
+    }
+  };
 
+  syncUser();
+
+  window.addEventListener(
+    "focus",
+    syncUser
+  );
+
+  window.addEventListener(
+    "storage",
+    syncUser
+  );
+
+  return () => {
+    window.removeEventListener(
+      "focus",
+      syncUser
+    );
+
+    window.removeEventListener(
+      "storage",
+      syncUser
+    );
+  };
+}, []);
   // 🔥 3. Save compare list per user
   useEffect(() => {
     if (!COMPARE_KEY) return;

@@ -54,3 +54,88 @@
 
   color: #6b7280;
 }
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* TABLET → 2 cards per row */
+@media (max-width: 1024px) {
+  .matched-grid {
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .matched-grid .profile-card {
+    width: calc(50% - 12px);
+    flex: 0 0 calc(50% - 12px);
+  }
+}
+
+/* LARGE MOBILE → 1 card */
+@media (max-width: 768px) {
+  .matched-wrapper {
+    padding: 30px 16px;
+  }
+
+  .matched-header h1 {
+    font-size: 28px;
+  }
+
+  .matched-header p {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .matched-grid {
+    gap: 18px;
+  }
+
+  .matched-grid .profile-card {
+    width: 100%;
+    max-width: 420px;
+    flex: 0 0 100%;
+  }
+
+  .no-results {
+    min-height: 250px;
+    font-size: 1rem;
+  }
+}
+
+/* SMALL MOBILE → 1 card */
+@media (max-width: 480px) {
+  .matched-wrapper {
+    padding: 24px 12px;
+  }
+
+  .matched-header {
+    margin-bottom: 22px;
+  }
+
+  .matched-header h1 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .matched-header p {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .matched-grid {
+    gap: 16px;
+  }
+
+  .matched-grid .profile-card {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .no-results {
+    min-height: 220px;
+    font-size: 0.95rem;
+    padding: 20px;
+    text-align: center;
+  }
+}
