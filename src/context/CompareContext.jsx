@@ -75,21 +75,40 @@ export function CompareProvider({ children }) {
   }, [selected, COMPARE_KEY]);
 
   // 🔥 4. Toggle property
-  const toggleProperty = (property) => {
-    const exists = selected.find((p) => p.id === property.id);
+ const toggleProperty = (
+  property
+) => {
+  let result = true;
+
+  setSelected((prev) => {
+    const exists =
+      prev.some(
+        (p) =>
+          String(p.id) ===
+          String(property.id)
+      );
 
     if (exists) {
-      setSelected((prev) =>
-        prev.filter((p) => p.id !== property.id)
+      return prev.filter(
+        (p) =>
+          String(p.id) !==
+          String(property.id)
       );
-      return true;
     }
 
-    if (selected.length >= 3) return false;
+    if (prev.length >= 3) {
+      result = false;
+      return prev;
+    }
 
-    setSelected((prev) => [...prev, property]);
-    return true;
-  };
+    return [
+      ...prev,
+      property,
+    ];
+  });
+
+  return result;
+};
 
   // 🔥 5. Clear compare (safe per user)
   const clearCompare = () => {

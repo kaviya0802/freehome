@@ -30,30 +30,59 @@ function PropertyCard({ property, onWishlistRemove }) {
   }, [property.id]);
 
   // ❤️ WISHLIST TOGGLE
-  const triggerWishlist = () => {
-    if (liked) {
-  removeFromWishlist(property.id);
-  setLiked(false);
+ const triggerWishlist =
+() => {
 
-  if (onWishlistRemove) {
-    onWishlistRemove(property.id);
-  }
+setLiked((prev) => {
 
-  setToast("Removed from wishlist");
+if (prev) {
+
+removeFromWishlist(
+property.id
+);
+
+if (
+onWishlistRemove
+) {
+onWishlistRemove(
+property.id
+);
 }
-    else {
-      addToWishlist(property);
-      setLiked(true);
-      setAnimate(true);
-      setBurst(true);
-      setToast("Added to wishlist ❤️");
 
-      setTimeout(() => setAnimate(false), 600);
-      setTimeout(() => setBurst(false), 700);
-    }
+setToast(
+"Removed from wishlist"
+);
 
-    setTimeout(() => setToast(""), 2000);
-  };
+return false;
+}
+
+addToWishlist(
+property
+);
+
+setBurst(true);
+
+setToast(
+"Added to wishlist ❤️"
+);
+
+setTimeout(
+() =>
+setBurst(false),
+700
+);
+
+return true;
+
+});
+
+setTimeout(
+() =>
+setToast(""),
+2000
+);
+
+};
 
   // 🖱 SINGLE + DOUBLE CLICK LOGIC
   const handleClick = () => {
