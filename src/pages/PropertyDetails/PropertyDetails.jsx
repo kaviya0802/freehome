@@ -24,9 +24,10 @@ const [burst, setBurst] = useState(false);
 const [toast, setToast] = useState("");
 
 const { selected, toggleProperty } = useCompare();
-
-const isSelected = selected.find(
-  (p) => p.id === property?.id
+const isSelected =
+selected.some(
+(p)=>
+p.id===property?.id
 );
   const images = property?.images || [];
   useEffect(() => {
@@ -73,20 +74,38 @@ const handleClickHeart = (e) => {
 const handleCompare = (e) => {
   e.stopPropagation();
 
-  if (isSelected) {
-    toggleProperty(property);
-    setToast("Removed from compare List");
-  } else {
-    const added = toggleProperty(property);
+  const removed =
+    selected.some(
+      (p) =>
+        p.id === property.id
+    );
 
-    if (!added) {
-      setToast("Only 3 properties can be compared");
-    } else {
-      setToast("Added to compare List");
-    }
+  const result =
+    toggleProperty(property);
+
+  if (removed) {
+    setToast(
+      "Removed from compare List"
+    );
+
+  } else if (!result) {
+
+    setToast(
+      "Only 3 properties can be compared"
+    );
+
+  } else {
+
+    setToast(
+      "Added to compare List"
+    );
   }
 
-  setTimeout(() => setToast(""), 2000);
+  setTimeout(
+    () =>
+      setToast(""),
+    2000
+  );
 };
 
   if (!property) {

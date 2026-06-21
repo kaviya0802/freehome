@@ -16,11 +16,10 @@ function PropertyCard({ property, onWishlistRemove }) {
 
   const { selected, toggleProperty } = useCompare();
   const isSelected =
-selected?.some(
+selected.some(
 (p)=>
-String(p?.id)===
-String(property?.id)
-) || false;
+p.id===property.id
+);
 
   const [liked, setLiked] = useState(false);
   const [animate, setAnimate] = useState(false);

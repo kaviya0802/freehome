@@ -98,52 +98,32 @@ export function CompareProvider({ children }) {
   }, [selected, COMPARE_KEY]);
 
   // 🔥 4. Toggle property
- const toggleProperty = (property) => {
-  try {
-    let success = true;
+  const toggleProperty = (property) => {
+  const exists = selected.some(
+    (p) => p.id === property.id
+  );
 
-    setSelected((prev) => {
-      const safePrev = Array.isArray(prev)
-        ? prev
-        : [];
+  if (exists) {
+    setSelected((prev) =>
+      prev.filter(
+        (p) => p.id !== property.id
+      )
+    );
 
-      const exists =
-        safePrev.some(
-          (p) =>
-            String(p.id) ===
-            String(property.id)
-        );
+    return true;
+  }
 
-      if (exists) {
-        return safePrev.filter(
-          (p) =>
-            String(p.id) !==
-            String(property.id)
-        );
-      }
-
-      if (safePrev.length >= 3) {
-        success = false;
-        return safePrev;
-      }
-
-      return [
-        ...safePrev,
-        {
-          ...property,
-          id: String(property.id),
-        },
-      ];
-    });
-
-    return success;
-
-  } catch (e) {
-    console.log(e);
+  if (selected.length >= 3) {
     return false;
   }
-};
 
+  setSelected((prev) => [
+    ...prev,
+    property,
+  ]);
+
+  return true;
+};
   // 🔥 5. Clear compare (safe per user)
   const clearCompare = () => {
     setSelected([]);
