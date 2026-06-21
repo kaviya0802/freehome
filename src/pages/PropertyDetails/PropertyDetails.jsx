@@ -105,9 +105,10 @@ const handleClickHeart = (e) => {
   triggerWishlist();
 };
 const handleCompare=(e)=>{
-
-e.stopPropagation();
-
+if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
 const exists =
 selected.some(
 (p)=>

@@ -49,9 +49,19 @@ function Properties() {
       !type ||
       normalize(property.type) === normalize(type);
 
-    const matchMode =
-      !mode ||
-      property.mode?.toLowerCase() === mode.toLowerCase();
+    const currentMode =
+(
+property.mode ||
+property.propertyDetails?.mode ||
+""
+)
+.trim()
+.toLowerCase();
+
+const matchMode =
+!mode ||
+currentMode ===
+mode.trim().toLowerCase();
 
     const price = Number(property.price);
 
@@ -92,7 +102,17 @@ function Properties() {
       !filters.type || property.type === filters.type;
 
     const matchMode =
-      !filters.mode || property.mode === filters.mode;
+!filters.mode ||
+(
+property.mode ||
+property.propertyDetails?.mode ||
+""
+)
+.trim()
+.toLowerCase() ===
+filters.mode
+.trim()
+.toLowerCase();
 
     const matchLocation =
       !filters.location ||

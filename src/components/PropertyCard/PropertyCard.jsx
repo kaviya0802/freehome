@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import "./PropertyCard.css";
 
@@ -26,7 +26,8 @@ String(property.id)
   const [toast, setToast] = useState("");
   const [burst, setBurst] = useState(false);
 
- 
+  const clickTimeout = useRef(null);
+  const lastClickTime = useRef(0);
 
   useEffect(() => {
 try {
@@ -101,122 +102,90 @@ setToast(""),
 };
 
   // 🖱 SINGLE + DOUBLE CLICK LOGIC
-  const handleClick = (e) => {
+  const handleClick = () => {
+    const now = Date.now();
+    const timeDiff = now - lastClickTime.current;
+    lastClickTime.current = now;
 
-if (
-e.target.closest(".wishlist-icon") ||
-e.target.closest(".compare-btn")
-) {
-return;
-}
+    // DOUBLE CLICK → wishlist
+    if (timeDiff < 300) {
+      clearTimeout(clickTimeout.current);
+      triggerWishlist();
+      return;
+    }
 
-navigate(
-`/property/${property.id}`,
-{
-state:{
-fromProperties:true
-}
-}
-);
-
-};
+    // SINGLE CLICK → navigate
+    clickTimeout.current = setTimeout(() => {
+      navigate(`/property/${property.id}`, {
+        state: { fromProperties: true },
+      });
+    }, 250);
+  };
 
   // 📊 COMPARE TOGGLE (LIMIT SAFE)
-   const handleCompare = (e) => {
-  e.stopPropagation();
+   // ... inside PropertyCard function
 
-  if (isSelected) {
-    toggleProperty(property);
-    setToast("Removed from compare List");
-  } else {
-    const added = toggleProperty(property);
-
-    if (!added) {
-      setToast("Only 3 properties can be compared");
+  const handleCompare = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Ensure this is here
+    
+    if (isSelected) {
+      toggleProperty(property);
+      setToast("Removed from compare List");
     } else {
-      setToast("Added to compare List");
+      const added = toggleProperty(property);
+      if (!added) {
+        setToast("Only 3 properties can be compared");
+      } else {
+        setToast("Added to compare List");
+      }
     }
-  }
-
-  setTimeout(() => setToast(""), 2000);
-};
+    setTimeout(() => setToast(""), 2000);
+  };
 
   return (
-     <div
-className="property-card"
-onClick={handleClick}
-
+    <div
+      className="property-card"
+      onClick={handleClick}
       style={{
         border: isSelected ? "2px solid #00c853" : "1px solid #ddd",
+        cursor: 'pointer'
       }}
     >
       {/* ❤️ WISHLIST BUTTON */}
       <button
-type="button"
-className={`wishlist-icon ${
-liked ? "active" : ""
-} ${
-animate ? "animate" : ""
-}`}
-
-onClick={(e)=>{
-e.stopPropagation();
-triggerWishlist();
-}}
->
-{liked ? "❤️" : "🤍"}
-</button>
+        type="button"
+        className={`wishlist-icon ${liked ? "active" : ""} ${animate ? "animate" : ""}`}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation(); // Prevents navigating to details page
+          triggerWishlist();
+        }}
+      >
+        {liked ? "❤️" : "🤍"}
+      </button>
 
       {/* 📊 COMPARE BUTTON */}
       <button
-type="button"
+        type="button"
+        className={`compare-btn ${isSelected ? "active" : ""}`}
+        onClick={handleCompare} // Uses the improved handler above
+      >
+        {isSelected ? "✔ Compare" : "+ Compare"}
+      </button>
 
-className={`compare-btn ${
-isSelected
-? "active"
-: ""
-}`}
-
-onClick={(e)=>{
-e.stopPropagation();
-handleCompare(e);
-}}
->
-{isSelected
-? "✔ Compare"
-: "+ Compare"}
-</button>
-
-      {/* 💥 BURST ANIMATION */}
+      {/* Rest of your component remains same */}
       {burst && <div className="heart-burst">❤️ ❤️ ❤️</div>}
-
-      {/* 🏠 IMAGE */}
-         <img
-src={
-property?.images?.length
-? property.images[0]
-: "/placeholder.jpg"
-}
-alt={property?.title || "Property"}
-className="mylisting-image"
-/>
-
-      {/* 📄 INFO */}
+      <img src={property?.images?.[0] || "/placeholder.jpg"} alt={property?.title} className="mylisting-image" />
       <div className="property-info">
         <h3>{property.title}</h3>
         <p>{property.location}</p>
-        <span>
-$
-{Number(
-property?.price || 0
-).toLocaleString()}
-</span>
+        <span>${Number(property?.price || 0).toLocaleString()}</span>
       </div>
-
-      {/* 🔔 TOAST */}
       {toast && <div className="toast">{toast}</div>}
     </div>
   );
+
 }
 
 export default PropertyCard;
