@@ -1,15 +1,26 @@
- const FieldWrapper = ({ children, error }) => (
-    <div className="addprop-field">
-      {children}
-      {error && <p className="error">{error}</p>}
-    </div>
-  );
+ const FieldWrapper = ({
+  children,
+  error,
+  fieldRef
+}) => (
+  <div
+    className="addprop-field"
+    ref={fieldRef}
+  >
+    {children}
+    {error && <p className="error">{error}</p>}
+  </div>
+);
 
-function VillaFields({ details, handleChange, errors = {} }) {
- 
+function VillaFields({
+  details,
+  handleChange,
+  errors = {},
+  fieldRefs = {}
+}) {
   return (
     <>
-      <FieldWrapper error={errors.bedrooms}>
+      <FieldWrapper error={errors.bedrooms} fieldRef={fieldRefs.bedrooms}>
         <input
           type="number"
           name="bedrooms"
@@ -19,7 +30,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.bathrooms}>
+      <FieldWrapper error={errors.bathrooms} fieldRef={fieldRefs.bathrooms}>
         <input
           type="number"
           name="bathrooms"
@@ -29,7 +40,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.area}>
+      <FieldWrapper error={errors.area} fieldRef={fieldRefs.area}>
         <input
           type="number"
           name="area"
@@ -39,7 +50,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.parking}>
+      <FieldWrapper error={errors.parking} fieldRef={fieldRefs.parking}>
         <input
           type="number"
           name="parking"
@@ -49,7 +60,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.propertyAge}>
+      <FieldWrapper
+        error={errors.propertyAge}
+        fieldRef={fieldRefs.propertyAge}
+      >
         <select
           name="propertyAge"
           value={details.propertyAge || ""}
@@ -63,19 +77,22 @@ function VillaFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.mode}>
+      <FieldWrapper error={errors.mode} fieldRef={fieldRefs.mode}>
         <select
           name="mode"
           value={details.mode || ""}
           onChange={handleChange}
         >
           <option value="">Mode</option>
-          <option value="Buy">Buy</option>
-          <option value="Rent">Rent</option>
+          <option value="buy">Buy</option>
+          <option value="rent">Rent</option>
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.furnishing}>
+      <FieldWrapper
+        error={errors.furnishing}
+        fieldRef={fieldRefs.furnishing}
+      >
         <select
           name="furnishing"
           value={details.furnishing || ""}
@@ -87,7 +104,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.address}>
+      <FieldWrapper error={errors.address} fieldRef={fieldRefs.address}>
         <input
           type="text"
           name="address"
@@ -97,7 +114,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.landArea}>
+      <FieldWrapper error={errors.landArea} fieldRef={fieldRefs.landArea}>
         <input
           type="number"
           name="landArea"
@@ -107,7 +124,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.builtUpArea}>
+      <FieldWrapper
+        error={errors.builtUpArea}
+        fieldRef={fieldRefs.builtUpArea}
+      >
         <input
           type="number"
           name="builtUpArea"
@@ -117,7 +137,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.floors}>
+      <FieldWrapper error={errors.floors} fieldRef={fieldRefs.floors}>
         <input
           type="number"
           name="floors"
@@ -127,7 +147,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.balconies}>
+      <FieldWrapper error={errors.balconies} fieldRef={fieldRefs.balconies}>
         <input
           type="number"
           name="balconies"
@@ -137,7 +157,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.facingDirection}>
+      <FieldWrapper
+        error={errors.facingDirection}
+        fieldRef={fieldRefs.facingDirection}
+      >
         <input
           type="text"
           name="facingDirection"
@@ -147,7 +170,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.privateGarden}>
+      <FieldWrapper
+        error={errors.privateGarden}
+        fieldRef={fieldRefs.privateGarden}
+      >
         <select
           name="privateGarden"
           value={details.privateGarden || ""}
@@ -159,7 +185,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.privatePool}>
+      <FieldWrapper
+        error={errors.privatePool}
+        fieldRef={fieldRefs.privatePool}
+      >
         <select
           name="privatePool"
           value={details.privatePool || ""}
@@ -171,7 +200,7 @@ function VillaFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.security}>
+      <FieldWrapper error={errors.security} fieldRef={fieldRefs.security}>
         <select
           name="security"
           value={details.security || ""}
@@ -183,7 +212,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.powerBackup}>
+      <FieldWrapper
+        error={errors.powerBackup}
+        fieldRef={fieldRefs.powerBackup}
+      >
         <select
           name="powerBackup"
           value={details.powerBackup || ""}
@@ -195,7 +227,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.nearbySchools}>
+      <FieldWrapper
+        error={errors.nearbySchools}
+        fieldRef={fieldRefs.nearbySchools}
+      >
         <input
           type="text"
           name="nearbySchools"
@@ -205,7 +240,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.nearbyHospitals}>
+      <FieldWrapper
+        error={errors.nearbyHospitals}
+        fieldRef={fieldRefs.nearbyHospitals}
+      >
         <input
           type="text"
           name="nearbyHospitals"
@@ -215,7 +253,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.metroConnectivity}>
+      <FieldWrapper
+        error={errors.metroConnectivity}
+        fieldRef={fieldRefs.metroConnectivity}
+      >
         <select
           name="metroConnectivity"
           value={details.metroConnectivity || ""}
@@ -227,7 +268,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.safetyScore}>
+      <FieldWrapper
+        error={errors.safetyScore}
+        fieldRef={fieldRefs.safetyScore}
+      >
         <input
           type="number"
           name="safetyScore"
@@ -237,7 +281,10 @@ function VillaFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.propertyDemand}>
+      <FieldWrapper
+        error={errors.propertyDemand}
+        fieldRef={fieldRefs.propertyDemand}
+      >
         <select
           name="propertyDemand"
           value={details.propertyDemand || ""}

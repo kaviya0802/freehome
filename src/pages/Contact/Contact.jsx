@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Contact.css";
@@ -14,6 +14,7 @@ function Contact() {
   const [errors, setErrors] = useState({});
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const fieldRefs = useRef({});
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -43,24 +44,65 @@ function Contact() {
 
     return newErrors;
   };
+  const scrollToFirstError = (err) => {
 
- const handleSubmit = (e) => {
-  e.preventDefault();
+setErrors(err);
 
-  const err = validate();
-  setErrors(err);
+const firstError =
+Object.keys(err)[0];
 
-  if (Object.keys(err).length > 0) return;
+setTimeout(() => {
 
-  triggerToast("Your request has been submitted successfully.");
+fieldRefs.current[
+firstError
+]?.scrollIntoView({
+behavior: "smooth",
+block: "center",
+});
 
-  setForm({
-    name: "",
-    email: "",
-    category: "General",
-    message: ""
-  });
+fieldRefs.current[
+firstError
+]?.focus();
+
+}, 100);
+
 };
+const handleSubmit = (e) => {
+
+e.preventDefault();
+
+const err =
+validate();
+
+if (
+Object.keys(err).length > 0
+) {
+
+scrollToFirstError(
+err
+);
+
+return;
+
+}
+
+setErrors({});
+
+triggerToast(
+"Your request has been submitted successfully."
+);
+
+setForm({
+name: "",
+email: "",
+category: "General",
+message: ""
+});
+
+};
+  
+
+
 const triggerToast = (message) => {
   setToastMessage(message);
   setShowToast(true);
@@ -110,15 +152,21 @@ const triggerToast = (message) => {
           <form className="cf-form" onSubmit={handleSubmit} noValidate>
 
             <input
-              name="name"
+ref={(el)=>
+fieldRefs.current.name=el
+}
+name="name"
               placeholder="Full Name *"
               value={form.name}
               onChange={handleChange}
             />
             {errors.name && <span className="cf-error">{errors.name}</span>}
 
-            <input
-              name="email"
+           <input
+ref={(el)=>
+fieldRefs.current.email=el
+}
+name="email"
               placeholder="Email Address *"
               value={form.email}
               onChange={handleChange}
@@ -137,7 +185,10 @@ const triggerToast = (message) => {
             </select>
 
             <textarea
-              name="message"
+ref={(el)=>
+fieldRefs.current.message=el
+}
+name="message"
               placeholder="Describe your issue *"
               value={form.message}
               onChange={handleChange}

@@ -58,6 +58,7 @@ function Navbar() {
           {/* ================= BUYER UI ================= */}
           {role === "buyer" || role === "guest" ? (
             <>
+              <li><Link to="/properties">All Properties</Link></li>
               <li className="dropdown">
                 <span><FaTools /> Services <FaChevronDown /></span>
                 <div className="dropdown-menu">
@@ -126,44 +127,119 @@ function Navbar() {
 </button>
 
       </div>
-{mobileOpen && (
-  <div className="mobile-menu">
+    {mobileOpen && (
+<div className="mobile-menu">
 
-    <Link to={role === "agent" ? "/agent-dashboard" : "/home"}>
-  Home
-</Link>
-    {(role === "buyer" || role === "guest") && (
-      <>
-        
-        <Link to="/contact-agent">Find Agent</Link>
-        <Link to="/home-loan">Home Loan Help</Link>
-        <Link to="/compare">Compare</Link>
-
-        <Link to="/wishlist">Wishlist</Link>
-      </>
-    )}
-
-    {role === "agent" && (
-      <>
-        <Link to="/agent/listings">My Listings</Link>
-        <Link to="/agent/add-property">Add Property</Link>
-        <Link to="/agent/leads">Leads</Link>
-      </>
-    )}
-
-    <Link to="/about">About Us</Link>
-    <Link to="/contact">Contact Us</Link>
-    <Link to="/faq">FAQ</Link>
-    <Link
-  to={
-    role === "agent"
-      ? "/agent-profile"
-      : "/user-profile"
-  }
+<Link
+to={role==="agent"
+?"/agent-dashboard"
+:"/home"}
+onClick={()=>setMobileOpen(false)}
 >
-  Profile
+Home
 </Link>
-  </div>
+
+{(role==="buyer" || role==="guest") && (
+<>
+
+<Link
+to="/properties"
+onClick={()=>setMobileOpen(false)}
+>
+All Properties
+</Link>
+
+<Link
+to="/contact-agent"
+onClick={()=>setMobileOpen(false)}
+>
+Find Agent
+</Link>
+
+<Link
+to="/home-loan"
+onClick={()=>setMobileOpen(false)}
+>
+Home Loan Help
+</Link>
+
+<Link
+to="/compare"
+onClick={()=>setMobileOpen(false)}
+>
+Compare
+</Link>
+
+<Link
+to="/wishlist"
+onClick={()=>setMobileOpen(false)}
+>
+Wishlist
+</Link>
+
+</>
+)}
+
+{role==="agent" && (
+<>
+
+<Link
+to="/agent/listings"
+onClick={()=>setMobileOpen(false)}
+>
+My Listings
+</Link>
+
+<Link
+to="/agent/add-property"
+onClick={()=>setMobileOpen(false)}
+>
+Add Property
+</Link>
+
+<Link
+to="/agent/leads"
+onClick={()=>setMobileOpen(false)}
+>
+Leads
+</Link>
+
+</>
+)}
+
+<Link
+to="/about"
+onClick={()=>setMobileOpen(false)}
+>
+About Us
+</Link>
+
+<Link
+to="/contact"
+onClick={()=>setMobileOpen(false)}
+>
+Contact
+</Link>
+
+<Link
+to="/faq"
+onClick={()=>setMobileOpen(false)}
+>
+FAQ
+</Link>
+
+<Link
+to={
+role==="agent"
+?"/agent-profile"
+:"/user-profile"
+}
+onClick={()=>setMobileOpen(false)}
+>
+Profile
+</Link>
+
+</div>
 )}
 
     </header>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -8,6 +8,7 @@ function AgentProfile() {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState("");
   const [errors, setErrors] = useState({});
+  const fieldRefs = useRef({});
   const [user, setUser] = useState({
     id: "",
     role: "",
@@ -129,6 +130,20 @@ function AgentProfile() {
   
     showSuccess("Profile updated successfully");
   };
+  const scrollToFirstError = (err) => {
+  setErrors(err);
+
+  const firstError = Object.keys(err)[0];
+
+  setTimeout(() => {
+    fieldRefs.current[firstError]?.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+    fieldRefs.current[firstError]?.focus();
+  }, 100);
+};
   const handleSave = () => {
   const newErrors = {};
   const nameRegex = /^[A-Za-z\s]+$/;
@@ -192,10 +207,9 @@ if (!user.specialization) {
   }
 
   if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors);
-    return;
-  }
-
+  scrollToFirstError(newErrors);
+  return;
+}
   setErrors({});
 
   const users =
@@ -226,10 +240,10 @@ if (!user.specialization) {
       "Min 8 chars, uppercase, lowercase, number & special char required";
   }
 
-  if (Object.keys(newErrors).length > 0) {
-    setErrors((prev) => ({ ...prev, ...newErrors }));
-    return;
-  }
+ if (Object.keys(newErrors).length > 0) {
+  scrollToFirstError(newErrors);
+  return;
+}
 
   const updatedUser = {
     ...user,
@@ -360,11 +374,12 @@ return (
     {/* Full Name */}
     <div>
       <input
-        name="fullName"
-        value={user.fullName}
-        onChange={handleChange}
-        placeholder="Full Name"
-      />
+ref={(el)=>fieldRefs.current.fullName=el}
+name="fullName"
+value={user.fullName}
+onChange={handleChange}
+placeholder="Full Name"
+/>
       {errors.fullName && (
         <span className="ap-error">
           {errors.fullName}
@@ -374,12 +389,13 @@ return (
 
     {/* Email */}
     <div>
-      <input
-        name="email"
-        value={user.email}
-        onChange={handleChange}
-        placeholder="Email"
-      />
+     <input
+ref={(el)=>fieldRefs.current.email=el}
+name="email"
+value={user.email}
+onChange={handleChange}
+placeholder="Email"
+/>
       {errors.email && (
         <span className="ap-error">
           {errors.email}
@@ -389,12 +405,13 @@ return (
 
     {/* Phone */}
     <div>
-      <input
-        name="phone"
-        value={user.phone}
-        onChange={handleChange}
-        placeholder="Phone"
-      />
+     <input
+ref={(el)=>fieldRefs.current.phone=el}
+name="phone"
+value={user.phone}
+onChange={handleChange}
+placeholder="Phone"
+/>
       {errors.phone && (
         <span className="ap-error">
           {errors.phone}
@@ -402,11 +419,12 @@ return (
       )}
     </div>
     <div>
-  <select
-    name="serviceLocation"
-    value={user.serviceLocation || ""}
-    onChange={handleChange}
-  >
+<select
+ref={(el)=>fieldRefs.current.serviceLocation=el}
+name="serviceLocation"
+value={user.serviceLocation}
+onChange={handleChange}
+>
     <option value="">Service Location *</option>
 
     <option>Sydney</option>
@@ -436,10 +454,11 @@ return (
 </div>
 <div>
   <select
-    name="budgetHandled"
-    value={user.budgetHandled || ""}
-    onChange={handleChange}
-  >
+ref={(el)=>fieldRefs.current.budgetHandled=el}
+name="budgetHandled"
+value={user.budgetHandled}
+onChange={handleChange}
+>
     <option value="">Budget Handled *</option>
 
     <option value="$0 - $5,000">
@@ -474,11 +493,12 @@ return (
   )}
 </div>
 <div>
-  <select
-    name="specialization"
-    value={user.specialization || ""}
-    onChange={handleChange}
-  >
+ <select
+ref={(el)=>fieldRefs.current.specialization=el}
+name="specialization"
+value={user.specialization}
+onChange={handleChange}
+>
     <option value="">
       Property Specialization *
     </option>
@@ -501,12 +521,13 @@ return (
 
     {/* Age */}
     <div>
-      <input
-        name="age"
-        value={user.age || ""}
-        onChange={handleChange}
-        placeholder="Age"
-      />
+    <input
+ref={(el)=>fieldRefs.current.age=el}
+name="age"
+value={user.age}
+onChange={handleChange}
+placeholder="Age"
+/>
       {errors.age && (
     <span className="ap-error">
       {errors.age}
@@ -530,43 +551,47 @@ return (
 
     {/* Agency */}
     <div>
-      <input
-        name="agencyName"
-        value={user.agencyName || ""}
-        onChange={handleChange}
-        placeholder="Agency Name"
-      />
+     <input
+ref={(el)=>fieldRefs.current.agencyName=el}
+name="agencyName"
+value={user.agencyName}
+onChange={handleChange}
+placeholder="Agency Name"
+/>
     </div>
 
     {/* Experience */}
     <div>
       <input
-        name="experience"
-        value={user.experience || ""}
-        onChange={handleChange}
-        placeholder="Experience (Years)"
-      />
+ref={(el)=>fieldRefs.current.experience=el}
+name="experience"
+value={user.experience}
+onChange={handleChange}
+placeholder="Experience (Years)"
+/>
     </div>
 
     {/* License */}
     <div>
-      <input
-        name="licenseNumber"
-        value={user.licenseNumber || ""}
-        onChange={handleChange}
-        placeholder="License Number"
-      />
+     <input
+ref={(el)=>fieldRefs.current.licenseNumber=el}
+name="licenseNumber"
+value={user.licenseNumber}
+onChange={handleChange}
+placeholder="License Number"
+/>
     </div>
 
 
     {/* Bio Full Width */}
     <div className="full-row">
-      <textarea
-        name="bio"
-        value={user.bio}
-        onChange={handleChange}
-        placeholder="About Me"
-      />
+     <textarea
+ref={(el)=>fieldRefs.current.bio=el}
+name="bio"
+value={user.bio}
+onChange={handleChange}
+placeholder="About Me"
+/>
       {errors.bio && (
     <span className="ap-error">
       {errors.bio}
@@ -594,12 +619,12 @@ return (
 
   <div>
     <input
-      type="password"
-      placeholder="Old Password"
-      value={oldPassword}
-      onChange={(e) => setOldPassword(e.target.value)}
-    />
-
+ref={(el)=>fieldRefs.current.oldPassword=el}
+type="password"
+placeholder="Old Password"
+value={oldPassword}
+onChange={(e)=>setOldPassword(e.target.value)}
+/>
     {errors.oldPassword && (
       <span className="ap-error">
         {errors.oldPassword}
@@ -609,11 +634,12 @@ return (
 
   <div>
     <input
-      type="password"
-      placeholder="New Password"
-      value={newPassword}
-      onChange={(e) => setNewPassword(e.target.value)}
-    />
+ref={(el)=>fieldRefs.current.newPassword=el}
+type="password"
+placeholder="New Password"
+value={newPassword}
+onChange={(e)=>setNewPassword(e.target.value)}
+/>
 
     {errors.newPassword && (
       <span className="ap-error">

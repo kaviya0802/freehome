@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "../../components/Navbar/Navbar";
@@ -21,7 +21,7 @@ function AddProperty() {
   const [toast, setToast] = useState("");
 
   const [errors, setErrors] = useState({});
-
+  const fieldRefs = useRef({});
   const [property, setProperty] = useState({
     title: "",
     type: "",
@@ -195,13 +195,12 @@ function AddProperty() {
     "mealsIncluded",
     "area",
     "furnishing",
-    "mode",
     "address",
     "genderPreference",
     "totalBeds",
     "availableBeds",
     "nearbyCollege",
-    "nearbyMetro",
+    "metroConnectivity",
     "attachedBathroom",
     "foodIncluded",
     "laundryService",
@@ -254,6 +253,39 @@ const handleImages = (e) => {
 
   e.target.value = "";
 };
+const scrollToFirstError = (err) => {
+  setErrors(err);
+
+  setTimeout(() => {
+    const firstMainError =
+      Object.keys(err).find(
+        (key) => key !== "propertyDetails"
+      );
+
+    if (firstMainError) {
+      fieldRefs.current[firstMainError]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+
+      fieldRefs.current[firstMainError]?.focus?.();
+
+      return;
+    }
+
+    if (err.propertyDetails) {
+      const firstDetail =
+        Object.keys(err.propertyDetails)[0];
+
+      fieldRefs.current[firstDetail]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+
+      fieldRefs.current[firstDetail]?.focus?.();
+    }
+  }, 100);
+};
   // ✅ VALIDATION
  const validate = () => {
   const err = {};
@@ -289,8 +321,13 @@ const handleImages = (e) => {
     err.propertyDetails = detailErrors;
   }
 
-  setErrors(err);
-  return Object.keys(err).length === 0;
+  if (Object.keys(err).length > 0) {
+  scrollToFirstError(err);
+  return false;
+}
+
+setErrors({});
+return true;
 };
 const convertFilesToBase64 = async (files) => {
   return Promise.all(
@@ -312,11 +349,25 @@ const convertFilesToBase64 = async (files) => {
   const imageBase64 = await convertFilesToBase64(property.images);
   const currentUser =
   JSON.parse(localStorage.getItem("currentUser"));
+  if (property.type === "PG Hostel") {
+property.propertyDetails.mode = "rent";
+}
   const newProperty = {
   ...property,
+
+  mode:
+    property.type === "PG Hostel"
+      ? "rent"
+      : (
+          property.propertyDetails?.mode ||
+          ""
+        )
+        .trim()
+        .toLowerCase(),
+
   id: Date.now(),
   source: "agent",
-  agentId: String(currentUser.id), // important
+  agentId: String(currentUser.id),
   images: imageBase64,
 };
 
@@ -360,7 +411,8 @@ const convertFilesToBase64 = async (files) => {
       {/* TITLE */}
       <div>
         <input
-          name="title"
+ref={(el)=>fieldRefs.current.title=el}
+name="title"
           placeholder="Property Title"
           value={property.title}
           onChange={handleChange}
@@ -371,7 +423,8 @@ const convertFilesToBase64 = async (files) => {
       {/* TYPE */}
       <div>
         <select
-          name="type"
+ref={(el)=>fieldRefs.current.type=el}
+name="type"
           value={property.type}
           onChange={handleChange}
         >
@@ -390,7 +443,8 @@ const convertFilesToBase64 = async (files) => {
       {/* LOCATION */}
       <div>
         <select
-          name="location"
+ref={(el)=>fieldRefs.current.location=el}
+name="location"
           value={property.location}
           onChange={handleChange}
         >
@@ -418,7 +472,8 @@ const convertFilesToBase64 = async (files) => {
       {/* PRICE */}
       <div>
         <input
-          type="number"
+ref={(el)=>fieldRefs.current.price=el}
+type="number"
           name="price"
           placeholder="Price"
           value={property.price}
@@ -431,7 +486,8 @@ const convertFilesToBase64 = async (files) => {
       <div className="addprop-full">
         
         <input
-          type="file"
+ref={(el)=>fieldRefs.current.images=el}
+type="file"
           accept="image/*"
           multiple
           onChange={handleImages}
@@ -455,7 +511,8 @@ const convertFilesToBase64 = async (files) => {
       {/* DESCRIPTION */}
       <div className="addprop-full">
         <textarea
-          name="description"
+ref={(el)=>fieldRefs.current.description=el}
+name="description"
           placeholder="Description"
           value={property.description}
           onChange={handleChange}
@@ -468,11 +525,12 @@ const convertFilesToBase64 = async (files) => {
   <div className="dynamic-grid">
 
     {property.type === "Apartment" && (
-      <ApartmentFields
-        details={property.propertyDetails}
-        handleChange={handlePropertyDetailsChange}
-        errors={errors.propertyDetails || {}}
-      />
+     <ApartmentFields
+details={property.propertyDetails}
+handleChange={handlePropertyDetailsChange}
+errors={errors.propertyDetails || {}}
+fieldRefs={fieldRefs}
+/>
     )}
 
     {property.type === "Villa" && (
@@ -480,6 +538,7 @@ const convertFilesToBase64 = async (files) => {
         details={property.propertyDetails}
         handleChange={handlePropertyDetailsChange}
         errors={errors.propertyDetails || {}}
+        fieldRefs={fieldRefs}
       />
     )}
 
@@ -488,6 +547,7 @@ const convertFilesToBase64 = async (files) => {
         details={property.propertyDetails}
         handleChange={handlePropertyDetailsChange}
         errors={errors.propertyDetails || {}}
+        fieldRefs={fieldRefs}
       />
     )}
 
@@ -496,6 +556,7 @@ const convertFilesToBase64 = async (files) => {
         details={property.propertyDetails}
         handleChange={handlePropertyDetailsChange}
         errors={errors.propertyDetails || {}}
+        fieldRefs={fieldRefs}
       />
     )}
 
@@ -504,6 +565,7 @@ const convertFilesToBase64 = async (files) => {
         details={property.propertyDetails}
         handleChange={handlePropertyDetailsChange}
         errors={errors.propertyDetails || {}}
+        fieldRefs={fieldRefs}
       />
     )}
 
@@ -512,6 +574,7 @@ const convertFilesToBase64 = async (files) => {
         details={property.propertyDetails}
         handleChange={handlePropertyDetailsChange}
         errors={errors.propertyDetails || {}}
+        fieldRefs={fieldRefs}
       />
     )}
 
@@ -520,6 +583,7 @@ const convertFilesToBase64 = async (files) => {
         details={property.propertyDetails}
         handleChange={handlePropertyDetailsChange}
         errors={errors.propertyDetails || {}}
+        fieldRefs={fieldRefs}
       />
     )}
 

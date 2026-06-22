@@ -48,20 +48,22 @@ function Properties() {
     const matchType =
       !type ||
       normalize(property.type) === normalize(type);
-
     const currentMode =
 (
-property.mode ||
-property.propertyDetails?.mode ||
+property.mode ??
+property.propertyDetails?.mode ??
 ""
 )
+.toString()
 .trim()
 .toLowerCase();
 
 const matchMode =
 !mode ||
 currentMode ===
-mode.trim().toLowerCase();
+mode
+.trim()
+.toLowerCase();
 
     const price = Number(property.price);
 
@@ -101,15 +103,19 @@ mode.trim().toLowerCase();
     const matchType =
       !filters.type || property.type === filters.type;
 
-    const matchMode =
-!filters.mode ||
+    const currentMode =
 (
-property.mode ||
-property.propertyDetails?.mode ||
+property.mode ??
+property.propertyDetails?.mode ??
 ""
 )
+.toString()
 .trim()
-.toLowerCase() ===
+.toLowerCase();
+
+const matchMode =
+!filters.mode ||
+currentMode ===
 filters.mode
 .trim()
 .toLowerCase();

@@ -1,4 +1,8 @@
-import { useEffect, useState } from "react";
+import {
+useEffect,
+useState,
+useRef
+} from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -9,7 +13,7 @@ function UserProfile() {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState("");
   const [errors, setErrors] = useState({});
-
+  const fieldRefs = useRef({});
   const [user, setUser] = useState({
     id: "",
     role: "",
@@ -134,6 +138,29 @@ function UserProfile() {
     localStorage.setItem("currentUser", JSON.stringify(updatedUser));
     showSuccess("Profile updated successfully");
   };
+  const scrollToFirstError = (err) => {
+
+setErrors(err);
+
+const firstError =
+Object.keys(err)[0];
+
+setTimeout(() => {
+
+fieldRefs.current[
+firstError
+]?.scrollIntoView({
+behavior: "smooth",
+block: "center",
+});
+
+fieldRefs.current[
+firstError
+]?.focus();
+
+}, 100);
+
+};
 
   // SAVE PROFILE VALIDATION
   const handleSave = () => {
@@ -191,11 +218,15 @@ if (user.state && !/^[A-Za-z\s]+$/.test(user.state))
     if (user.bio && user.bio.length > 500)
       newErrors.bio = "Max 500 characters";
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+     if (Object.keys(newErrors).length > 0) {
 
+scrollToFirstError(
+newErrors
+);
+
+return;
+
+}
     setErrors({});
 
     const users =
@@ -227,9 +258,17 @@ if (user.state && !/^[A-Za-z\s]+$/.test(user.state))
     }
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors((prev) => ({ ...prev, ...newErrors }));
-      return;
-    }
+
+scrollToFirstError(
+{
+...errors,
+...newErrors
+}
+);
+
+return;
+
+}
 
     const updatedUser = {
       ...user,
@@ -463,7 +502,10 @@ return (
 
             <div>
               <input
-                name="fullName"
+ref={(el)=>
+fieldRefs.current.fullName=el
+}
+name="fullName"
                 value={user.fullName}
                 onChange={handleChange}
                 placeholder="Full Name"
@@ -475,7 +517,10 @@ return (
 
             <div>
               <input
-                name="email"
+ref={(el)=>
+fieldRefs.current.email=el
+}
+name="email"
                 value={user.email}
                 onChange={handleChange}
                 placeholder="Email"
@@ -487,7 +532,10 @@ return (
 
             <div>
               <input
-                name="phone"
+ref={(el)=>
+fieldRefs.current.phone=el
+}
+name="phone"
                 value={user.phone}
                 onChange={handleChange}
                 placeholder="Phone"
@@ -499,7 +547,10 @@ return (
 
             <div>
               <input
-                name="age"
+ref={(el)=>
+fieldRefs.current.age=el
+}
+name="age"
                 value={user.age}
                 onChange={handleChange}
                 placeholder="Age"
@@ -526,7 +577,10 @@ return (
 
             <div>
               <input
-                name="address"
+ref={(el)=>
+fieldRefs.current.address=el
+}
+name="address"
                 value={user.address}
                 onChange={handleChange}
                 placeholder="Address"
@@ -540,7 +594,10 @@ return (
 
             <div>
               <input
-                name="city"
+ref={(el)=>
+fieldRefs.current.city=el
+}
+name="city"
                 value={user.city}
                 onChange={handleChange}
                 placeholder="City"
@@ -554,7 +611,10 @@ return (
 
             <div>
               <input
-                name="state"
+ref={(el)=>
+fieldRefs.current.state=el
+}
+name="state"
                 value={user.state}
                 onChange={handleChange}
                 placeholder="State"
@@ -568,7 +628,10 @@ return (
 
             <div>
               <input
-                name="pincode"
+ref={(el)=>
+fieldRefs.current.pincode=el
+}
+name="pincode"
                 value={user.pincode}
                 onChange={handleChange}
                 placeholder="Pincode"
@@ -612,7 +675,10 @@ return (
 
             <div className="full-row">
               <textarea
-                name="bio"
+ref={(el)=>
+fieldRefs.current.bio=el
+}
+name="bio"
                 value={user.bio}
                 onChange={handleChange}
                 placeholder="About Me"
@@ -640,8 +706,11 @@ return (
 
             <div>
               <input
-                type="password"
-                placeholder="Old Password"
+ref={(el)=>
+fieldRefs.current.newPassword=el
+}
+type="password"
+               
                 value={oldPassword}
                 onChange={(e) =>
                   setOldPassword(e.target.value)
@@ -655,8 +724,11 @@ return (
             </div>
 
             <div>
-              <input
-                type="password"
+             <input
+ref={(el)=>
+fieldRefs.current.newPassword=el
+}
+type="password"
                 placeholder="New Password"
                 value={newPassword}
                 onChange={(e) =>

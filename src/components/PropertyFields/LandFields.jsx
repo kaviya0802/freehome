@@ -1,15 +1,36 @@
-function LandFields({ details, handleChange, errors = {} }) {
+function LandFields({
+  details,
+  handleChange,
+  errors = {},
+  fieldRefs
+}) {
 
-  const FieldWrapper = ({ children, error }) => (
-    <div className="addprop-field">
+  const FieldWrapper = ({
+    children,
+    error,
+    fieldName,
+    fieldRefs
+  }) => (
+    <div
+      className="addprop-field"
+      ref={(el) => {
+        if (el && fieldRefs) {
+          fieldRefs.current[fieldName] = el;
+        }
+      }}
+    >
       {children}
-      {error && <p className="error">{error}</p>}
+      {error && (
+        <p className="error">
+          {error}
+        </p>
+      )}
     </div>
   );
 
   return (
     <>
-      <FieldWrapper error={errors.area}>
+      <FieldWrapper error={errors.area} fieldName="area" fieldRefs={fieldRefs}>
         <input
           type="number"
           name="area"
@@ -19,7 +40,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.soilType}>
+      <FieldWrapper error={errors.soilType} fieldName="soilType" fieldRefs={fieldRefs}>
         <input
           type="text"
           name="soilType"
@@ -29,7 +50,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.roadAccess}>
+      <FieldWrapper error={errors.roadAccess} fieldName="roadAccess" fieldRefs={fieldRefs}>
         <select
           name="roadAccess"
           value={details.roadAccess || ""}
@@ -41,7 +62,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.address}>
+      <FieldWrapper error={errors.address} fieldName="address" fieldRefs={fieldRefs}>
         <input
           type="text"
           name="address"
@@ -51,7 +72,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.plotWidth}>
+      <FieldWrapper error={errors.plotWidth} fieldName="plotWidth" fieldRefs={fieldRefs}>
         <input
           type="number"
           name="plotWidth"
@@ -61,19 +82,19 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.mode}>
+      <FieldWrapper error={errors.mode} fieldName="mode" fieldRefs={fieldRefs}>
         <select
           name="mode"
           value={details.mode || ""}
           onChange={handleChange}
         >
           <option value="">Mode</option>
-          <option value="Buy">Buy</option>
-          <option value="Rent">Rent</option>
+          <option value="buy">Buy</option>
+          <option value="rent">Rent</option>
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.plotLength}>
+      <FieldWrapper error={errors.plotLength} fieldName="plotLength" fieldRefs={fieldRefs}>
         <input
           type="number"
           name="plotLength"
@@ -83,7 +104,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.roadWidth}>
+      <FieldWrapper error={errors.roadWidth} fieldName="roadWidth" fieldRefs={fieldRefs}>
         <input
           type="number"
           name="roadWidth"
@@ -93,7 +114,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.facingDirection}>
+      <FieldWrapper error={errors.facingDirection} fieldName="facingDirection" fieldRefs={fieldRefs}>
         <input
           type="text"
           name="facingDirection"
@@ -103,7 +124,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.zoningType}>
+      <FieldWrapper error={errors.zoningType} fieldName="zoningType" fieldRefs={fieldRefs}>
         <select
           name="zoningType"
           value={details.zoningType || ""}
@@ -119,7 +140,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.cornerPlot}>
+      <FieldWrapper error={errors.cornerPlot} fieldName="cornerPlot" fieldRefs={fieldRefs}>
         <select
           name="cornerPlot"
           value={details.cornerPlot || ""}
@@ -131,7 +152,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.boundaryWall}>
+      <FieldWrapper error={errors.boundaryWall} fieldName="boundaryWall" fieldRefs={fieldRefs}>
         <select
           name="boundaryWall"
           value={details.boundaryWall || ""}
@@ -143,7 +164,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.waterConnection}>
+      <FieldWrapper error={errors.waterConnection} fieldName="waterConnection" fieldRefs={fieldRefs}>
         <select
           name="waterConnection"
           value={details.waterConnection || ""}
@@ -155,7 +176,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.electricityConnection}>
+      <FieldWrapper error={errors.electricityConnection} fieldName="electricityConnection" fieldRefs={fieldRefs}>
         <select
           name="electricityConnection"
           value={details.electricityConnection || ""}
@@ -167,7 +188,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.approvedLayout}>
+      <FieldWrapper error={errors.approvedLayout} fieldName="approvedLayout" fieldRefs={fieldRefs}>
         <select
           name="approvedLayout"
           value={details.approvedLayout || ""}
@@ -179,7 +200,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.nearbySchools}>
+      <FieldWrapper error={errors.nearbySchools} fieldName="nearbySchools" fieldRefs={fieldRefs}>
         <input
           type="text"
           name="nearbySchools"
@@ -189,7 +210,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.nearbyHospitals}>
+      <FieldWrapper error={errors.nearbyHospitals} fieldName="nearbyHospitals" fieldRefs={fieldRefs}>
         <input
           type="text"
           name="nearbyHospitals"
@@ -199,7 +220,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.metroConnectivity}>
+      <FieldWrapper error={errors.metroConnectivity} fieldName="metroConnectivity" fieldRefs={fieldRefs}>
         <select
           name="metroConnectivity"
           value={details.metroConnectivity || ""}
@@ -211,7 +232,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.safetyScore}>
+      <FieldWrapper error={errors.safetyScore} fieldName="safetyScore" fieldRefs={fieldRefs}>
         <input
           type="number"
           name="safetyScore"
@@ -221,7 +242,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.propertyDemand}>
+      <FieldWrapper error={errors.propertyDemand} fieldName="propertyDemand" fieldRefs={fieldRefs}>
         <select
           name="propertyDemand"
           value={details.propertyDemand || ""}
@@ -234,7 +255,7 @@ function LandFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.futureDevelopmentPotential}>
+      <FieldWrapper error={errors.futureDevelopmentPotential} fieldName="futureDevelopmentPotential" fieldRefs={fieldRefs}>
         <select
           name="futureDevelopmentPotential"
           value={details.futureDevelopmentPotential || ""}

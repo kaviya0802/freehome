@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Register/Register.css";
 
@@ -7,7 +7,7 @@ function ForgotPassword() {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
-
+  const fieldRefs = useRef({});
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
@@ -24,6 +24,25 @@ function ForgotPassword() {
     setErrors({});
     setSuccess("");
   };
+  const scrollToFirstError = (newErrors) => {
+
+setErrors(newErrors);
+
+const firstError =
+Object.keys(newErrors)[0];
+
+setTimeout(() => {
+
+fieldRefs.current[
+firstError
+]?.scrollIntoView({
+behavior: "smooth",
+block: "center",
+});
+
+}, 100);
+
+};
 
   const handleResetPassword = (e) => {
     e.preventDefault();
@@ -51,9 +70,14 @@ function ForgotPassword() {
     }
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+
+scrollToFirstError(
+newErrors
+);
+
+return;
+
+}
 
     // 2️⃣ PASSWORD RULE VALIDATION
     if (!passwordRegex.test(formData.password)) {
@@ -80,11 +104,15 @@ function ForgotPassword() {
       newErrors.phone = "Invalid email or phone number";
     }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+   if (Object.keys(newErrors).length > 0) {
 
+scrollToFirstError(
+newErrors
+);
+
+return;
+
+}
     // 4️⃣ UPDATE PASSWORD
     users[userIndex].password = formData.password;
     localStorage.setItem("users", JSON.stringify(users));
@@ -138,7 +166,10 @@ function ForgotPassword() {
         <form className="rg-form" onSubmit={handleResetPassword}>
 
           <input
-            type="email"
+ref={(el)=>
+fieldRefs.current.email=el
+}
+type="email"
             name="email"
             placeholder="Registered Email*"
             value={formData.email}
@@ -149,6 +180,9 @@ function ForgotPassword() {
           )}
 
           <input
+          ref={(el)=>
+fieldRefs.current.phone=el
+}
             type="tel"
             name="phone"
             placeholder="Registered Phone Number*"
@@ -160,6 +194,9 @@ function ForgotPassword() {
           )}
 
           <input
+          ref={(el)=>
+fieldRefs.current.password=el
+}
             type="password"
             name="password"
             placeholder="New Password*"
@@ -171,6 +208,9 @@ function ForgotPassword() {
           )}
 
           <input
+          ref={(el)=>
+fieldRefs.current.confirmPassword=el
+}
             type="password"
             name="confirmPassword"
             placeholder="Confirm New Password*"

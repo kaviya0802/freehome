@@ -1,13 +1,26 @@
-const FieldWrapper = ({ children, error }) => (
-    <div className="addprop-field">
-      {children}
-      {error && <p className="error">{error}</p>}
-    </div>
-  );
-function TownhouseFields({ details, handleChange, errors = {} }) {
+const FieldWrapper = ({
+  children,
+  error,
+  fieldRef
+}) => (
+  <div
+    className="addprop-field"
+    ref={fieldRef}
+  >
+    {children}
+    {error && <p className="error">{error}</p>}
+  </div>
+);
+
+function TownhouseFields({
+  details,
+  handleChange,
+  errors = {},
+  fieldRefs = {}
+}) {
   return (
     <>
-      <FieldWrapper error={errors.bedrooms}>
+      <FieldWrapper error={errors.bedrooms} fieldRef={fieldRefs.bedrooms}>
         <input
           type="number"
           name="bedrooms"
@@ -17,7 +30,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.bathrooms}>
+      <FieldWrapper error={errors.bathrooms} fieldRef={fieldRefs.bathrooms}>
         <input
           type="number"
           name="bathrooms"
@@ -27,7 +40,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.area}>
+      <FieldWrapper error={errors.area} fieldRef={fieldRefs.area}>
         <input
           type="number"
           name="area"
@@ -37,7 +50,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.parking}>
+      <FieldWrapper error={errors.parking} fieldRef={fieldRefs.parking}>
         <input
           type="number"
           name="parking"
@@ -47,7 +60,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.propertyAge}>
+      <FieldWrapper error={errors.propertyAge} fieldRef={fieldRefs.propertyAge}>
         <select
           name="propertyAge"
           value={details.propertyAge || ""}
@@ -61,19 +74,19 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.mode}>
+      <FieldWrapper error={errors.mode} fieldRef={fieldRefs.mode}>
         <select
           name="mode"
           value={details.mode || ""}
           onChange={handleChange}
         >
           <option value="">Mode</option>
-          <option value="Buy">Buy</option>
-          <option value="Rent">Rent</option>
+          <option value="buy">Buy</option>
+          <option value="rent">Rent</option>
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.furnishing}>
+      <FieldWrapper error={errors.furnishing} fieldRef={fieldRefs.furnishing}>
         <select
           name="furnishing"
           value={details.furnishing || ""}
@@ -85,7 +98,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.address}>
+      <FieldWrapper error={errors.address} fieldRef={fieldRefs.address}>
         <input
           type="text"
           name="address"
@@ -95,7 +108,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.builtUpArea}>
+      <FieldWrapper error={errors.builtUpArea} fieldRef={fieldRefs.builtUpArea}>
         <input
           type="number"
           name="builtUpArea"
@@ -105,7 +118,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.balconies}>
+      <FieldWrapper error={errors.balconies} fieldRef={fieldRefs.balconies}>
         <input
           type="number"
           name="balconies"
@@ -115,7 +128,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.floors}>
+      <FieldWrapper error={errors.floors} fieldRef={fieldRefs.floors}>
         <input
           type="number"
           name="floors"
@@ -125,7 +138,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.maintenanceFee}>
+      <FieldWrapper error={errors.maintenanceFee} fieldRef={fieldRefs.maintenanceFee}>
         <input
           type="number"
           name="maintenanceFee"
@@ -135,7 +148,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.privateTerrace}>
+      <FieldWrapper error={errors.privateTerrace} fieldRef={fieldRefs.privateTerrace}>
         <select
           name="privateTerrace"
           value={details.privateTerrace || ""}
@@ -147,7 +160,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.gatedCommunity}>
+      <FieldWrapper error={errors.gatedCommunity} fieldRef={fieldRefs.gatedCommunity}>
         <select
           name="gatedCommunity"
           value={details.gatedCommunity || ""}
@@ -159,7 +172,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.clubhouse}>
+      <FieldWrapper error={errors.clubhouse} fieldRef={fieldRefs.clubhouse}>
         <select
           name="clubhouse"
           value={details.clubhouse || ""}
@@ -171,7 +184,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.security}>
+      <FieldWrapper error={errors.security} fieldRef={fieldRefs.security}>
         <select
           name="security"
           value={details.security || ""}
@@ -183,7 +196,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.powerBackup}>
+      <FieldWrapper error={errors.powerBackup} fieldRef={fieldRefs.powerBackup}>
         <select
           name="powerBackup"
           value={details.powerBackup || ""}
@@ -195,7 +208,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.nearbySchools}>
+      <FieldWrapper error={errors.nearbySchools} fieldRef={fieldRefs.nearbySchools}>
         <input
           type="text"
           name="nearbySchools"
@@ -205,7 +218,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.nearbyHospitals}>
+      <FieldWrapper error={errors.nearbyHospitals} fieldRef={fieldRefs.nearbyHospitals}>
         <input
           type="text"
           name="nearbyHospitals"
@@ -215,7 +228,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.metroConnectivity}>
+      <FieldWrapper error={errors.metroConnectivity} fieldRef={fieldRefs.metroConnectivity}>
         <select
           name="metroConnectivity"
           value={details.metroConnectivity || ""}
@@ -227,7 +240,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.trafficCondition}>
+      <FieldWrapper error={errors.trafficCondition} fieldRef={fieldRefs.trafficCondition}>
         <select
           name="trafficCondition"
           value={details.trafficCondition || ""}
@@ -240,7 +253,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.safetyScore}>
+      <FieldWrapper error={errors.safetyScore} fieldRef={fieldRefs.safetyScore}>
         <input
           type="number"
           name="safetyScore"
@@ -250,7 +263,7 @@ function TownhouseFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.propertyDemand}>
+      <FieldWrapper error={errors.propertyDemand} fieldRef={fieldRefs.propertyDemand}>
         <select
           name="propertyDemand"
           value={details.propertyDemand || ""}

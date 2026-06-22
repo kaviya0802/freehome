@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -19,7 +19,7 @@ function ContactAgent() {
   const [errors, setErrors] = useState({});
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
-
+  const fieldRefs = useRef({});
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -63,14 +63,40 @@ function ContactAgent() {
         );
       });
   };
+  const scrollToFirstError = (err) => {
+
+setErrors(err);
+
+const firstError =
+Object.keys(err)[0];
+
+setTimeout(() => {
+
+fieldRefs.current[
+firstError
+]?.scrollIntoView({
+behavior: "smooth",
+block: "center",
+});
+
+}, 100);
+
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const err = validate();
-    setErrors(err);
+  const err = validate();
 
-    if (Object.keys(err).length > 0) return;
+if (Object.keys(err).length > 0) {
+
+scrollToFirstError(
+err
+);
+
+return;
+
+}
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -143,13 +169,25 @@ function ContactAgent() {
 
           <form className="ac-right" onSubmit={handleSubmit}>
 
-            <input name="name" placeholder="Full Name*" value={form.name} onChange={handleChange} />
+            <input
+ref={(el)=>
+fieldRefs.current.name=el
+}
+name="name" placeholder="Full Name*" value={form.name} onChange={handleChange} />
             {errors.name && <span className="ac-error">{errors.name}</span>}
 
-            <input name="email" placeholder="Email*" value={form.email} onChange={handleChange} />
+            <input
+ref={(el)=>
+fieldRefs.current.email=el
+}
+name="email"placeholder="Email*" value={form.email} onChange={handleChange} />
             {errors.email && <span className="ac-error">{errors.email}</span>}
 
-            <select name="location" value={form.location} onChange={handleChange}>
+            <select
+ref={(el)=>
+fieldRefs.current.location=el
+}
+name="location" value={form.location} onChange={handleChange}>
               <option value="">Preferred Location*</option>
               <option>Sydney</option>
               <option>Melbourne</option>
@@ -173,7 +211,11 @@ function ContactAgent() {
               <span className="ac-error">{errors.location}</span>
             )}
 
-            <select name="preference" value={form.preference} onChange={handleChange}>
+           <select
+ref={(el)=>
+fieldRefs.current.preference=el
+}
+name="preference" value={form.preference} onChange={handleChange}>
               <option value="">Property Type*</option>
               <option>Apartment</option>
               <option>Villa</option>
@@ -193,7 +235,11 @@ function ContactAgent() {
               <option>Rent</option>
             </select>
 
-            <select name="budget" value={form.budget} onChange={handleChange}>
+            <select
+ref={(el)=>
+fieldRefs.current.budget=el
+}
+name="budget" value={form.budget} onChange={handleChange}>
               <option value="">Budget*</option>
               <option value="$0 - $5,000">$0 - $5,000</option>
               <option value="$5,000 - $10,000">$5,000 - $10,000</option>

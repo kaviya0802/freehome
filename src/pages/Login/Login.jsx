@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
@@ -6,7 +6,7 @@ function Login() {
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
-
+  const fieldRefs = useRef({});
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,10 +37,26 @@ function Login() {
 
   // STOP HERE if empty fields exist
   if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors);
-    return;
-  }
 
+setErrors(newErrors);
+
+const firstError =
+Object.keys(newErrors)[0];
+
+setTimeout(() => {
+
+fieldRefs.current[
+firstError
+]?.scrollIntoView({
+behavior: "smooth",
+block: "center",
+});
+
+}, 100);
+
+return;
+
+}
   // 2. ONLY NOW CHECK LOGIN CREDENTIALS
   const users =
     JSON.parse(localStorage.getItem("users")) || [];
@@ -108,9 +124,12 @@ function Login() {
         noValidate
         >
 
-          <input
-            type="email"
-            name="email"
+           <input
+ref={(el)=>
+fieldRefs.current.email=el
+}
+type="email"
+name="email"
             placeholder="Email Address*"
             value={formData.email}
             onChange={handleChange}
@@ -120,8 +139,11 @@ function Login() {
           )}
 
           <input
-            type="password"
-            name="password"
+ref={(el)=>
+fieldRefs.current.password=el
+}
+type="password"
+name="password"
             placeholder="Password*"
             value={formData.password}
             onChange={handleChange}

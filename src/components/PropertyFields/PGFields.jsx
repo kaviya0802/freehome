@@ -5,11 +5,26 @@ const FieldWrapper = ({ children, error }) => (
   </div>
 );
 
-function PGFields({ details, handleChange, errors = {} }) {
+function PGFields({
+  details,
+  handleChange,
+  errors = {},
+  fieldRefs
+}) {
+
+  const getRef = (name) => ({
+    ref: (el) => {
+      if (fieldRefs?.current) {
+        fieldRefs.current[name] = el;
+      }
+    }
+  });
+
   return (
     <>
       <FieldWrapper error={errors.sharingType}>
         <select
+          {...getRef("sharingType")}
           name="sharingType"
           value={details.sharingType || ""}
           onChange={handleChange}
@@ -22,6 +37,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.wifi}>
         <select
+          {...getRef("wifi")}
           name="wifi"
           value={details.wifi || ""}
           onChange={handleChange}
@@ -34,6 +50,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.mealsIncluded}>
         <select
+          {...getRef("mealsIncluded")}
           name="mealsIncluded"
           value={details.mealsIncluded || ""}
           onChange={handleChange}
@@ -46,6 +63,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.area}>
         <input
+          {...getRef("area")}
           type="number"
           name="area"
           placeholder="Area (sqft)"
@@ -56,6 +74,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.furnishing}>
         <select
+          {...getRef("furnishing")}
           name="furnishing"
           value={details.furnishing || ""}
           onChange={handleChange}
@@ -66,20 +85,9 @@ function PGFields({ details, handleChange, errors = {} }) {
         </select>
       </FieldWrapper>
 
-      <FieldWrapper error={errors.mode}>
-        <select
-          name="mode"
-          value={details.mode || ""}
-          onChange={handleChange}
-        >
-          <option value="">Mode</option>
-          <option value="Buy">Buy</option>
-          <option value="Rent">Rent</option>
-        </select>
-      </FieldWrapper>
-
       <FieldWrapper error={errors.address}>
         <input
+          {...getRef("address")}
           type="text"
           name="address"
           placeholder="Address"
@@ -90,6 +98,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.genderPreference}>
         <select
+          {...getRef("genderPreference")}
           name="genderPreference"
           value={details.genderPreference || ""}
           onChange={handleChange}
@@ -103,6 +112,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.totalBeds}>
         <input
+          {...getRef("totalBeds")}
           type="number"
           name="totalBeds"
           placeholder="Total Beds"
@@ -113,6 +123,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.availableBeds}>
         <input
+          {...getRef("availableBeds")}
           type="number"
           name="availableBeds"
           placeholder="Available Beds"
@@ -123,6 +134,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.nearbyCollege}>
         <input
+          {...getRef("nearbyCollege")}
           type="text"
           name="nearbyCollege"
           placeholder="Nearby College"
@@ -131,18 +143,22 @@ function PGFields({ details, handleChange, errors = {} }) {
         />
       </FieldWrapper>
 
-      <FieldWrapper error={errors.nearbyMetro}>
-        <input
-          type="text"
-          name="nearbyMetro"
-          placeholder="Nearby Metro"
-          value={details.nearbyMetro || ""}
+      <FieldWrapper error={errors.metroConnectivity}>
+        <select
+          {...getRef("metroConnectivity")}
+          name="metroConnectivity"
+          value={details.metroConnectivity || ""}
           onChange={handleChange}
-        />
+        >
+          <option value="">Metro Connectivity</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
       </FieldWrapper>
 
       <FieldWrapper error={errors.attachedBathroom}>
         <select
+          {...getRef("attachedBathroom")}
           name="attachedBathroom"
           value={details.attachedBathroom || ""}
           onChange={handleChange}
@@ -155,6 +171,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.foodIncluded}>
         <select
+          {...getRef("foodIncluded")}
           name="foodIncluded"
           value={details.foodIncluded || ""}
           onChange={handleChange}
@@ -167,6 +184,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.laundryService}>
         <select
+          {...getRef("laundryService")}
           name="laundryService"
           value={details.laundryService || ""}
           onChange={handleChange}
@@ -179,6 +197,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.housekeeping}>
         <select
+          {...getRef("housekeeping")}
           name="housekeeping"
           value={details.housekeeping || ""}
           onChange={handleChange}
@@ -191,6 +210,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.acRoom}>
         <select
+          {...getRef("acRoom")}
           name="acRoom"
           value={details.acRoom || ""}
           onChange={handleChange}
@@ -203,6 +223,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.powerBackup}>
         <select
+          {...getRef("powerBackup")}
           name="powerBackup"
           value={details.powerBackup || ""}
           onChange={handleChange}
@@ -215,6 +236,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.security}>
         <select
+          {...getRef("security")}
           name="security"
           value={details.security || ""}
           onChange={handleChange}
@@ -227,6 +249,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.cctv}>
         <select
+          {...getRef("cctv")}
           name="cctv"
           value={details.cctv || ""}
           onChange={handleChange}
@@ -239,6 +262,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.propertyDemand}>
         <select
+          {...getRef("propertyDemand")}
           name="propertyDemand"
           value={details.propertyDemand || ""}
           onChange={handleChange}
@@ -252,6 +276,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.safetyScore}>
         <input
+          {...getRef("safetyScore")}
           type="number"
           name="safetyScore"
           placeholder="Safety Score (1-10)"
@@ -262,6 +287,7 @@ function PGFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.occupancyRate}>
         <input
+          {...getRef("occupancyRate")}
           type="text"
           name="occupancyRate"
           placeholder="Occupancy Rate (%)"

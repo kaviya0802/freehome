@@ -1,14 +1,30 @@
 const FieldWrapper = ({ children, error }) => (
-    <div className="addprop-field">
-      {children}
-      {error && <p className="error">{error}</p>}
-    </div>
-  );
-function LuxuryFields({ details, handleChange, errors = {} }) {
+  <div className="addprop-field">
+    {children}
+    {error && <p className="error">{error}</p>}
+  </div>
+);
+
+function LuxuryFields({
+  details,
+  handleChange,
+  errors = {},
+  fieldRefs
+}) {
+
+  const getRef = (name) => ({
+    ref: (el) => {
+      if (fieldRefs?.current) {
+        fieldRefs.current[name] = el;
+      }
+    }
+  });
+
   return (
     <>
       <FieldWrapper error={errors.bedrooms}>
         <input
+          {...getRef("bedrooms")}
           type="number"
           name="bedrooms"
           placeholder="Bedrooms"
@@ -19,6 +35,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.bathrooms}>
         <input
+          {...getRef("bathrooms")}
           type="number"
           name="bathrooms"
           placeholder="Bathrooms"
@@ -29,6 +46,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.area}>
         <input
+          {...getRef("area")}
           type="number"
           name="area"
           placeholder="Area (sqft)"
@@ -39,6 +57,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.parking}>
         <input
+          {...getRef("parking")}
           type="number"
           name="parking"
           placeholder="Parking Spaces"
@@ -49,6 +68,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.propertyAge}>
         <select
+          {...getRef("propertyAge")}
           name="propertyAge"
           value={details.propertyAge || ""}
           onChange={handleChange}
@@ -63,18 +83,20 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.mode}>
         <select
+          {...getRef("mode")}
           name="mode"
           value={details.mode || ""}
           onChange={handleChange}
         >
           <option value="">Mode</option>
-          <option value="Buy">Buy</option>
-          <option value="Rent">Rent</option>
+          <option value="buy">Buy</option>
+          <option value="rent">Rent</option>
         </select>
       </FieldWrapper>
 
       <FieldWrapper error={errors.furnishing}>
         <select
+          {...getRef("furnishing")}
           name="furnishing"
           value={details.furnishing || ""}
           onChange={handleChange}
@@ -87,6 +109,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.address}>
         <input
+          {...getRef("address")}
           type="text"
           name="address"
           placeholder="Address"
@@ -97,6 +120,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.landArea}>
         <input
+          {...getRef("landArea")}
           type="number"
           name="landArea"
           placeholder="Land Area (sqft)"
@@ -107,6 +131,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.builtUpArea}>
         <input
+          {...getRef("builtUpArea")}
           type="number"
           name="builtUpArea"
           placeholder="Built-up Area (sqft)"
@@ -117,6 +142,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.parkingCapacity}>
         <input
+          {...getRef("parkingCapacity")}
           type="number"
           name="parkingCapacity"
           placeholder="Parking Capacity"
@@ -127,6 +153,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.waterView}>
         <select
+          {...getRef("waterView")}
           name="waterView"
           value={details.waterView || ""}
           onChange={handleChange}
@@ -139,6 +166,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.luxuryRating}>
         <input
+          {...getRef("luxuryRating")}
           type="number"
           name="luxuryRating"
           placeholder="Luxury Rating (1-10)"
@@ -149,6 +177,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.privatePool}>
         <select
+          {...getRef("privatePool")}
           name="privatePool"
           value={details.privatePool || ""}
           onChange={handleChange}
@@ -161,6 +190,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.privateGym}>
         <select
+          {...getRef("privateGym")}
           name="privateGym"
           value={details.privateGym || ""}
           onChange={handleChange}
@@ -173,6 +203,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.homeTheater}>
         <select
+          {...getRef("homeTheater")}
           name="homeTheater"
           value={details.homeTheater || ""}
           onChange={handleChange}
@@ -185,6 +216,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.smartHomeFeatures}>
         <select
+          {...getRef("smartHomeFeatures")}
           name="smartHomeFeatures"
           value={details.smartHomeFeatures || ""}
           onChange={handleChange}
@@ -197,6 +229,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.privateGarden}>
         <select
+          {...getRef("privateGarden")}
           name="privateGarden"
           value={details.privateGarden || ""}
           onChange={handleChange}
@@ -209,6 +242,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.rooftopTerrace}>
         <select
+          {...getRef("rooftopTerrace")}
           name="rooftopTerrace"
           value={details.rooftopTerrace || ""}
           onChange={handleChange}
@@ -221,6 +255,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.securitySystem}>
         <select
+          {...getRef("securitySystem")}
           name="securitySystem"
           value={details.securitySystem || ""}
           onChange={handleChange}
@@ -233,6 +268,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.nearbySchools}>
         <input
+          {...getRef("nearbySchools")}
           type="text"
           name="nearbySchools"
           placeholder="Nearby Schools"
@@ -243,6 +279,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.nearbyHospitals}>
         <input
+          {...getRef("nearbyHospitals")}
           type="text"
           name="nearbyHospitals"
           placeholder="Nearby Hospitals"
@@ -253,6 +290,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.metroConnectivity}>
         <select
+          {...getRef("metroConnectivity")}
           name="metroConnectivity"
           value={details.metroConnectivity || ""}
           onChange={handleChange}
@@ -265,6 +303,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.propertyDemand}>
         <select
+          {...getRef("propertyDemand")}
           name="propertyDemand"
           value={details.propertyDemand || ""}
           onChange={handleChange}
@@ -278,6 +317,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.safetyScore}>
         <input
+          {...getRef("safetyScore")}
           type="number"
           name="safetyScore"
           placeholder="Safety Score (1-10)"
@@ -288,6 +328,7 @@ function LuxuryFields({ details, handleChange, errors = {} }) {
 
       <FieldWrapper error={errors.investmentPotential}>
         <select
+          {...getRef("investmentPotential")}
           name="investmentPotential"
           value={details.investmentPotential || ""}
           onChange={handleChange}

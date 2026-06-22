@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
@@ -7,7 +7,7 @@ function Register() {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
-
+  const fieldRefs = useRef({});
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -85,8 +85,25 @@ if (existingUser) {
 }
 
 if (Object.keys(newErrors).length > 0) {
-  setErrors(newErrors);
-  return;
+
+setErrors(newErrors);
+
+const firstError =
+Object.keys(newErrors)[0];
+
+setTimeout(() => {
+
+fieldRefs.current[
+firstError
+]?.scrollIntoView({
+behavior: "smooth",
+block: "center",
+});
+
+}, 100);
+
+return;
+
 }
     const newUser = {
   id: Date.now(),
@@ -181,9 +198,12 @@ if (Object.keys(newErrors).length > 0) {
           onSubmit={handleRegister}
           noValidate
         >
-          <input
-            type="text"
-            name="fullName"
+           <input
+ref={(el)=>
+fieldRefs.current.fullName=el
+}
+type="text"
+name="fullName"
             placeholder="Full Name*"
             value={formData.fullName}
             onChange={handleChange}
@@ -195,8 +215,11 @@ if (Object.keys(newErrors).length > 0) {
   </span>
 )}
 
-          <input
-            type="email"
+           <input
+ref={(el)=>
+fieldRefs.current.email=el
+}
+type="email"
             name="email"
             placeholder="Email Address*"
             value={formData.email}
@@ -210,6 +233,9 @@ if (Object.keys(newErrors).length > 0) {
 )}
 
           <input
+          ref={(el)=>
+fieldRefs.current.phone=el
+}
             type="tel"
             name="phone"
             placeholder="Phone Number*"
@@ -225,6 +251,9 @@ if (Object.keys(newErrors).length > 0) {
 )}
 
           <input
+          ref={(el)=>
+fieldRefs.current.password=el
+}
             type="password"
             name="password"
             placeholder="Password*"
@@ -239,6 +268,9 @@ if (Object.keys(newErrors).length > 0) {
 )}
 
           <input
+          ref={(el)=>
+fieldRefs.current.confirmPassword=el
+}
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password*"
