@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -31,6 +31,7 @@ function PropertyContactAgent() {
 }, [id]);
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -41,7 +42,7 @@ function PropertyContactAgent() {
   });
 
   const [errors, setErrors] = useState({});
-
+  const fieldRefs = useRef({});
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -80,14 +81,32 @@ function PropertyContactAgent() {
 
     return newErrors;
   };
+  const scrollToFirstError = (err) => {
+  setErrors(err);
+
+  const firstError = Object.keys(err)[0];
+
+  setTimeout(() => {
+    fieldRefs.current[firstError]?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    fieldRefs.current[firstError]?.focus?.();
+  }, 100);
+};
 
 const handleSubmit = (e) => {
   e.preventDefault();
 
-  const validationErrors = validate();
-  setErrors(validationErrors);
+ const validationErrors = validate();
 
-  if (Object.keys(validationErrors).length > 0) return;
+if (Object.keys(validationErrors).length > 0) {
+  scrollToFirstError(validationErrors);
+  return;
+}
+
+setErrors({});
 
   setErrors({});
   const lead = {
@@ -187,24 +206,26 @@ localStorage.setItem(
         <form className="pc-form" onSubmit={handleSubmit}>
 
           <input
-            name="name"
-            placeholder="Full Name *"
-            value={form.name}
-            onChange={handleChange}
-          />
+name="name"
+placeholder="Full Name *"
+value={form.name}
+onChange={handleChange}
+/>
           {errors.name && <span className="pc-error">{errors.name}</span>}
 
           <input
-            name="email"
-            placeholder="Email Address *"
-            value={form.email}
-            onChange={handleChange}
-          />
+ref={(el) => (fieldRefs.current.email = el)}
+name="email"
+placeholder="Email Address *"
+value={form.email}
+onChange={handleChange}
+/>
           {errors.email && <span className="pc-error">{errors.email}</span>}
 
           <input
-            name="phone"
-            placeholder="Phone Number *"
+ref={(el) => (fieldRefs.current.phone = el)}
+name="phone"
+placeholder="Phone Number *"
             value={form.phone}
             onChange={(e) => {
               const value = e.target.value.replace(/\D/g, "");
@@ -214,8 +235,9 @@ localStorage.setItem(
           {errors.phone && <span className="pc-error">{errors.phone}</span>}
 
           {/* FIXED SELECT */}
-          <select
-            name="contactMode"
+         <select
+ref={(el) => (fieldRefs.current.contactMode = el)}
+name="contactMode"
             value={form.contactMode}
             onChange={handleChange}
           >
@@ -228,7 +250,9 @@ localStorage.setItem(
           {errors.contactMode && <span className="pc-error">{errors.contactMode}</span>}
 
           <input
-            type="text"
+ref={(el) => (fieldRefs.current.visitDate = el)}
+type="text"
+
             name="visitDate"
             placeholder="Select visiting date *"
             onFocus={(e) => (e.target.type = "date")}
